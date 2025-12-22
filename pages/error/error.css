@@ -77,9 +77,14 @@ body {
   position: absolute;
   height: 100%;
   width: 1000px;
-  max-width: 100%;
+  max-width: calc(100% - 10vw); /* Отступ по 5vw с каждой стороны */
   padding: 4rem;
   text-transform: uppercase;
+  /* Центрируем контейнер */
+  left: 50%;
+  transform: translateX(-50%);
+  /* Убедимся, что контент не выходит за пределы контейнера */
+  box-sizing: border-box;
 }
 
 .output {
