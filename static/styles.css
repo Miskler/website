@@ -1,0 +1,77 @@
+:root {
+    --sidebar-width: 300px;
+}
+
+/* reset */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+}
+
+/* контейнер */
+.layout {
+    display: flex;
+    height: 100vh;
+}
+
+/* левая панель */
+.sidebar {
+    width: var(--sidebar-width);
+    background: #2c2c2c;
+    color: white;
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100vh;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+/* правая часть */
+.content {
+    margin-left: var(--sidebar-width);
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    height: 100vh;
+}
+
+/* кнопка */
+.toggle-btn {
+    display: none;
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 1100;
+    padding: 10px 14px;
+    background: #000;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+/* мобильное состояние */
+@media (max-width: 999px) {
+    .sidebar {
+        width: 100vw;
+        transform: translateX(-100%);
+    }
+
+    .sidebar.open {
+        transform: translateX(0);
+    }
+
+    .content {
+        margin-left: 0;
+    }
+
+    .toggle-btn {
+        display: block;
+    }
+}
