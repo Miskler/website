@@ -1,4 +1,84 @@
 <aside class="sidebar" id="sidebar">
-    <h2>Левая панель</h2>
-    <p>Фиксированная</p>
+    <!-- Пользовательская информация -->
+    <div class="user-info">
+        <img src="{{ info_panel.avatar_url }}" alt="Avatar" class="avatar">
+        <h2 class="nickname">{{ info_panel.nickname }}</h2>
+        <p class="description">{{ info_panel.description }}</p>
+        <p class="details">
+            {{ info_panel.country }}<br>
+            {{ info_panel.age }} лет
+        </p>
+    </div>
+
+    <!-- Круговые графики -->
+    <div class="skills-pie">
+        {% for skill in info_panel.pie_skills %}
+        <div class="pie-container" data-percent="{{ skill.percent }}" data-name="{{ skill.name }}">
+            <div class="ct-chart ct-perfect-fourth"></div>
+            <div class="pie-label">
+                <strong>{{ skill.name }}</strong><br>
+                {{ skill.percent }}%
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Горизонтальные бары -->
+    <div class="skills-bar">
+        {% for skill in info_panel.bar_skills %}
+        <div class="bar-item" data-percent="{{ skill.percent }}">
+            <div class="bar-header">
+                <span class="bar-title">{{ skill.name }}</span>
+                <span class="bar-percent">{{ skill.percent }}%</span>
+            </div>
+            <div class="bar-description">{{ skill.description }}</div>
+            <div class="ct-chart-bar"></div>
+        </div>
+        {% endfor %}
+    </div>
+
+    <!-- Социальные ссылки внизу -->
+    <div class="social-footer">
+        {% for social in info_panel.social_links %}
+        <a href="{{ social.url }}" target="_blank">
+            <img src="{{ social.icon }}" alt="{{ social.name }}" class="social-icon">
+        </a>
+        {% endfor %}
+    </div>
 </aside>
+
+<!-- Chartist.js -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist/dist/chartist.min.css">
+<script src="https://cdn.jsdelivr.net/npm/chartist/dist/chartist.min.js"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Круговые диаграммы
+    document.querySelectorAll('.skills-pie .pie-container').forEach(function(pie) {
+        const percent = parseInt(pie.dataset.percent);
+        new Chartist.Pie(pie.querySelector('.ct-chart'), {
+            series: [percent, 100 - percent]
+        }, {
+            donut: true,
+            donutWidth: 10,
+            startAngle: 0,
+            showLabel: false
+        });
+    });
+
+    // Горизонтальные бары
+    document.querySelectorAll('.bar-item').forEach(function(bar, i) {
+        const percent = parseInt(bar.dataset.percent);
+        const chart = new Chartist.Bar(bar.querySelector('.ct-chart-bar'), {
+            labels: [''],
+            series: [[percent]]
+        }, {
+            axisX: { showGrid: false, showLabel: false },
+            axisY: { showGrid: false, showLabel: false, low: 0, high: 100 },
+            chartPadding: 0,
+            distributeSeries: true,
+            horizontalBars: true
+        });
+    });
+});
+</script>

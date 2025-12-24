@@ -1,34 +1,22 @@
 {
-  "profile": {
-    "image": "placeholder-profile.jpg",
-    "name": "Artur Carter",
-    "title": "Front-end Developer, UI/UX Designer",
-    "residence": "Canada",
-    "city": "Toronto",
-    "age": 26
-  },
-  "languages": [
-    {"name": "French", "proficiency": 100},
-    {"name": "English", "proficiency": 90},
-    {"name": "Spanish", "proficiency": 70}
-  ],
-  "skills": [
-    {"name": "html", "proficiency": 90},
-    {"name": "CSS", "proficiency": 95},
-    {"name": "Js", "proficiency": 75},
-    {"name": "PHP", "proficiency": 65},
-    {"name": "Wordpress", "proficiency": 85}
-  ],
-  "extras": [
-    "Bootstrap, Materialize",
-    "Stylus, Sass, Less",
-    "Gulp, Webpack, Grunt",
-    "GIT Knowledge"
-  ],
-  "social": [
-    {"icon": "in", "link": "#"},
-    {"icon": "Be", "link": "#"},
-    {"icon": "Gh", "link": "#"},
-    {"icon": "Tw", "link": "#"}
-  ]
+    "avatar_url": "/static/avatar.jpg",
+    "nickname": "Miskler",
+    "description": "Разработчик и геймер",
+    "country": "Россия",
+    "age": 20,
+    "pie_skills": [
+        {"name": "Python", "percent": 80},
+        {"name": "JavaScript", "percent": 70},
+        {"name": "HTML/CSS", "percent": 90}
+    ],
+    "bar_skills": [
+        {"name": "Flask", "percent": 85, "description": "Backend web-приложений"},
+        {"name": "React", "percent": 75, "description": "Frontend интерфейсы"},
+        {"name": "SQL", "percent": 60, "description": "Работа с базами данных"}
+    ],
+    "social_links": [
+        {"name": "Telegram", "url": "https://t.me/miskler", "icon": "/static/tg.png"},
+        {"name": "GitHub", "url": "https://github.com/miskler", "icon": "/static/github.png"},
+        {"name": "LinkedIn", "url": "https://linkedin.com/in/miskler", "icon": "/static/linkedin.png"}
+    ]
 }
