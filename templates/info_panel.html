@@ -51,10 +51,6 @@
     </div>
 </aside>
 
-<!-- Chartist.js -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist/dist/chartist.min.css">
-<script src="https://cdn.jsdelivr.net/npm/chartist/dist/chartist.min.js"></script>
-
 <script>
 document.addEventListener('DOMContentLoaded', function() {
     // Круговые диаграммы
@@ -64,7 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
             series: [100 - percent, percent]
         }, {
             donut: true,
-            donutWidth: 10,
+            donutWidth: 5,
             startAngle: 0,
             showLabel: false
         });

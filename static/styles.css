@@ -19,6 +19,16 @@ a:visited {
     color: var(--color-accent-dark);
 }
 
+/* фон (оставшаяся часть) */
+.ct-series-a .ct-slice-donut {
+    stroke: var(--color-accent-disabled);
+}
+
+/* заполненная часть */
+.ct-series-b .ct-slice-donut {
+    stroke: var(--color-accent);
+}
+
 /* контейнер */
 .layout {
     display: flex;
@@ -38,9 +48,22 @@ a:visited {
     z-index: 1000;
 }
 
-/* правая часть */
+.navigation {
+    width: var(--navigation-width);
+    background: var(--color-bg-secondary);
+    padding: 20px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    transition: transform 0.3s ease;
+    z-index: 1000;
+}
+
+/* центральная часть */
 .content {
     margin-left: var(--sidebar-width);
+    margin-right: var(--navigation-width);
     flex: 1;
     padding: 20px;
     overflow-y: auto;
