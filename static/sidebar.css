@@ -8,7 +8,12 @@
 
 .user-info {
     text-align: center;
-    margin-bottom: 20px;
+    display: flex;
+    align-self: center;
+}
+
+.user-info > div {
+    margin-left: 15pt;
 }
 
 .avatar {
@@ -26,6 +31,7 @@
 .description {
     font-size: 0.9em;
     margin: 5px 0;
+    color: var(--color-text-secondary);
 }
 
 .details {
@@ -39,13 +45,13 @@
     flex-wrap: wrap;
     justify-content: center;
     gap: 15px;
-    margin-bottom: 20px;
+    margin-top: 5px;
 }
 
 .pie-container {
     position: relative;
-    width: 120px;
-    height: 120px;
+    width: 116px;
+    height: 95px;
 }
 
 .pie-label {
@@ -68,7 +74,7 @@
     margin-bottom: 5px;
 }
 
-.bar-description {
+.description.bar {
     font-size: 0.8em;
     margin-bottom: 5px;
 }
@@ -80,29 +86,48 @@
 .social-footer {
     margin-top: auto;
     text-align: center;
-    padding: 10px 0;
+    margin-top: 7pt;
 }
 
 .social-footer .social-icon {
-    width: 30px;
-    height: 30px;
+    width: 50px;
+    height: 50px;
     margin: 0 5px;
 }
 
-/* Горизонтальные бары */
-.skills-bar .bar-item {
-    margin-bottom: 20px;
+.sidebar-scroll {
+    overflow-y: auto;        /* скролл на wrapper */
+    padding-right: 12px;     /* сдвигаем скролл вправо */
+    box-sizing: content-box; /* чтобы padding не уменьшал ширину контента */
+    /* Маска применяется только к контенту */
+    -webkit-mask-image: linear-gradient(
+        to bottom,
+        transparent 0px,
+        black 24px,
+        black calc(100% - 24px),
+        transparent 100%
+    );
+    mask-image: linear-gradient(
+        to bottom,
+        transparent 0px,
+        black 24px,
+        black calc(100% - 24px),
+        transparent 100%
+    );
 }
 
-.ct-chart-bar {
-    height: 20px; /* увеличиваем высоту */
-    width: 100%;  /* обязательно */
-}
-.bar-item {
-    margin-bottom: 20px;
+.progress-bar {
+    height: 10px;
+    background: var(--color-accent-disabled);
+    border-radius: 3px;
+    overflow: hidden;
 }
 
-.ct-bar {
-    stroke: #4caf50;    /* цвет самой полосы */
-    stroke-width: 20px; /* толщина линии = высота контейнера */
+.progress-fill {
+    width: var(--percent);
+    height: 100%;
+    background: var(--color-accent);
+    border-radius: 10px 0 0 10px;
+    transition: width 0.3s ease;
 }
+

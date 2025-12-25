@@ -1,8 +1,3 @@
-:root {
-    --sidebar-width: 300px;
-}
-
-/* reset */
 * {
     box-sizing: border-box;
     margin: 0;
@@ -11,6 +6,17 @@
 
 body {
     font-family: sans-serif;
+    background: var(--color-bg-primary);
+    color: var(--color-text-primary);
+}
+
+a {
+    color: var(--color-accent);
+    text-decoration: none;
+    font-weight: bold;
+}
+a:visited {
+    color: var(--color-accent-dark);
 }
 
 /* контейнер */
@@ -22,8 +28,7 @@ body {
 /* левая панель */
 .sidebar {
     width: var(--sidebar-width);
-    background: #2c2c2c;
-    color: white;
+    background: var(--color-bg-secondary);
     padding: 20px;
     position: fixed;
     top: 0;
@@ -57,7 +62,7 @@ body {
 }
 
 /* мобильное состояние */
-@media (max-width: 999px) {
+@media (max-width: 699px) {
     .sidebar {
         width: 100vw;
         transform: translateX(-100%);
@@ -73,5 +78,14 @@ body {
 
     .toggle-btn {
         display: block;
+    }
+}
+
+@media (min-width: 1200px) {
+    .sidebar {
+        width: var(--sidebar-width-wide);
+    }
+    .content {
+        margin-left: var(--sidebar-width-wide);
     }
 }

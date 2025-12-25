@@ -1,0 +1,22 @@
+:root {
+    --sidebar-width: 300px;
+    --sidebar-width-wide: 400px;
+
+    /* Основные цвета */
+    --color-bg-primary: #121212;
+    --color-bg-secondary: #1E1E1E;
+    --color-text-primary: #E0E0E0;
+    --color-text-secondary: #B0B0B0;
+
+    /* Акцент */
+    --color-accent: #4CAF50;
+    --color-accent-dark: #388E3C;
+    --color-accent-disabled: #303A30;
+
+    /* Дополнительно */
+    --color-border: #2C2C2C;
+    --color-success: #43A047;
+    --color-error: #E53935;
+    --color-warning: #FB8C00;
+    --color-hover-bg: #272727;
+}
