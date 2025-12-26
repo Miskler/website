@@ -3,7 +3,9 @@
         {% for item in navigation %}
             <li class="nav-item">
                 <a href="{{ item.link }}" class="nav-link">
-                    <span class="icon">{{ item.icon }}</span>
+                    {% if item.icon %}
+                    {% include item.icon %}
+                    {% endif %}
                     <span class="title">{{ item.title }}</span>
                 </a>
                 {% if item.children %}
@@ -11,7 +13,9 @@
                         {% for child in item.children %}
                             <li class="nav-item">
                                 <a href="{{ child.link }}" class="nav-link">
-                                    <span class="icon">{{ child.icon }}</span>
+                                    {% if child.icon %}
+                                    {% include child.icon %}
+                                    {% endif %}
                                     <span class="title">{{ child.title }}</span>
                                 </a>
                             </li>

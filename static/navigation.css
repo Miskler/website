@@ -20,6 +20,13 @@
     z-index: 1;
 }
 
+.nav-link svg {
+    max-width: 30px;
+    max-height: 30px;
+    color: var(--color-accent);
+    margin-right: 5px;
+}
+
 .nav-link:hover {
     background-color: var(--color-hover-bg);
 }

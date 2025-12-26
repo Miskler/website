@@ -1,30 +1,28 @@
 [
     {
-        "title": "Главная",
+        "title": "Проекты",
         "link": "/",
-        "icon": "🏠",
+        "icon": "/navigation/icons/dashboard.svg",
         "children": []
     },
     {
-        "title": "Профиль",
-        "link": "/profile",
-        "icon": "👤",
+        "title": "Опыт",
+        "link": "/experience",
+        "icon": "/navigation/icons/experience.svg",
         "children": []
     },
     {
-        "title": "Настройки",
-        "link": "/settings",
-        "icon": "⚙️",
+        "title": "Статьи",
+        "link": "/papers",
+        "icon": "/navigation/icons/microscope.svg",
         "children": [
             {
-                "title": "Безопасность",
-                "link": "/settings/security",
-                "icon": "🔒"
+                "title": "Токсичность на Пикабу - научный подход",
+                "link": "/papers/pikaby"
             },
             {
-                "title": "Уведомления",
-                "link": "/settings/notifications",
-                "icon": "🔔"
+                "title": "Эмоции в комментариях в политическом ютубе и вне его",
+                "link": "/papers/youtube"
             }
         ]
     }
