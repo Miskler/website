@@ -17,11 +17,13 @@
         "icon": "/navigation/icons/microscope.svg",
         "children": [
             {
-                "title": "Токсичность на Пикабу - научный подход",
+                "title": "Токсичность на Пикабу",
+                "description": "научный подход",
                 "link": "/papers/pikaby"
             },
             {
-                "title": "Эмоции в комментариях в политическом ютубе и вне его",
+                "title": "Эмоции в комментариях",
+                "description": "в политическом ютубе и вне его",
                 "link": "/papers/youtube"
             }
         ]
