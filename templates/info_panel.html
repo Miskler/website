@@ -19,7 +19,7 @@
                 <div class="ct-chart ct-perfect-fourth"></div>
                 <div class="pie-label">
                     <strong>{{ skill.name }}</strong><br>
-                    {{ skill.percent }}%
+                    {{ skill.description }}
                 </div>
             </div>
             {% endfor %}
@@ -46,7 +46,8 @@
     <div class="social-footer">
         {% for social in info_panel.social_links %}
         <a href="{{ social.url }}" target="_blank">
-            <img src="{{ url_for('static', filename=social.icon) }}" alt="{{ social.name }}" class="social-icon"></a>
+            {% include social.icon %}
+        </a>
         {% endfor %}
     </div>
 </aside>

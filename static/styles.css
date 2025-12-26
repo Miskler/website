@@ -4,6 +4,12 @@
     padding: 0;
 }
 
+html, body {
+  width: 100%;
+  overflow-x: hidden; /* скрывает горизонтальный скролл */
+}
+
+
 body {
     font-family: sans-serif;
     background: var(--color-bg-primary);
@@ -17,6 +23,9 @@ a {
 }
 a:visited {
     color: var(--color-accent-dark);
+}
+a:hover {
+    color: var(--color-accent-hover);
 }
 
 /* фон (оставшаяся часть) */
@@ -51,7 +60,6 @@ a:visited {
 .navigation {
     width: var(--navigation-width);
     background: var(--color-bg-secondary);
-    padding: 20px;
     position: fixed;
     top: 0;
     right: 0;
@@ -70,19 +78,6 @@ a:visited {
     height: 100vh;
 }
 
-/* кнопка */
-.toggle-btn {
-    display: none;
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 1100;
-    padding: 10px 14px;
-    background: #000;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
 
 /* мобильное состояние */
 @media (max-width: 699px) {
@@ -99,8 +94,22 @@ a:visited {
         margin-left: 0;
     }
 
-    .toggle-btn {
-        display: block;
+    .info-panel-toggle {
+        display: flex;
+    }
+}
+
+@media (max-width: 920px) {
+    .navigation {
+        transform: translateX(100%);
+    }
+
+    .navigation.open {
+        transform: translateX(0);
+    }
+
+    .content {
+        margin-right: 0;
     }
 }
 

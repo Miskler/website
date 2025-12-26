@@ -8,9 +8,12 @@ app = Flask(__name__)
 def inject_config():
     with open("configs/info_panel.json", encoding="utf-8") as f:
         info_bar = json.load(f)
+    with open("configs/navigation.json", encoding="utf-8") as f:
+        navigation = json.load(f)
 
     return {
         'info_panel': info_bar,
+        'navigation': navigation
     }
 
 @app.route('/')

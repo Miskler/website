@@ -10,12 +10,19 @@
         <script src="https://cdn.jsdelivr.net/npm/chartist/dist/chartist.min.js"></script>
 
         <link rel="stylesheet" href="{{ url_for('static', filename='variables.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-        <!-- Sidebar specific styles -->
+        
         <link rel="stylesheet" href="{{ url_for('static', filename='sidebar.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='navigation.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='info_panel_button.css') }}">
+
+        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     </head>
     <body>
-        <button class="toggle-btn" onclick="toggleSidebar()">Меню</button>
+        <button id="info-panel-buttom-state" class="info-panel-toggle" onclick="toggleSidebar()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
         <div class="layout">
             {% include 'info_panel.html' %}
 
@@ -26,9 +33,17 @@
             {% include 'navigation.html' %}
         </div>
         <script>
+            const sidebar = document.getElementById('sidebar');
+            const toggleButton = document.getElementById('info-panel-buttom-state');
+
             function toggleSidebar() {
-                document.getElementById('sidebar').classList.toggle('open');
+                const isOpen = sidebar.classList.toggle('open');
+                toggleButton.classList.toggle('active', isOpen); // добавляем/убираем класс для гамбургера
             }
+
+            window.addEventListener('DOMContentLoaded', () => {
+                toggleButton.classList.toggle('active', sidebar.classList.contains('open'));
+            });
         </script>
     </body>
 </html>

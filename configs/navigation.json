@@ -1,0 +1,31 @@
+[
+    {
+        "title": "Главная",
+        "link": "/",
+        "icon": "🏠",
+        "children": []
+    },
+    {
+        "title": "Профиль",
+        "link": "/profile",
+        "icon": "👤",
+        "children": []
+    },
+    {
+        "title": "Настройки",
+        "link": "/settings",
+        "icon": "⚙️",
+        "children": [
+            {
+                "title": "Безопасность",
+                "link": "/settings/security",
+                "icon": "🔒"
+            },
+            {
+                "title": "Уведомления",
+                "link": "/settings/notifications",
+                "icon": "🔔"
+            }
+        ]
+    }
+]

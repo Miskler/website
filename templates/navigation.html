@@ -1,3 +1,43 @@
 <aside class="navigation" id="navigation">
-    ...
+    <ul class="nav-list">
+        {% for item in navigation %}
+            <li class="nav-item">
+                <a href="{{ item.link }}" class="nav-link">
+                    <span class="icon">{{ item.icon }}</span>
+                    <span class="title">{{ item.title }}</span>
+                </a>
+                {% if item.children %}
+                    <ul class="sub-nav">
+                        {% for child in item.children %}
+                            <li class="nav-item">
+                                <a href="{{ child.link }}" class="nav-link">
+                                    <span class="icon">{{ child.icon }}</span>
+                                    <span class="title">{{ child.title }}</span>
+                                </a>
+                            </li>
+                        {% endfor %}
+                    </ul>
+                {% endif %}
+            </li>
+        {% endfor %}
+        <div class="hover-bar" id="hover-bar"></div>
+    </ul>
 </aside>
+
+<script>
+const navItems = document.querySelectorAll('.nav-link');
+const hoverBar = document.getElementById('hover-bar');
+
+navItems.forEach(item => {
+    item.addEventListener('mouseenter', e => {
+        const rect = item.getBoundingClientRect();
+        hoverBar.style.top = item.offsetTop + 'px';
+        hoverBar.style.height = item.offsetHeight + 'px';
+        hoverBar.style.opacity = 1;
+    });
+});
+
+document.getElementById('navigation').addEventListener('mouseleave', e => {
+    hoverBar.style.opacity = 0;
+});
+</script>

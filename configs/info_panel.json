@@ -5,8 +5,8 @@
     "country": "Россия",
     "age": 17,
     "pie_skills": [
-        {"name": "Russian", "percent": 100},
-        {"name": "English", "percent": 70}
+        {"name": "Russian", "percent": 100, "description": "Native"},
+        {"name": "English", "percent": 60, "description": "B1"}
     ],
     "bar_skills": [
         {"name": "Godot 3.3-4.5", "percent": 90, "description": "Несколько игр, например: <a href=\"https://www.rustore.ru/catalog/app/org.godotengine.khuter\">kHUTER</a>. GDScript 1.0/2.0 в частности. Разрабатывал этот проект около 4 лет, был учебным полигоном в программировании."},
@@ -15,12 +15,11 @@
         {"name": "Outlook & Jira & Confluence & GitLab", "percent": 75, "description": "Основной стек на моей работе - сталкиваюсь каждый день."},
         {"name": "Flask & FastAPI & jQuery", "percent": 70, "description": "Я разрабатывал <a href=\"https://github.com/Open-Workshop\">Open Inflation</a> - раньше был популярный для скачивания пиратских модов (500 уников в сутки, закрыл из-за дороговизны поддержки). Flask бекенд + jQuery как основа фронта, а FastAPI на отдельном процессе как основа бизнес-логики. Под конец база проекта насчитывала пол миллиона модов для ~10~ игр, вне учета сопроводительных файлов."},
         {"name": "SQLite / MySQL & SQLAlchemy", "percent": 30, "description": "Для <a href=\"https://github.com/Open-Workshop\">Open Inflation</a> вел базу данных, изначально строилось на SQLite, но после около сотни тысяч добавленных модов серверу стало плохо, тогда перевел на MySQL интегрированного через SQLAlchemy. Прочитать SQL запрос - могу, но базы данных были инструментом, а не целью, так что знаю постолько-поскольку."}
-        
     ],
     "social_links": [
-        {"name": "Telegram", "url": "https://t.me/misklers", "icon": "/img/icons/telegram.png"},
-        {"name": "GitHub", "url": "https://github.com/miskler", "icon": "/img/icons/github.png"},
-        {"name": "Discord", "url": "https://discord.gg/UnJnGHNbBp", "icon": "/img/icons/discord.png"},
-        {"name": "YouTube", "url": "https://youtube.com/@miskler", "icon": "/img/icons/youtube.png"}
+        {"name": "Telegram", "url": "https://t.me/misklers", "icon": "/info_panel/icons/telegram.svg"},
+        {"name": "GitHub",  "url": "https://github.com/miskler", "icon": "/info_panel/icons/github.svg"},
+        {"name": "Discord", "url": "https://discord.gg/UnJnGHNbBp", "icon": "/info_panel/icons/discord.svg"},
+        {"name": "YouTube", "url": "https://youtube.com/@miskler", "icon": "/info_panel/icons/youtube.svg"}
     ]
 }
