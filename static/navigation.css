@@ -20,6 +20,13 @@
     position: relative;
     z-index: 1;
 }
+.nav-link:visited {
+    color: var(--color-text-primary);
+}
+.nav-link:hover {
+    color: var(--color-accent);
+}
+
 .nav-link div {
     display: flex;
 }
@@ -89,4 +96,21 @@
 /* последний пункт — ОБРЫВ */
 .sub-nav .nav-item:last-child::before {
     bottom: 50%;
+}
+
+.navigation-menu-toggle {
+    display: none;
+    position: fixed;
+    top: 0;
+    z-index: 9999;
+    right: 0;
+    border: none;
+    border-bottom-left-radius: 10px;
+    background: var(--color-bg-secondary);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 15px;
+}
+.navigation-menu-toggle.active {
+    right: var(--navigation-width);
 }

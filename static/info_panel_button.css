@@ -2,7 +2,7 @@
     display: none;
     position: fixed;
     bottom: 130px;
-    z-index: 1100;
+    z-index: 950;
     padding: 11px;
     padding-top: 13px;
     background: var(--color-accent);
@@ -21,14 +21,13 @@
     opacity: 1;
 }
 
-.info-panel-toggle {
+.burger-toggle {
     flex-direction: column;
     align-items: center;
-    height: auto;
 }
 
 /* span внутри menu-btn-tree */
-.info-panel-toggle span {
+.burger-toggle span {
     height: 3px;
     background: #4e4e4e;
     position: relative;
@@ -39,34 +38,34 @@
 }
 
 /* Отдельные span */
-.info-panel-toggle span:nth-child(1) {
+.burger-toggle span:nth-child(1) {
     width: 20px;
     margin-right: auto;
 }
 
-.info-panel-toggle span:nth-child(2) {
+.burger-toggle span:nth-child(2) {
     width: 40px;
 }
 
-.info-panel-toggle span:nth-child(3) {
+.burger-toggle span:nth-child(3) {
     width: 20px;
     margin-left: auto;
 }
 
 /* Стили при checked */
-.info-panel-toggle.active > span:nth-child(1) {
+.burger-toggle.active > span:nth-child(1) {
     transform: rotate(45deg) translate(4px, 1px);
     background: #f4f726;
     box-shadow: 0 0 2em 0.2em #f4f726;
 }
 
-.info-panel-toggle.active > span:nth-child(2) {
+.burger-toggle.active > span:nth-child(2) {
     transform: rotate(-45deg);
     background: #f4f726;
     box-shadow: 0 0 2em 0.2em #f4f726;
 }
 
-.info-panel-toggle.active > span:nth-child(3) {
+.burger-toggle.active > span:nth-child(3) {
     display: block;
     transform: rotate(45deg) translate(-4px, 0px);
     background: #f4f726;

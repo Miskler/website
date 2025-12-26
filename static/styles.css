@@ -54,7 +54,7 @@ a:hover {
     left: 0;
     height: 100vh;
     transition: transform 0.3s ease;
-    z-index: 1000;
+    z-index: 900;
 }
 
 .navigation {
@@ -110,6 +110,19 @@ a:hover {
 
     .content {
         margin-right: 0;
+    }
+
+    .navigation-menu-toggle {
+        display: flex;
+    }
+
+    #navigation-background.active {
+        position: fixed;
+        height: 100%;
+        width: 100%;
+        background: black;
+        opacity: 0.5;
+        z-index: 999;
     }
 }
 

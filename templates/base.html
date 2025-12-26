@@ -18,11 +18,17 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
     </head>
     <body>
-        <button id="info-panel-buttom-state" class="info-panel-toggle" onclick="toggleSidebar()">
+        <button id="info-panel-buttom-state" class="info-panel-toggle burger-toggle" onclick="toggleSidebar()">
             <span></span>
             <span></span>
             <span></span>
         </button>
+        <button id="navigation-menu-button-state" class="navigation-menu-toggle burger-toggle" onclick="toggleNavigation()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+
         <div class="layout">
             {% include 'info_panel.html' %}
 
@@ -30,19 +36,39 @@
                 {% block content %}{% endblock %}
             </main>
 
+            <div id="navigation-background"></div>
             {% include 'navigation.html' %}
         </div>
+
         <script>
             const sidebar = document.getElementById('sidebar');
-            const toggleButton = document.getElementById('info-panel-buttom-state');
+            const toggleButtonInf = document.getElementById('info-panel-buttom-state');
 
             function toggleSidebar() {
                 const isOpen = sidebar.classList.toggle('open');
-                toggleButton.classList.toggle('active', isOpen); // добавляем/убираем класс для гамбургера
+                toggleButtonInf.classList.toggle('active', isOpen); // добавляем/убираем класс для гамбургера
             }
 
             window.addEventListener('DOMContentLoaded', () => {
-                toggleButton.classList.toggle('active', sidebar.classList.contains('open'));
+                toggleButtonInf.classList.toggle('active', sidebar.classList.contains('open'));
+            });
+        </script>
+
+        <script>
+            const navigation = document.getElementById('navigation');
+            const navigationBackground = document.getElementById('navigation-background');
+            const toggleButtonNav = document.getElementById('navigation-menu-button-state');
+
+            function toggleNavigation() {
+                const isOpen = navigation.classList.toggle('open');
+                toggleButtonNav.classList.toggle('active', isOpen); // добавляем/убираем класс для гамбургера
+                navigationBackground.classList.toggle('active', isOpen);
+            }
+
+            window.addEventListener('DOMContentLoaded', () => {
+                const isOpen = navigation.classList.contains('open');
+                toggleButtonNav.classList.toggle('active', isOpen);
+                navigationBackground.classList.toggle('active', isOpen);
             });
         </script>
     </body>
