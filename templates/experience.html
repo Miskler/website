@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div id="timeline">
+  <div class="timeline-axis"></div>
+  <div id="timeline-items"></div>
+</div>
+
+<script id="timeline-data" type="application/json">
+  {{ experience | tojson }}
+</script>
+
+<script src="/static/timeline.js"></script>
+<link rel="stylesheet" href="/static/timeline.css">
+{% endblock %}

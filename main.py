@@ -20,5 +20,11 @@ def inject_config():
 def home():
     return render_template('index.html')
 
+@app.route('/experience')
+def experience():
+    with open("configs/timeline.json", encoding="utf-8") as f:
+        exp = json.load(f)
+    return render_template('experience.html', experience=exp)
+
 if __name__ == '__main__':
     app.run(debug=True)
