@@ -2,6 +2,7 @@ const data = JSON.parse(
   document.getElementById('timeline-data').textContent
 );
 const container = document.getElementById('timeline');
+const Lcontainer = document.getElementById('timeline-items');
 const DAY = 86400000;
 const PX_PER_DAY = 0.8;
 function parseDate(s) {
@@ -34,32 +35,34 @@ data.forEach((e, i) => {
   const sign = e.side === 'right' ? 1 : -1;
   const visualStep = 12; // Small step for visual staggering
   const offset = sign * e.lane * visualStep;
+
+  const element = document.createElement('div')
   if (e.timeline.point) {
-    const point = document.createElement('div');
-    point.className = 'timeline-point';
-    point.id = `event-${i}-point`;
-    point.style.top = `${y1}px`;
-    point.style.left = `calc(50% + ${offset}px)`;
-    point.style.transform = 'translate(-50%, -50%)';
-    point.style.background = e.color;
-    container.appendChild(point);
+    element.className = 'timeline-point';
+    element.id = `event-${i}-point`;
+    element.style.transform = 'translate(-50%, -50%)';
   } else {
-    const range = document.createElement('div');
-    range.className = 'timeline-range';
-    range.id = `event-${i}-range`;
-    range.style.top = `${y1}px`;
-    range.style.height = `${Math.max(6, y2 - y1)}px`;
-    range.style.left = `calc(50% + ${offset}px)`;
-    range.style.transform = 'translate(-50%, 0)';
-    range.style.background = e.color;
-    container.appendChild(range);
+    element.className = 'timeline-range';
+    element.id = `event-${i}-range`;
+    element.style.height = `${Math.max(6, y2 - y1)}px`;
+    element.style.transform = 'translate(-50%, 0)';
   }
+  element.style.left = `calc(50% + ${offset}px)`;
+  element.style.top = `${y1}px`;
+  element.style.background = e.color;
+  Lcontainer.appendChild(element);
+
+
+  const baseShiftTopForPointLabel = 15;
+  const baseShiftTopForLineLabel = -15;
+
   const label = document.createElement('div');
   label.className = `timeline-label ${e.side}`;
   label.id = `event-${i}-label`;
   const labelLane = e.side === 'left' ? Math.abs(minLane) : Math.abs(maxLane);
   label.style.setProperty('--lane', labelLane);
-  label.style.setProperty('--y', `${y1}px`);
+  label.style.setProperty('--y', `${y1 - (e.timeline.point ? baseShiftTopForPointLabel : baseShiftTopForLineLabel)}px`);
+  label.style.setProperty('--clr', e.color);
   label.textContent = e.title;
   container.appendChild(label);
 });

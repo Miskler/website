@@ -24,7 +24,7 @@
     "title": "Нападение на СССР",
     "color": "red",
     "lane": 0,
-    "side": "right",
+    "side": "left",
     "timeline": { "point": "22.06.1941" }
   },
   {

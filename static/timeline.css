@@ -38,7 +38,7 @@
   top: var(--y);
   max-width: 320px;
   padding: 6px 10px;
-  background: #1e1e1e;
+  background: color-mix(in srgb, rgb(21, 21, 21) 90%, var(--clr) 10%);;
   border-radius: 6px;
 }
 
