@@ -15,7 +15,7 @@
   },
   {
     "title": "Битва за Британию",
-    "color": "red",
+    "color": "green",
     "lane": 1,
     "side": "right",
     "timeline": { "from": "10.07.1940", "to": "31.10.1940" }
@@ -30,13 +30,13 @@
   {
     "title": "Великая Отечественная война",
     "color": "red",
-    "lane": 1,
+    "lane": 0,
     "side": "right",
     "timeline": { "from": "22.06.1941", "to": "09.05.1945" }
   },
   {
     "title": "Война на Тихом океане",
-    "color": "red",
+    "color": "blue",
     "lane": -1,
     "side": "left",
     "timeline": { "from": "07.12.1941", "to": "02.09.1945" }
@@ -44,34 +44,34 @@
   {
     "title": "Сталинградская битва",
     "color": "red",
-    "lane": 2,
+    "lane": 1,
     "side": "right",
     "timeline": { "from": "23.08.1942", "to": "02.02.1943" }
   },
   {
     "title": "Высадка в Нормандии",
-    "color": "red",
-    "lane": 2,
+    "color": "green",
+    "lane": 1,
     "side": "right",
     "timeline": { "point": "06.06.1944" }
   },
   {
     "title": "Освобождение Западной Европы",
-    "color": "red",
-    "lane": 0,
-    "side": "left",
+    "color": "green",
+    "lane": 1,
+    "side": "right",
     "timeline": { "from": "06.06.1944", "to": "08.05.1945" }
   },
   {
     "title": "Капитуляция Германии",
     "color": "red",
     "lane": 0,
-    "side": "left",
+    "side": "right",
     "timeline": { "point": "09.05.1945" }
   },
   {
     "title": "Капитуляция Японии",
-    "color": "red",
+    "color": "blue",
     "lane": -1,
     "side": "left",
     "timeline": { "point": "02.09.1945" }

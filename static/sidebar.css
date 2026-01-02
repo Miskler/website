@@ -36,7 +36,7 @@
 
 .details {
     font-size: 0.8em;
-    color: #ccc;
+    color: var(--color-text-secondary);
     line-height: 1.2em;
 }
 

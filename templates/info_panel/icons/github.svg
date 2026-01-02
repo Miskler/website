@@ -1,6 +1,6 @@
 <svg width="40" height="40" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="icon">
   <!-- Белый круг -->
-  <circle cx="12" cy="12" r="12" fill="#fff"/>
+  <circle cx="12" cy="12" r="12" fill="#E0E0E0"/>
 
   <!-- Упрощённый GitHub path, вписан в квадрат 24x24 -->
   <path fill="currentColor" d="M12 0C5.373 0 0 5.373 0 12c0 5.302 3.438 9.8 8.205 11.385.6.111.82-.261.82-.577 

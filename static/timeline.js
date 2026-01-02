@@ -4,7 +4,7 @@ const data = JSON.parse(
 const container = document.getElementById('timeline');
 const Lcontainer = document.getElementById('timeline-items');
 const DAY = 86400000;
-const PX_PER_DAY = 0.8;
+const PX_PER_DAY = 0.3;
 function parseDate(s) {
   const [d, m, y] = s.split('.').map(Number);
   return new Date(y, m - 1, d);
@@ -34,7 +34,7 @@ data.forEach((e, i) => {
   const y2 = y(end(e));
   const sign = e.side === 'right' ? 1 : -1;
   const visualStep = 12; // Small step for visual staggering
-  const offset = sign * e.lane * visualStep;
+  const offset = e.lane * visualStep;
 
   const element = document.createElement('div')
   if (e.timeline.point) {
@@ -49,20 +49,30 @@ data.forEach((e, i) => {
   }
   element.style.left = `calc(50% + ${offset}px)`;
   element.style.top = `${y1}px`;
-  element.style.background = e.color;
+  element.style.setProperty('--clr', e.color);
   Lcontainer.appendChild(element);
+  registerTimelineHover(element, i);
 
-
-  const baseShiftTopForPointLabel = 15;
-  const baseShiftTopForLineLabel = -15;
 
   const label = document.createElement('div');
   label.className = `timeline-label ${e.side}`;
   label.id = `event-${i}-label`;
-  const labelLane = e.side === 'left' ? Math.abs(minLane) : Math.abs(maxLane);
+
+  const labelLane = e.side === 'left'
+    ? Math.abs(minLane)
+    : Math.abs(maxLane);
+
   label.style.setProperty('--lane', labelLane);
-  label.style.setProperty('--y', `${y1 - (e.timeline.point ? baseShiftTopForPointLabel : baseShiftTopForLineLabel)}px`);
   label.style.setProperty('--clr', e.color);
+
+  // ВЕРТИКАЛЬНЫЙ ЦЕНТР
+  const centerY = e.timeline.point
+    ? y1
+    : (y1 + y2) / 2;
+
+  label.style.setProperty('--y', `${centerY}px`);
   label.textContent = e.title;
+
   container.appendChild(label);
+  registerTimelineHover(label, i);
 });

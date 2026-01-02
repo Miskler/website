@@ -2,6 +2,19 @@
   position: relative;
 }
 
+#timeline.element-hovered :not(i-hovered) {
+  opacity: 0.3;
+}
+#timeline.element-hovered #timeline-items {
+  opacity: 1;
+}
+#timeline.element-hovered .i-hovered {
+  opacity: 1;
+}
+.timeline-label, .timeline-point, .timeline-range {
+  transition: opacity 0.5s ease 0.05s;
+}
+
 .timeline-axis {
   position: absolute;
   left: 50%;
@@ -32,10 +45,15 @@
   z-index: 2;
 }
 
+.timeline-range, .timeline-point {
+  background: color-mix(in srgb, rgb(21, 21, 21) 30%, var(--clr) 70%);
+}
+
 /* Текст */
 .timeline-label {
   position: absolute;
   top: var(--y);
+  transform: translateY(-50%);
   max-width: 320px;
   padding: 6px 10px;
   background: color-mix(in srgb, rgb(21, 21, 21) 90%, var(--clr) 10%);;
