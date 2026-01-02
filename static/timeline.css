@@ -3,16 +3,16 @@
 }
 
 #timeline.element-hovered :not(i-hovered) {
-  opacity: 0.3;
+  filter: brightness(0.4);
 }
 #timeline.element-hovered #timeline-items {
-  opacity: 1;
+  filter: brightness(1.0);
 }
 #timeline.element-hovered .i-hovered {
-  opacity: 1;
+  filter: brightness(1.0);
 }
 .timeline-label, .timeline-point, .timeline-range {
-  transition: opacity 0.5s ease 0.05s;
+  transition: filter 0.5s ease 0.05s;
 }
 
 .timeline-axis {
@@ -29,7 +29,7 @@
 .timeline-range {
   position: absolute;
   left: 50%;
-  width: 6px;
+  width: 8px;
   transform: translateX(-50%);
   border-radius: 3px;
 }
@@ -38,8 +38,8 @@
 .timeline-point {
   position: absolute;
   left: 50%;
-  width: 14px;
-  height: 14px;
+  aspect-ratio: 1;
+  height: 18px;
   border-radius: 50%;
   transform: translate(-50%, -50%);
   z-index: 2;

@@ -33,7 +33,7 @@ data.forEach((e, i) => {
   const y1 = y(start(e));
   const y2 = y(end(e));
   const sign = e.side === 'right' ? 1 : -1;
-  const visualStep = 12; // Small step for visual staggering
+  const visualStep = 16; // Small step for visual staggering
   const offset = e.lane * visualStep;
 
   const element = document.createElement('div')
