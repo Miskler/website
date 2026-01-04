@@ -69,3 +69,9 @@
   right: calc(50% + 30px + var(--lane) * 10px);
   text-align: right;
 }
+
+.bounds-timeline {
+  z-index: -1;
+  border-radius: 10px;
+  background-color: rgba(0, 0, 0, 0.2);
+}

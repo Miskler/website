@@ -29,12 +29,19 @@ const minLane = Math.min(...data.map(e => e.lane));
 const maxLane = Math.max(...data.map(e => e.lane));
 // Use predefined sides and lanes from data
 // Create elements
+let minX = Infinity;
+let maxX = -Infinity;
+let maxY = -Infinity
+
 data.forEach((e, i) => {
   const y1 = y(start(e));
   const y2 = y(end(e));
-  const sign = e.side === 'right' ? 1 : -1;
   const visualStep = 16; // Small step for visual staggering
   const offset = e.lane * visualStep;
+
+  minX = Math.min(minX, offset);
+  maxX = Math.max(maxX, offset);
+  maxY = Math.max(maxY, y2)
 
   const element = document.createElement('div')
   if (e.timeline.point) {
@@ -51,7 +58,7 @@ data.forEach((e, i) => {
   element.style.top = `${y1}px`;
   element.style.setProperty('--clr', e.color);
   Lcontainer.appendChild(element);
-  registerTimelineHover(element, i);
+  registerTimelineHover(element, i, true, false);
 
 
   const label = document.createElement('div');
@@ -74,5 +81,22 @@ data.forEach((e, i) => {
   label.textContent = e.title;
 
   container.appendChild(label);
-  registerTimelineHover(label, i);
+  registerTimelineHover(label, i, true, true);
 });
+
+// Compute bounding box from all descendant elements
+
+// Create a new child element with the computed boundaries
+const boundsElement = document.createElement('div');
+boundsElement.style.position = 'absolute';
+boundsElement.style.transform = "translateX(-50%)"
+boundsElement.style.left = `50%`;
+
+const marginOutPX = 15;
+boundsElement.style.top = `${-marginOutPX}px`;
+boundsElement.style.width = `${(Math.abs(minX)+maxX)+marginOutPX*2}px`;
+boundsElement.style.height = `${maxY+marginOutPX*2}px`;
+
+boundsElement.className = `bounds-timeline`;
+Lcontainer.appendChild(boundsElement);
+registerTimelineHover(boundsElement, -1, false, true);

@@ -36,9 +36,13 @@
   }
 
   // публичная функция, которую вызывает timeline.js
-  window.registerTimelineHover = function (el, groupId) {
+  window.registerTimelineHover = function (el, groupId, onEnterEvent, onExitEvent) {
     el.dataset.hoverGroup = groupId;
-    el.addEventListener('mouseenter', onEnter);
-    el.addEventListener('mouseleave', onLeave);
+    if (onEnterEvent) {
+      el.addEventListener('mouseenter', onEnter);
+    };
+    if (onExitEvent) {
+      el.addEventListener('mouseleave', onLeave);
+    };
   };
 })();
