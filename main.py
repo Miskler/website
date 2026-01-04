@@ -24,7 +24,7 @@ def home():
 def experience():
     with open("configs/timeline.json", encoding="utf-8") as f:
         exp = json.load(f)
-    return render_template('experience.html', experience=exp)
+    return render_template('experience.html', experience=exp, experience_per_day="0.28")
 
 if __name__ == '__main__':
     app.run(debug=True)

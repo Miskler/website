@@ -4,7 +4,7 @@ const data = JSON.parse(
 const container = document.getElementById('timeline');
 const Lcontainer = document.getElementById('timeline-items');
 const DAY = 86400000;
-const PX_PER_DAY = 0.3;
+const PX_PER_DAY = parseFloat(container.getAttribute('experience-per-day'));
 function parseDate(s) {
   const [d, m, y] = s.split('.').map(Number);
   return new Date(y, m - 1, d);

@@ -3,7 +3,7 @@
 {% block content %}
 <h1 style="padding:20px;padding-bottom:35px;text-align:center;color:var(--color-accent-hover);">My Life Timeline</h1>
 
-<div id="timeline">
+<div id="timeline" experience-per-day="{{ experience_per_day | safe }}">
   <div id="timeline-items"></div>
 </div>
 
