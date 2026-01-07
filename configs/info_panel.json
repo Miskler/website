@@ -9,12 +9,42 @@
         {"name": "English", "percent": 60, "description": "B1"}
     ],
     "bar_skills": [
-        {"name": "Godot 3.3-4.5", "percent": 90, "description": "Несколько игр, например: <a href=\"https://www.rustore.ru/catalog/app/org.godotengine.khuter\">kHUTER</a>. GDScript 1.0/2.0 в частности. Разрабатывал этот проект около 4 лет, был учебным полигоном в программировании."},
-        {"name": "Playwright & curl-cffi & asyncio", "percent": 80, "description": "Основная моя хобби-специализация - reverse engineering, в частности - реверс веб-api. Например: <a href=\"https://github.com/Open-Inflation/pyaterochka_api\">Пятерочка</a>, <a href=\"https://github.com/Open-Inflation/perekrestok_api\">Перекресток</a>, <a href=\"https://github.com/Open-Inflation/chizhik_api\">Чижик</a>, <a href=\"https://github.com/Open-Inflation/fixprice_api\">FixPrice</a><br>Немало так же я сделал и для \"самой reverse-инфраструктуры\", так, например: <a href=\"https://github.com/Miskler/jsonschema-diff\">jsonschema-diff</a> и <a href=\"https://github.com/Miskler/pytest-jsonschema-snapshot\">pytest-jsonschema-snapshot</a>"},
-        {"name": "Pytest & coverage & flake8 & black & Heaptrack", "percent": 50, "description": "Хорошо знаком с python-экосистемой тестирования и линтирования, которые активно применяю в своих новых open-source проектах, знаком с heaptrack и общими приципами дебага cpp кода, в основном - задачи на работе по дебаггингу утечек памяти в модифицированном Godot 4."},
-        {"name": "Outlook & Jira & Confluence & GitLab", "percent": 75, "description": "Основной стек на моей работе - сталкиваюсь каждый день."},
-        {"name": "Flask & FastAPI & jQuery", "percent": 70, "description": "Я разрабатывал <a href=\"https://github.com/Open-Workshop\">Open Inflation</a> - раньше был популярный для скачивания пиратских модов (500 уников в сутки, закрыл из-за дороговизны поддержки). Flask бекенд + jQuery как основа фронта, а FastAPI на отдельном процессе как основа бизнес-логики. Под конец база проекта насчитывала пол миллиона модов для ~10~ игр, вне учета сопроводительных файлов."},
-        {"name": "SQLite / MySQL & SQLAlchemy", "percent": 30, "description": "Для <a href=\"https://github.com/Open-Workshop\">Open Inflation</a> вел базу данных, изначально строилось на SQLite, но после около сотни тысяч добавленных модов серверу стало плохо, тогда перевел на MySQL интегрированного через SQLAlchemy. Прочитать SQL запрос - могу, но базы данных были инструментом, а не целью, так что знаю постолько-поскольку."}
+        {
+            "name": "Godot 3.3-4.5",
+            "percent": 90,
+            "grade": "Expert",
+            "description": "Несколько игр, например: <a href=\"https://www.rustore.ru/catalog/app/org.godotengine.khuter\">kHUTER</a>. GDScript 1.0/2.0 в частности. Разрабатывал этот проект около 4 лет, был учебным полигоном в программировании."
+        },
+        {
+            "name": "Playwright & curl-cffi & asyncio",
+            "percent": 80,
+            "grade": "Pro",
+            "description": "Основная моя хобби-специализация - reverse engineering, в частности - реверс веб-api. Например: <a href=\"https://github.com/Open-Inflation/pyaterochka_api\">Пятерочка</a>, <a href=\"https://github.com/Open-Inflation/perekrestok_api\">Перекресток</a>, <a href=\"https://github.com/Open-Inflation/chizhik_api\">Чижик</a>, <a href=\"https://github.com/Open-Inflation/fixprice_api\">FixPrice</a><br>Немало так же я сделал и для \"самой reverse-инфраструктуры\", так, например: <a href=\"https://github.com/Miskler/jsonschema-diff\">jsonschema-diff</a> и <a href=\"https://github.com/Miskler/pytest-jsonschema-snapshot\">pytest-jsonschema-snapshot</a>"
+        },
+        {
+            "name": "Pytest & coverage & flake8 & black & Heaptrack",
+            "percent": 50,
+            "grade": "Middle",
+            "description": "Хорошо знаком с python-экосистемой тестирования и линтирования, которые активно применяю в своих новых open-source проектах, знаком с heaptrack и общими приципами дебага cpp кода, в основном - задачи на работе по дебаггингу утечек памяти в модифицированном Godot 4."
+        },
+        {
+            "name": "Outlook & Jira & Confluence & GitLab",
+            "percent": 75,
+            "grade": "Middle",
+            "description": "Основной стек на моей работе - сталкиваюсь каждый день."
+        },
+        {
+            "name": "Flask & FastAPI & jQuery",
+            "percent": 70,
+            "grade": "Middle",
+            "description": "Я разрабатывал <a href=\"https://github.com/Open-Workshop\">Open Inflation</a> - раньше был популярный для скачивания пиратских модов (500 уников в сутки, закрыл из-за дороговизны поддержки). Flask бекенд + jQuery как основа фронта, а FastAPI на отдельном процессе как основа бизнес-логики. Под конец база проекта насчитывала пол миллиона модов для ~10~ игр, вне учета сопроводительных файлов."
+        },
+        {
+            "name": "SQLite / MySQL & SQLAlchemy",
+            "percent": 30,
+            "grade": "Novice",
+            "description": "Для <a href=\"https://github.com/Open-Workshop\">Open Inflation</a> вел базу данных, изначально строилось на SQLite, но после около сотни тысяч добавленных модов серверу стало плохо, тогда перевел на MySQL интегрированного через SQLAlchemy. Прочитать SQL запрос - могу, но базы данных были инструментом, а не целью, так что знаю постолько-поскольку."
+        }
     ],
     "social_links": [
         {"name": "Telegram", "url": "https://t.me/misklers", "icon": "/info_panel/icons/telegram.svg"},

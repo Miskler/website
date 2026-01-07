@@ -74,6 +74,11 @@
     margin-bottom: 5px;
 }
 
+.bar-header .bar-percent {
+    margin-left: 10px;
+    color: var(--color-text-secondary);
+}
+
 .description.bar {
     font-size: 0.8em;
     margin-bottom: 5px;

@@ -4,6 +4,7 @@
 <h1 style="padding:20px;padding-bottom:35px;text-align:center;color:var(--color-accent-hover);">My Life Timeline</h1>
 
 <div id="timeline" experience-per-day="{{ experience_per_day | safe }}">
+  <div id="timeline-dates" class="timeline-dates right" data-min-px-minor="10" data-min-px-major="120"></div>
   <div id="timeline-items"></div>
 </div>
 
@@ -13,5 +14,6 @@
 
 <script src="/static/timeline-hover.js"></script>
 <script src="/static/timeline.js"></script>
+<script src="/static/timeline-dates.js"></script>
 <link rel="stylesheet" href="/static/timeline.css">
 {% endblock %}

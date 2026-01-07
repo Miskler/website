@@ -75,3 +75,46 @@
   border-radius: 10px;
   background-color: rgba(0, 0, 0, 0.2);
 }
+
+/* Боковые панели дат */
+
+.timeline-dates {
+  width: 100px;
+  position: absolute;
+}
+.timeline-dates.right > * {
+  right: 0%;
+}
+.timeline-dates.left > * {
+  left: 0%;
+}
+.timeline-dates > * {
+  border-radius: 3px;
+}
+
+.timeline-dates .major-line {
+  position: absolute;
+  width: 50%;
+  height: 2.5px;
+  background-color: white;
+}
+
+.timeline-dates .major-line-text {
+  position: absolute;
+  transform: translateY(-100%);
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+}
+.timeline-dates.right .major-line-text {
+  margin-right: 12%;
+}
+.timeline-dates.left .major-line-text {
+  margin-left: 12%;
+}
+
+.timeline-dates .minor-line {
+  position: absolute;
+  width: 10%;
+  height: 2px;
+  background-color: white;
+}
