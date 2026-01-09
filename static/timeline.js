@@ -1,10 +1,10 @@
 const data = JSON.parse(
   document.getElementById('timeline-data').textContent
 );
-const container = document.getElementById('timeline');
+const container = document.getElementById('timeline-body');
 const Lcontainer = document.getElementById('timeline-items');
 const DAY = 86400000;
-const PX_PER_DAY = parseFloat(container.getAttribute('experience-per-day'));
+const PX_PER_DAY = parseFloat(document.getElementById('timeline').getAttribute('experience-per-day'));
 function parseDate(s) {
   const [d, m, y] = s.split('.').map(Number);
   return new Date(y, m - 1, d);

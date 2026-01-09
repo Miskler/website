@@ -73,7 +73,6 @@ a:hover {
     margin-left: var(--sidebar-width);
     margin-right: var(--navigation-width);
     flex: 1;
-    padding: 20px;
     overflow-y: auto;
     height: 100vh;
 }

@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', function() {
+function initTimeline(containerId) {
     const timelineElement = document.getElementById('timeline');
     const experiencePerDay = parseFloat(timelineElement.getAttribute('experience-per-day'));
     
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
         return `${day}.${month}.${year}`;
     }
     
-    const container = document.getElementById('timeline-dates');
+    const container = document.getElementById(containerId);
     const minPxMinor = parseFloat(container.getAttribute('data-min-px-minor')) || 20;
     const minPxMajor = parseFloat(container.getAttribute('data-min-px-major')) || 100;
     container.style.height = `${height}px`;
@@ -105,4 +105,4 @@ document.addEventListener('DOMContentLoaded', function() {
             container.appendChild(tick);
         }
     }
-});
+};
