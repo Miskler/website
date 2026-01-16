@@ -4,7 +4,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Miskler.dev</title>
-        <link rel="icon" href="{{ url_for('static', filename='/favicon.ico') }}" type="image/x-icon">
+        <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist/dist/chartist.min.css">
         <script src="https://cdn.jsdelivr.net/npm/chartist/dist/chartist.min.js"></script>
@@ -16,6 +16,8 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='info_panel_button.css') }}">
 
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='photoswipe/photoswipe.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='photoswipe/photoswipe-dynamic-caption-plugin.css') }}">
     </head>
     <body>
         <button id="info-panel-buttom-state" class="info-panel-toggle burger-toggle" onclick="toggleSidebar()">
@@ -70,6 +72,34 @@
                 toggleButtonNav.classList.toggle('active', isOpen);
                 navigationBackground.classList.toggle('active', isOpen);
             });
+        </script>
+
+        <script type="module">
+            import PhotoSwipeLightbox from "{{ url_for('static', filename='photoswipe/photoswipe-lightbox.esm.js') }}";
+            // or 'photoswipe-dynamic-caption-plugin' if using package manager
+            import PhotoSwipeDynamicCaption from "{{ url_for('static', filename='photoswipe/photoswipe-dynamic-caption-plugin.esm.js') }}";
+
+            const lightbox = new PhotoSwipeLightbox({
+                gallery: '.pswp-gallery',
+                children: 'a',
+                pswpModule: () => import("{{ url_for('static', filename='photoswipe/photoswipe.esm.js') }}"),
+
+                // Optional padding for images,
+                // note that this is an option of PhotoSwipe, not a plugin
+                paddingFn: (viewportSize) => {
+                    return {
+                    top: 30, bottom: 30, left: 70, right: 70
+                    }
+                },
+            });
+
+            const captionPlugin = new PhotoSwipeDynamicCaption(lightbox, {
+                // Plugins options, for example:
+                type: 'auto',
+            });
+
+            // make sure you init photoswipe core after plugins are added
+            lightbox.init();
         </script>
     </body>
 </html>

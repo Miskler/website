@@ -1,7 +1,36 @@
 <aside class="sidebar" id="sidebar">
     <!-- Пользовательская информация -->
     <div class="user-info">
-        <img src="{{ url_for('static', filename=info_panel.avatar_url) }}" alt="Avatar" class="avatar">
+        <div class="pswp-gallery" id="my-avatar">
+            <!-- Главное (видимое) фото -->
+            <a
+                href="{{ url_for('static', filename=info_panel.avatar.url) }}"
+                data-pswp-width="800"
+                data-pswp-height="800"
+            >
+                <img
+                src="{{ url_for('static', filename=info_panel.avatar.url) }}"
+                class="avatar"
+                alt="avatar"
+                />
+                <span class="pswp-caption-content">
+                {{ info_panel.avatar.description | safe }}
+                </span>
+            </a>
+
+            <!-- Дополнительные фото (скрытые) -->
+            {% for extra in info_panel.avatar.extra %}
+            <a
+                href="{{ url_for('static', filename=extra.url) }}"
+                data-pswp-width="800"
+                data-pswp-height="800"
+            >
+                <span class="pswp-caption-content">
+                    {{ extra.description | safe }}
+                </span>
+            </a>
+            {% endfor %}
+        </div>
         <div>
             <h2 class="nickname">{{ info_panel.nickname }}</h2>
             <p class="description">{{ info_panel.description }}</p>
