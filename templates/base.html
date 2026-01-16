@@ -78,6 +78,7 @@
             import PhotoSwipeLightbox from "{{ url_for('static', filename='photoswipe/photoswipe-lightbox.esm.js') }}";
             // or 'photoswipe-dynamic-caption-plugin' if using package manager
             import PhotoSwipeDynamicCaption from "{{ url_for('static', filename='photoswipe/photoswipe-dynamic-caption-plugin.esm.js') }}";
+            import PhotoSwipeThumbsPlugin from "{{ url_for('static', filename='photoswipe/photoswipe-thumbs-plugin.esm.js') }}";
 
             const lightbox = new PhotoSwipeLightbox({
                 gallery: '.pswp-gallery',
@@ -97,6 +98,7 @@
                 // Plugins options, for example:
                 type: 'auto',
             });
+            const swipePlugin = new PhotoSwipeThumbsPlugin(lightbox);
 
             // make sure you init photoswipe core after plugins are added
             lightbox.init();

@@ -421,3 +421,15 @@ div.pswp__img--placeholder,
 .pswp--one-slide .pswp__counter {
   display: none;
 }
+
+.pswp-thumbs-root {
+  --left-margin: 70px;
+  --right-margin: 120px;
+  top: 0;
+  z-index: 0;
+}
+.pswp-thumbs-track {
+  position: absolute;
+  left: var(--left-margin);
+  width: calc(100% - var(--left-margin) - var(--right-margin));
+}
