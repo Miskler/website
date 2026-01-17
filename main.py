@@ -1,5 +1,6 @@
 from flask import Flask, render_template, url_for
 import json
+from pswp import render_pswp_description, render_md
 
 app = Flask(__name__)
 
@@ -24,7 +25,12 @@ def home():
 def experience():
     with open("configs/timeline.json", encoding="utf-8") as f:
         exp = json.load(f)
-    return render_template('experience.html', experience=exp, experience_per_day="0.28")
+    
+    for e in exp:
+        if isinstance(e.get("description"), list):
+            e["description"] = render_md(render_pswp_description(e["description"]))
+
+    return render_template('experience.html', experience=exp, experience_per_day="0.5")
 
 if __name__ == '__main__':
     app.run(debug=True)
