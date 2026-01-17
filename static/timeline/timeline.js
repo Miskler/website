@@ -78,14 +78,16 @@ data.forEach((e, i) => {
     : (y1 + y2) / 2;
 
   label.style.setProperty('--y', `${centerY}px`);
-  label.textContent = e.title;
+  const labelTitle = document.createElement('span');
+  labelTitle.textContent = e.title;
+  label.appendChild(labelTitle);
 
   if (e.description) {
     const labelDesc = document.createElement('div');
-    labelDesc.innerHTML = e.description
-    labelDesc.className = 'description'
-    label.appendChild(labelDesc)
-  }
+    labelDesc.innerHTML = e.description;
+    labelDesc.className = 'description';
+    label.appendChild(labelDesc);
+  };
 
   container.prepend(label);
   registerTimelineHover(label, i, true, true);
