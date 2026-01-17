@@ -28,12 +28,6 @@
     font-size: 1.5em;
 }
 
-.description {
-    font-size: 0.9em;
-    margin: 5px 0;
-    color: var(--color-text-secondary);
-}
-
 .details {
     font-size: 0.8em;
     color: var(--color-text-secondary);

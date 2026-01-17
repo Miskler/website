@@ -80,7 +80,14 @@ data.forEach((e, i) => {
   label.style.setProperty('--y', `${centerY}px`);
   label.textContent = e.title;
 
-  container.appendChild(label);
+  if (e.description) {
+    const labelDesc = document.createElement('div');
+    labelDesc.innerHTML = e.description
+    labelDesc.className = 'description'
+    label.appendChild(labelDesc)
+  }
+
+  container.prepend(label);
   registerTimelineHover(label, i, true, true);
 });
 

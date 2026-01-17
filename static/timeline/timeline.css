@@ -18,7 +18,10 @@
   transform: translateX(-50%);
 }
 
-#timeline.element-hovered > #timeline-body :not(i-hovered) {
+#timeline.element-hovered > #timeline-body > :not(.i-hovered) {
+  filter: brightness(0.4);
+}
+#timeline.element-hovered > #timeline-body #timeline-items > :not(.i-hovered) {
   filter: brightness(0.4);
 }
 #timeline.element-hovered > #timeline-body #timeline-items {
@@ -80,17 +83,20 @@
   border-radius: 6px;
   text-wrap: balance;
 
-  max-height: 3.4em; /* ≈ 2 строки */
-
   overflow: hidden;
 
-  transition: filter var(--timeline-hover-anim-time), max-height var(--timeline-hover-anim-time);
+  transition: filter var(--timeline-hover-anim-time), grid-template-rows var(--timeline-hover-anim-time);
 
+  display: grid;
+  grid-template-rows: auto 0fr;
 
   box-shadow: 0 1px 2px rgba(0, 0, 0, 1), 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 .timeline-label.i-hovered {
-  max-height: 100px;
+  grid-template-rows: auto 1fr;
+}
+.timeline-label > * {
+  overflow: hidden;
 }
 
 

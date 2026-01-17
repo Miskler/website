@@ -133,3 +133,11 @@ a:hover {
         margin-left: var(--sidebar-width-wide);
     }
 }
+
+
+.description {
+    font-size: 0.9em;
+    margin: 5px 0;
+    color: var(--color-text-secondary);
+    text-align: left;
+}
