@@ -93,6 +93,10 @@ data.forEach((e, i) => {
   registerTimelineHover(label, i, true, true);
 });
 
+
+const sFooter = document.getElementById('space-footer');
+sFooter.style.top = maxY+"px"
+
 // Compute bounding box from all descendant elements
 
 // Create a new child element with the computed boundaries
