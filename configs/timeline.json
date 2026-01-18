@@ -68,6 +68,7 @@
     "color": "red",
     "lane": 0,
     "side": "right",
+    "labelShift": -20,
     "timeline": { "from": "05.09.2022", "to": "NOW" }
   },
   {
@@ -78,7 +79,7 @@
     "timeline": { "point": "25.06.2024" }
   },
   {
-    "title": "Поступление в МГОК и переезд в Москву из Краснодарского края",
+    "title": "Поступление в колледж и переезд в Москву с Кубани",
     "color": "darkred",
     "lane": 1,
     "side": "right",
@@ -89,6 +90,7 @@
     "color": "darkred",
     "lane": 1,
     "side": "right",
+    "labelShift": -75,
     "timeline": { "from": "10.09.2024", "to": "NOW" }
   },
   {
@@ -96,6 +98,7 @@
     "color": "cyan",
     "lane": -1,
     "side": "left",
+    "labelShift": -8,
     "timeline": { "point": "06.10.2022" },
     "description": ["Как и любой школьник делающий игру мечты, я считал, что у моей игры будут космические продажи и ни в коем случае кодом нельзя делиться, но [розовые очки спали](https://github.com/Miskler/kHUTER-old). До этого момента гит в проекте не использовался, так что исходники утеряны."]
   },
@@ -103,7 +106,8 @@
     "title": "Первая публичная версия",
     "color": "cyan",
     "lane": -1,
-    "side": "right",
+    "side": "left",
+    "labelShift": 8,
     "timeline": { "point": "15.11.2022" },
     "description": ["Первая версия для \"масс\" была [выпущена на itch.io](https://sphere-studio.itch.io/khuter), но до этого было так же много версий, они распространялись через Google диск *(большинстов утеряно)*."]
   },
@@ -111,7 +115,8 @@
     "title": "Загрузка kHUTER в RuStore",
     "color": "cyan",
     "lane": -1,
-    "side": "right",
+    "side": "left",
+    "labelShift": -10,
     "timeline": { "point": "11.04.2023" },
     "description": ["Я подумал, что игра бы хорошо пошла бы на телефоне, за пару месяцев я [сделал порт на мобильные телефоны](https://www.rustore.ru/catalog/app/org.godotengine.khuter) *(с шейдерами я намучался)*"]
   },
@@ -120,6 +125,7 @@
     "color": "cyan",
     "lane": -1,
     "side": "left",
+    "labelShift": 10,
     "timeline": { "point": "17.05.2023" },
     "description": ["Как бы это не было бы тяжело, нельзя всю жизнь делать одно и тоже - мозг заржавеет. Я понял что игра выходит средней, популярность не светит, а разрабатывать еще 5 лет была пугающей перспективой..."]
   },
@@ -135,7 +141,7 @@
     "title": "Создание системы аккаунтов",
     "color": "yellow",
     "lane": -1,
-    "side": "right",
+    "side": "left",
     "timeline": { "point": "24.10.2023" },
     "description": ["Изначально была выбрана немного неккоректная архитектура, из-за чего эту подсистему было тяжело совмещать с основной."]
   },
@@ -144,6 +150,7 @@
     "color": "yellow",
     "lane": -1,
     "side": "left",
+    "labelShift": -22,
     "timeline": { "point": "19.11.2024" },
     "description": ["Тут несколько факторов: неопимизированная стратегия хранения, даже тех модов, что \"не ликвид\", неудачный выбор хост-сервера где масштабирование оказалось слишком дорогим и страх от популярности проекта."]
   },
@@ -160,7 +167,75 @@
     "color": "orange",
     "lane": -1,
     "side": "left",
+    "labelShift": 40,
     "timeline": { "from": "29.12.2024", "to": "NOW" },
     "description": ["В пике была посещаемость 500 уникальных человек в день, а на самые популярные моды набегало пара тысяч скачиваний за неделю после добавления! База была размером 300 гигабайт архивов *(а в распакованном виде еще больше)*"]
+  },
+  {
+    "title": "Chizhik API",
+    "color": "orange",
+    "lane": -1,
+    "side": "left",
+    "labelShift": 8,
+    "timeline": { "point": "22.12.2024" },
+    "description": [""]
+  },
+  {
+    "title": "Perekrestok API",
+    "color": "orange",
+    "lane": -1,
+    "side": "left",
+    "timeline": { "point": "05.03.2025" },
+    "description": [""]
+  },
+  {
+    "title": "Fixprice API",
+    "color": "orange",
+    "lane": -1,
+    "side": "left",
+    "timeline": { "point": "02.05.2025" },
+    "description": [""]
+  },
+  {
+    "title": "Pyaterochka API",
+    "color": "orange",
+    "lane": -1,
+    "side": "left",
+    "timeline": { "point": "28.06.2025" },
+    "description": [""]
+  },
+  {
+    "title": "jsoncrack-for-sphinx",
+    "color": "green",
+    "lane": 2,
+    "side": "right",
+    "timeline": { "point": "29.06.2025" },
+    "description": [""]
+  },
+  {
+    "title": "jsonschema-diff",
+    "color": "green",
+    "lane": 2,
+    "side": "right",
+    "labelShift": 21,
+    "timeline": { "point": "25.07.2025" },
+    "description": [""]
+  },
+  {
+    "title": "pytest-jsonschema-snapshot",
+    "color": "green",
+    "lane": 2,
+    "side": "right",
+    "labelShift": -10,
+    "timeline": { "point": "18.05.2025" },
+    "description": [""]
+  },
+  {
+    "title": "Создание этого сайта",
+    "color": "green",
+    "lane": 2,
+    "side": "right",
+    "timeline": { "point": "19.01.2026" },
+    "description": [""]
   }
 ]

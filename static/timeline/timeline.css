@@ -57,6 +57,15 @@
   transform: translateX(-50%);
   border-radius: 3px;
 }
+.timeline-range.now {
+  background:
+    linear-gradient(
+      to bottom,
+      color-mix(in srgb, rgb(21, 21, 21) 30%, var(--clr, #fff) 70%) calc(100% - 10px),
+      transparent 100%
+    );
+}
+
 
 /* Точки */
 .timeline-point {
@@ -70,7 +79,7 @@
 }
 
 .timeline-range, .timeline-point {
-  background: color-mix(in srgb, rgb(21, 21, 21) 30%, var(--clr) 70%);
+  background: color-mix(in srgb, rgb(21, 21, 21) 30%, var(--clr, #fff) 70%);
 }
 
 /* Текст */
@@ -120,11 +129,11 @@
 
 /* СТОРОНЫ — СТРОГО СИММЕТРИЧНЫ */
 .timeline-label.right {
-  left: calc(50% + 30px + var(--lane) * 10px);
+  left: calc(50% + 25px + var(--lane) * 16px);
 }
 
 .timeline-label.left {
-  right: calc(50% + 30px + var(--lane) * 10px);
+  right: calc(50% + 25px + var(--lane) * 16px);
   text-align: right;
 }
 

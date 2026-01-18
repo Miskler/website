@@ -49,7 +49,7 @@ data.forEach((e, i) => {
     element.id = `event-${i}-point`;
     element.style.transform = 'translate(-50%, -50%)';
   } else {
-    element.className = 'timeline-range';
+    element.className = 'timeline-range' + (e.timeline.now ? ' now' : '');
     element.id = `event-${i}-range`;
     element.style.height = `${Math.max(6, y2 - y1)}px`;
     element.style.transform = 'translate(-50%, 0)';
@@ -77,7 +77,7 @@ data.forEach((e, i) => {
     ? y1
     : (y1 + y2) / 2;
 
-  label.style.setProperty('--y', `${centerY}px`);
+  label.style.setProperty('--y', `${centerY+(e.labelShift ? e.labelShift : 0)}px`);
   const labelTitle = document.createElement('span');
   labelTitle.textContent = e.title;
   label.appendChild(labelTitle);
@@ -99,12 +99,12 @@ data.forEach((e, i) => {
 const boundsElement = document.createElement('div');
 boundsElement.style.position = 'absolute';
 boundsElement.style.transform = "translateX(-50%)"
-boundsElement.style.left = `50%`;
 
 const marginOutPX = 15;
 boundsElement.style.top = `${-marginOutPX}px`;
 boundsElement.style.width = `${(Math.abs(minX)+maxX)+marginOutPX*2}px`;
 boundsElement.style.height = `${maxY+marginOutPX*2}px`;
+boundsElement.style.left = `calc(50% + `+(Math.abs(minX) != Math.abs(maxX) ? (maxX+minX)/2 : 0)+'px)';
 
 boundsElement.className = `bounds-timeline`;
 Lcontainer.appendChild(boundsElement);

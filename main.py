@@ -33,8 +33,9 @@ def experience():
             e["description"] = render_md(render_pswp_description(e["description"]))
         if "point" not in e["timeline"].keys() and e["timeline"]["to"].upper() == "NOW":
             e["timeline"]["to"] = today
+            e["timeline"]["now"] = True
 
-    return render_template('experience.html', experience=exp, experience_per_day="0.55")
+    return render_template('experience.html', experience=exp, experience_per_day="0.65")
 
 if __name__ == '__main__':
     app.run(debug=True)
