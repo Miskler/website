@@ -3,8 +3,59 @@ from pathlib import Path
 from flask import url_for
 from markupsafe import Markup, escape
 import markdown
+import os
+from bs4 import BeautifulSoup
+from urllib.parse import urlparse
+
 
 STATIC_ROOT = Path("static/timeline/res")
+
+
+def wrap_images(html: str, static_root: str = '') -> str:
+    soup = BeautifulSoup(html, "html.parser")
+
+    for p in soup.find_all("p"):
+        imgs = p.find_all("img", recursive=False)
+        if not imgs:
+            continue
+
+        for img in imgs:
+            src = img.get("src")
+            if not src:
+                continue
+
+            parsed = urlparse(src)
+            if parsed.scheme in ("http", "https"):
+                continue
+
+            file_path = os.path.join(static_root, src.lstrip("/"))
+            if not os.path.isfile(file_path):
+                continue
+
+            try:
+                with Image.open(file_path) as im:
+                    w, h = im.size
+            except Exception:
+                continue
+
+            a = soup.new_tag(
+                "a",
+                href=src,
+                **{
+                    "data-pswp-width": str(w),
+                    "data-pswp-height": str(h),
+                }
+            )
+
+            img.wrap(a)
+
+        classes = p.get("class", [])
+        if "pswp-gallery" not in classes:
+            classes.append("pswp-gallery")
+        p["class"] = classes
+
+    return str(soup)
+
 
 def render_md(text):
     html = markdown.markdown(
