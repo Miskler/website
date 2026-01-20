@@ -1,7 +1,12 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Контент</h1>
-<p>Прокручиваемая область</p>
-<p style="margin-top: 2000px;">Низ страницы</p>
+<div class="main-grid">
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+    <div></div>
+</div>
+<link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
 {% endblock %}

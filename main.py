@@ -1,4 +1,4 @@
-from flask import Flask, render_template, url_for, abort
+from flask import Flask, render_template, abort
 import os
 import json
 from pswp import render_pswp_description, render_md, wrap_images
