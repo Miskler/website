@@ -21,6 +21,9 @@
   --pswp-error-text-color: var(--pswp-icon-color);
 }
 
+.pswp-gallery > a {
+  line-height: 0;
+}
 
 /*
 	Styles for basic PhotoSwipe (pswp) functionality (sliding area, open/close transitions)

@@ -17,5 +17,14 @@
 
 #paper > p > a > img {
     width: 100%;
-    border-radius: 10px;
+}
+
+#paper > .pswp-gallery {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  border-radius: 10px;
+  overflow: hidden;
+}
+#paper > .pswp-gallery > :only-child {
+  grid-column: 1 / -1;
 }
