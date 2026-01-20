@@ -2,17 +2,17 @@
 <html lang="ru" >
   <head>
     <meta charset="UTF-8">
-    <title>Miskler 404</title>
+    <title>{{ title }}</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.min.css">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="stylesheet" href="./error.css">
+    <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='error.css') }}">
   </head>
   <body>
     <div class="noise"></div>
     <div class="overlay"></div>
     <div class="terminal">
-      <h1>Error <span class="errorcode">404</span></h1>
-      <p class="output">Данной страницы не существует, она удалена, временно недоступна либо введен неккоректный адрес</p>
+      <h1>Error <span class="errorcode">{{ code }}</span></h1>
+      <p class="output">{{ message }}</p>
       <p class="output">Вернитесь на <a href="/">домашнюю страницу</a></p>
     </div>
   </body>

@@ -87,6 +87,12 @@ body {
   box-sizing: border-box;
 }
 
+@media (max-width: 699px) {
+  .terminal {
+    padding: 0;
+  }
+}
+
 .output {
   color: rgba(128, 255, 128, 0.8);
   text-shadow: 0 0 1px rgba(51, 255, 51, 0.4), 0 0 2px rgba(255, 255, 255, 0.8);

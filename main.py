@@ -45,10 +45,10 @@ def papers(slug):
 
     # защита от ../
     if not os.path.abspath(md_path).startswith(os.path.abspath(base_dir)):
-        abort(404)
+        abort(404, description="Directory traversal атака")
 
     if not os.path.isfile(md_path):
-        abort(404)
+        abort(404, description="Статья не найдена")
 
     with open(md_path, encoding='utf-8') as f:
         md = f.read()
@@ -61,6 +61,32 @@ def papers(slug):
         page_type='paper',
         paper_slug=slug
     )
+
+
+@app.errorhandler(404)
+def error_404(e):
+    message = e.description or (
+        "Данной страницы не существует, она удалена, "
+        "временно недоступна либо введён некорректный адрес"
+    )
+    return render_template(
+        "error.html",
+        code=404,
+        title="Страница не найдена",
+        message=message
+    ), 404
+
+@app.errorhandler(500)
+def error_500(e):
+    message = e.description or (
+        "Произошла ошибка при обработке запроса"
+    )
+    return render_template(
+        "error.html",
+        code=500,
+        title="Внутренняя ошибка сервера",
+        message=message
+    ), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
