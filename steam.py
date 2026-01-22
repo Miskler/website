@@ -103,12 +103,18 @@ def humanize_timestamp(
 
 async def get_user_data():
     async with aiohttp.ClientSession() as session:
-        user, games = await asyncio.gather(
+        user, badges, games = await asyncio.gather(
             steam_get(
                 session,
                 "ISteamUser",
                 "GetPlayerSummaries",
                 steamids=STEAM_ID
+            ),
+            steam_get(
+                session,
+                "IPlayerService",
+                "GetBadges",
+                steamid=STEAM_ID
             ),
             steam_get(
                 session,
@@ -120,11 +126,27 @@ async def get_user_data():
             )
         )
         user = user["response"]["players"]["player"][0]
+        badges = badges["response"]
+        games = games["response"]
 
         user["loccountyflag"] = country_code_to_flag(user["loccountrycode"])
-        user["lastlog"] = humanize_timestamp(user["lastlogoff"], tz_offset=3)
+
+        real_state = ["offline", "online", "занят", "отошел", "спит", "торгует", "ищет игру", "играет в {game}"]
+        online_state = ["offline", "online", "busy", "away", "away", "online", "online", "busy"]
+        user["onlineState"] = online_state[user["personastate"]].replace(" ", "")
+        if "gameextrainfo" in user:
+            user["lastlog"] = real_state[-1].format(game=user["gameextrainfo"])
+        else:
+            if user["personastate"] == 0:
+                user["lastlog"] = humanize_timestamp(user["lastlogoff"], tz_offset=0)
+            else:
+                user["lastlog"] = real_state[user["personastate"]]
+
+        badges["player_level_word"] = f"{badges['player_level']} уровень"
+        badges["percent"] = round(100 / (badges['player_xp']+badges['player_xp_needed_to_level_up']) * badges['player_xp'], 1)
 
         return {
             "user": user,
-            "games": games["response"]
+            "badges": badges,
+            "games": games
         }

@@ -1,0 +1,38 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='variables.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='cards/steam.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='photoswipe/photoswipe.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='photoswipe/photoswipe-dynamic-caption-plugin.css') }}">
+    </head>
+    <body>
+        <a class="top" href="{{ steam_user.profileurl }}">
+            <div class="profileSpace">
+                <img src="{{ steam_user.avatarfull }}" class="avatar" alt="avatar">
+                <div>
+                    <div class="nameSpace">
+                        <span>
+                            {{ steam_user.personaname }}
+                        </span>
+                        <div>
+                            {% include 'info_panel/icons/steam.svg' %}
+                        </div>
+                    </div>
+                    <span class="lastOnline {{ steam_user.onlineState }}"><div class="icon"><div></div></div> {{ steam_user.lastlog }}</span>
+                    <div class="percent">
+                        <span>
+                            {{ steam_badges.player_level_word }}
+                        </span>
+                        <div class="percentLine">
+                            <div style="width: {{ steam_badges.percent }}%;"></div>
+                            <span style="--percent: {{ steam_badges.percent }}%;">{{ steam_badges.percent }}%</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <div class="games">
+            .
+        </div>
+    </body>
+</html>

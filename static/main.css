@@ -6,24 +6,62 @@
     gap: 15px;
 }
 
-.main-grid > div {
-    background: var(--color-bg-secondary);
+.frame {
+    position: relative;
     aspect-ratio: 3 / 1.5;
-    max-height: 290px;
     border-radius: 15px;
-    padding: 15px;
+    overflow: hidden;
+    background: var(--color-bg-secondary);
 }
 
-.main-grid > div .top .avatar {
-    height: 100%;
-    width: auto;
+/* нижняя анимация */
+.shimmer {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        110deg,
+        var(--color-bg-secondary) 0%,
+        rgba(255,255,255,.10) 50%,
+        var(--color-bg-secondary) 100%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1s linear infinite;
 }
+
+/* iframe поверх */
+.frame iframe {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    border: none;
+
+    opacity: 0;
+    transition: opacity .4s ease;
+}
+
+/* iframe загрузился */
+.frame iframe.loaded {
+    opacity: 1;
+}
+
+/* когда iframe полностью появился — останавливаем анимацию */
+.frame iframe.loaded ~ .shimmer,
+.frame iframe.loaded + .shimmer {
+    animation: none;
+    opacity: 0;
+}
+
+@keyframes shimmer {
+    from { background-position: 200% 0; }
+    to   { background-position: -200% 0; }
+}
+
 
 @media (max-width: 1888px) {
     .main-grid {
         grid-template-columns: repeat(2, 1fr);
     }
-}@media (max-width: 1240px) {
+}@media (max-width: 1440px) {
     .main-grid {
         grid-template-columns: repeat(1, 1fr);
     }

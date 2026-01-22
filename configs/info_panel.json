@@ -67,6 +67,7 @@
         {"name": "Telegram", "url": "https://t.me/misklers", "icon": "/info_panel/icons/telegram.svg"},
         {"name": "GitHub",  "url": "https://github.com/miskler", "icon": "/info_panel/icons/github.svg"},
         {"name": "Discord", "url": "https://discord.gg/UnJnGHNbBp", "icon": "/info_panel/icons/discord.svg"},
+        {"name": "Steam", "url": "https://steamcommunity.com/id/miskler/", "icon": "/info_panel/icons/steam.svg"},
         {"name": "YouTube", "url": "https://youtube.com/@miskler", "icon": "/info_panel/icons/youtube.svg"}
     ]
 }

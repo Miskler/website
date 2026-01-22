@@ -1,0 +1,163 @@
+
+body {
+    background: var(--color-bg-secondary);
+    
+    --pad: 5vh;
+    padding: var(--pad);
+    margin: 0;
+    height: calc(100% - var(--pad) * 2);
+}
+
+.top {
+    height: 30vh;
+    display: block;
+    text-decoration: none;
+    transition: filter 0.1s;
+}
+.top:hover {
+    filter: brightness(0.9);
+}
+.top:active {
+    filter: brightness(0.7);
+}
+
+.profileSpace {
+    height: 100%;
+    display: flex;
+}
+.profileSpace > .avatar {
+    aspect-ratio: 1;
+    height: 100%;
+    border-radius: 12%;
+}
+.profileSpace > div {
+    margin-left: 2vw;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: fit-content;
+    align-self: center;
+}
+.nameSpace {
+    color: var(--color-text-primary);
+    display: flex;
+    font-size: 10vh;
+    gap: 10px;
+    font-weight: bold;
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+}
+.nameSpace svg {
+    height: 100%;
+    color: black;
+}
+
+.lastOnline {
+    display: flex;
+
+    --size: 6vh;
+
+    height: var(--size);
+    font-size: var(--size);
+
+    color: var(--color-text-primary);
+}
+.lastOnline > .icon {
+    position: relative;
+    margin-right: 2vh;
+    margin-top: calc(var(--size) / 4);
+    height: var(--size);
+    aspect-ratio: 1;
+    border-radius: 100%;
+}
+.lastOnline.online > .icon {
+    background: var(--color-accent-dark);
+}
+.lastOnline.offline > .icon {
+    background-color: var(--color-border);
+}
+.lastOnline.offline > .icon > div {
+    width: 40%;
+    height: 40%;
+    background: var(--color-bg-secondary);
+    border-radius: 100%;
+    right: 50%;
+    top: 50%;
+    position: absolute;
+    transform: translate(50%, -50%);
+}
+.lastOnline.busy > .icon {
+    background: red;
+}
+.lastOnline.busy > .icon > div {
+    width: 60%;
+    height: 30%;
+    position: absolute;
+    z-index: 10;
+    background: var(--color-bg-secondary);
+    border-radius: 30%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+.lastOnline.away > .icon {
+    background: yellow;
+}
+.lastOnline.away > .icon > div {
+    height: 65%;
+    width: 60%;
+    background: var(--color-bg-secondary);
+    top: 5%;
+    position: absolute;
+    border-radius: 100%;
+}
+
+.lastOnline > svg {
+    height: 100%;
+    aspect-ratio: 1;
+}
+
+.percent {
+    font-size: 7vh;
+    display: flex;
+    margin-top: 3vh;
+}
+.percent > span {
+    color: var(--color-text-primary);
+    letter-spacing: -1.5;
+    white-space: nowrap;
+}
+.percent > .percentLine {
+    font-size: 80%;
+    width: 100%;
+    margin-left: 2vw;
+    text-align: center;
+    background: var(--color-accent-disabled);
+    border-radius: 2vw;
+    display: flex;
+    align-self: end;
+    align-content: center;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+    z-index: 0;
+}
+.percent > .percentLine > div {
+    background: var(--color-accent);
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+}
+.percent > .percentLine > span {
+    --percent: 0%;
+    background: linear-gradient(to right, black var(--percent), white var(--percent));
+    content: var(--percent);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.games {
+    height: 60vh;
+    width: 100%;
+}

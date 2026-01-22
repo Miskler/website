@@ -1,4 +1,6 @@
 :root {
+    font-family: sans-serif;
+
     --sidebar-width: 300px;
     --sidebar-width-wide: 400px;
 
@@ -18,7 +20,7 @@
     --color-accent-disabled: #303A30;
 
     /* Дополнительно */
-    --color-border: #2C2C2C;
+    --color-border: #505050;
     --color-success: #43A047;
     --color-error: #E53935;
     --color-warning: #FB8C00;

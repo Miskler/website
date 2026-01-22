@@ -48,16 +48,24 @@ def inject_config():
 # Routes
 # ------------------------
 
+@app.route("/cards/steam")
+async def steam():
+    steam_data = await get_user_data()
+    pprint(steam_data["user"])
+
+    return render_template(
+        "cards/steam.html",
+        steam_user=steam_data["user"],
+        steam_badges=steam_data["badges"],
+        steam_games=steam_data["games"]
+    )
+
 @app.route("/")
 async def home():
     steam_data = await get_user_data()
     pprint(steam_data["user"])
 
-    return render_template(
-        "index.html",
-        steam_user=steam_data["user"],
-        steam_games=steam_data["games"]
-    )
+    return render_template("index.html")
 
 
 @app.route("/experience")
