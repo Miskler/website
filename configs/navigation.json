@@ -9,7 +9,12 @@
         "title": "Опыт",
         "link": "/experience",
         "icon": "/navigation/icons/experience.svg",
-        "children": []
+        "children": [
+            {
+                "title": "Резюме",
+                "link": "/get/cv"
+            }
+        ]
     },
     {
         "title": "Статьи",
@@ -20,11 +25,6 @@
                 "title": "Токсичность на Пикабу",
                 "description": "научный подход",
                 "link": "/papers/pikabu"
-            },
-            {
-                "title": "Эмоции в комментариях",
-                "description": "в политическом ютубе и вне его",
-                "link": "/papers/youtube"
             }
         ]
     }

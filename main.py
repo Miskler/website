@@ -1,4 +1,4 @@
-from flask import Flask, render_template, abort
+from flask import Flask, render_template, abort, request
 import os
 from PIL import Image
 from pathlib import Path
@@ -62,10 +62,25 @@ async def steam():
 
 @app.route("/")
 async def home():
-    steam_data = await get_user_data()
-    pprint(steam_data["user"])
-
     return render_template("index.html")
+
+@app.route("/get/cv")
+async def get_cv():
+    return render_template("get_cv.html")
+
+@app.route("/get/cv/ok")
+async def get_cv_ok():
+    password = request.args.get("psw")
+    
+    with open("configs/secrets.json", encoding="utf-8") as f:
+        SECRETS = json.load(f)
+
+    print(password)
+    print(str(SECRETS["password_cv"]))
+    if str(password) == str(SECRETS["password_cv"]):
+        return render_template("cv.txt")
+    else:
+        abort(403, description="Неверный пароль")
 
 
 @app.route("/experience")
@@ -134,6 +149,17 @@ async def error_404(e):
             "она удалена или адрес введён неверно"
         )
     ), 404
+
+@app.errorhandler(403)
+async def error_403(e):
+    return render_template(
+        "error.html",
+        code=403,
+        title="Доступ заблокирован",
+        message=e.description or (
+            "Доступ заблокирован, обратитесь к администратору"
+        )
+    ), 403
 
 
 @app.errorhandler(500)

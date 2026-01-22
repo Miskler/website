@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+.dialogCont {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    font-size: 30px;
+    padding: 10px;
+    background: var(--color-bg-secondary);
+    border-radius: 10px;
+}
+</style>
+
+<div class="dialogCont">
+    <span>Введите пароль</span>
+    <div>
+        <input type="text" id="passwordCV">
+        <input type="button" value="Отправить" id="submitBtn">
+    </div>
+</div>
+
+<script>
+const button = document.getElementById('submitBtn');
+const input = document.getElementById('passwordCV');
+
+button.addEventListener('click', async () => {
+    const password = input.value;
+
+    try {
+        const response = await fetch('/get/cv/ok?psw=' + encodeURIComponent(password));
+
+        if (response.status === 403) {
+            alert('Неверный пароль');
+            return;
+        }
+
+        if (!response.ok) {
+            alert('Ошибка на сервере');
+            return;
+        }
+
+        const blob = await response.blob();
+        const url = window.URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'cv.txt';
+        document.body.appendChild(a);
+        a.click();
+        a.remove();
+        window.URL.revokeObjectURL(url);
+
+    } catch (e) {
+        alert('Ошибка соединения с сервером');
+        console.error(e);
+    }
+});
+</script>
+{% endblock %}
