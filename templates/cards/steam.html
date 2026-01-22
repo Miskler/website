@@ -6,7 +6,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='photoswipe/photoswipe-dynamic-caption-plugin.css') }}">
     </head>
     <body>
-        <a class="top" href="{{ steam_user.profileurl }}">
+        <a class="top" href="{{ steam_user.profileurl }}" target="_top">
             <div class="profileSpace">
                 <img src="{{ steam_user.avatarfull }}" class="avatar" alt="avatar">
                 <div>
@@ -32,7 +32,14 @@
             </div>
         </a>
         <div class="games">
-            .
+            <div>
+                {% for game in steam_games %}
+                <a href="{{ game.gamelink }}">
+                    <img src="{{ game.vlogo }}" alt="logo {{ game.name }}" onerror="this.onerror=null; this.src='{{ url_for("static", filename="img/no_image.webp") }}';">
+                    <div class="gamePlayTime">{{ game.playtime_word }}</div>
+                </a>
+                {% endfor %}
+            </div>
         </div>
     </body>
 </html>
