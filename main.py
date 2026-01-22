@@ -1,9 +1,12 @@
 from flask import Flask, render_template, abort
 import os
+from PIL import Image
+from pathlib import Path
 import json
-from .steam import get_user_data
+from steam import get_user_data
 from datetime import datetime
 from pswp import render_pswp_description, render_md, wrap_images
+from pprint import pprint
 
 app = Flask(__name__)
 
@@ -14,6 +17,26 @@ def inject_config():
         info_bar = json.load(f)
     with open("configs/navigation.json", encoding="utf-8") as f:
         navigation = json.load(f)
+
+    def get_size(path, static_root: Path = Path("static")) -> list[int, int]:
+        path = os.path.join(static_root, path)
+        if not os.path.isfile(path):
+            return [200, 200]
+
+        with Image.open(path) as im:
+            w, h = im.size
+
+        min_size = 200
+        if w < min_size or h < min_size:
+            scale = max(min_size / w, min_size / h)
+            w = int(round(w * scale))
+            h = int(round(h * scale))
+
+        return [w, h]
+
+    info_bar["avatar"]["size"] = get_size(info_bar["avatar"]["url"])
+    for i in info_bar["avatar"]["extra"]:
+        i["size"] = get_size(i["url"])
 
     return {
         "info_panel": info_bar,
@@ -28,11 +51,11 @@ def inject_config():
 @app.route("/")
 async def home():
     steam_data = await get_user_data()
+    pprint(steam_data["user"])
 
     return render_template(
         "index.html",
         steam_user=steam_data["user"],
-        steam_badges=steam_data["badges"],
         steam_games=steam_data["games"]
     )
 
@@ -93,7 +116,7 @@ async def papers(slug):
 # ------------------------
 
 @app.errorhandler(404)
-def error_404(e):
+async def error_404(e):
     return render_template(
         "error.html",
         code=404,
@@ -106,7 +129,7 @@ def error_404(e):
 
 
 @app.errorhandler(500)
-def error_500(e):
+async def error_500(e):
     return render_template(
         "error.html",
         code=500,
