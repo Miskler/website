@@ -18,11 +18,23 @@
     --color-accent-hover: #38a13d;
     --color-accent-dark: #388E3C;
     --color-accent-disabled: #303A30;
+}
 
-    /* Дополнительно */
-    --color-border: #505050;
-    --color-success: #43A047;
-    --color-error: #E53935;
-    --color-warning: #FB8C00;
-    --color-hover-bg: #272727;
+:root.light {
+    --color-bg-primary: #FFFFFF;
+    --color-bg-secondary: #F5F5F5;
+    --color-text-primary: #212121;
+    --color-text-secondary: #757575;
+    
+    --color-accent: #4CAF50;
+    --color-accent-hover: #66BB6A;
+    --color-accent-dark: #2E7D32;
+    --color-accent-disabled: #C8E6C9;
+}
+
+/* Prevent default View Transition animations for a clean reveal */
+::view-transition-old(root),
+::view-transition-new(root) {
+    animation: none;
+    mix-blend-mode: normal;
 }
