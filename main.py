@@ -51,7 +51,7 @@ def inject_config():
 @app.route("/cards/steam")
 async def steam():
     steam_data = await get_user_data()
-    pprint(steam_data["games"])
+    pprint(steam_data["user"])
 
     return render_template(
         "cards/steam.html",

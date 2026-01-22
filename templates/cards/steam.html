@@ -18,7 +18,10 @@
                             {% include 'info_panel/icons/steam.svg' %}
                         </div>
                     </div>
-                    <span class="lastOnline {{ steam_user.onlineState }}"><div class="icon"><div></div></div> {{ steam_user.lastlog }}</span>
+                    <div class="nameSpaceSecond">
+                        <span class="lastOnline {{ steam_user.onlineState }}"><div class="icon"><div></div></div> {{ steam_user.lastlog }}</span>
+                        <span class="timeCreate">{{ steam_user.timecreated_word }}</span>
+                    </div>
                     <div class="percent">
                         <span>
                             {{ steam_badges.player_level_word }}

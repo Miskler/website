@@ -15,10 +15,10 @@ body {
     transition: filter 0.1s;
 }
 .top:hover {
-    filter: brightness(0.9);
+    filter: brightness(0.8);
 }
 .top:active {
-    filter: brightness(0.7);
+    filter: brightness(0.6);
 }
 
 .profileSpace {
@@ -53,15 +53,26 @@ body {
     color: black;
 }
 
-.lastOnline {
-    display: flex;
-
+.nameSpaceSecond {
     --size: 6vh;
 
     height: var(--size);
     font-size: var(--size);
 
     color: var(--color-text-primary);
+
+    display: flex;
+    justify-content: space-between;
+}
+.timeCreate {
+    letter-spacing: -0.6vh;
+    text-align: end;
+    word-break: break-all;
+    margin-left: 3.5vh;
+    white-space: nowrap;
+}
+.lastOnline {
+    display: flex;
 }
 .lastOnline > .icon {
     position: relative;
@@ -125,7 +136,7 @@ body {
 }
 .percent > span {
     color: var(--color-text-primary);
-    letter-spacing: -1.5;
+    letter-spacing: -0.7vh;
     white-space: nowrap;
 }
 .percent > .percentLine {
@@ -174,6 +185,13 @@ body {
     border-radius: 3vh;
     overflow: hidden;
     position: relative;
+    transition: filter 0.1s;
+}
+.games > div > a:hover {
+    filter: brightness(0.8);
+}
+.games > div > a:active {
+    filter: brightness(0.6);
 }
 .games > div > a > img {
     height: 100%;
@@ -187,4 +205,5 @@ body {
     padding: 0.5vh;
     border-radius: 2vh;
     letter-spacing: -0.2vh;
+    font-size: 5vh;
 }

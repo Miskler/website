@@ -18,12 +18,6 @@ async def steam_get(session, interface, method, version="v1", **params):
         resp.raise_for_status()
         return await resp.json()
 
-def country_code_to_flag(code: str) -> str:
-    if not code or len(code) != 2:
-        return ""
-    code = code.upper()
-    return chr(ord(code[0]) + 127397) + chr(ord(code[1]) + 127397)
-
 
 def plural_ru(value: int, form1: str, form2: str, form5: str) -> str:
     n = abs(value)
@@ -44,11 +38,13 @@ def humanize_timestamp(ts: int, tz_offset: int = 0, now: int | None = None) -> s
     offset = tz_offset * 3600
     if now is None:
         now = int(time.time())
+
     delta = (now - ts) - offset
     if delta < 0:
         return "в будущем"
     if delta < 5:
         return "только что"
+
     units = (
         (60, "секунду", "секунды", "секунд"),
         (60, "минуту", "минуты", "минут"),
@@ -58,10 +54,27 @@ def humanize_timestamp(ts: int, tz_offset: int = 0, now: int | None = None) -> s
         (12, "месяц", "месяца", "месяцев"),
         (float("inf"), "год", "года", "лет"),
     )
+
     value = delta
+    prev_value = None
+    prev_forms = None
+
     for limit, f1, f2, f5 in units:
         if value < limit:
-            return plural_ru(int(value), f1, f2, f5) + " назад"
+            main = int(value)
+
+            result = plural_ru(main, f1, f2, f5)
+
+            # добавляем предыдущий разряд, если он есть и ненулевой
+            if prev_value is not None:
+                extra = int((value - main) * prev_value)
+                if extra > 0:
+                    result += " " + plural_ru(extra, *prev_forms)
+
+            return result + " назад"
+
+        prev_value = limit
+        prev_forms = (f1, f2, f5)
         value /= limit
 
 def humanize_playtime(ts: int) -> str:
@@ -95,8 +108,6 @@ async def get_user_data():
         badges = badges["response"]
         games = games["response"]["games"]
 
-        user["loccountyflag"] = country_code_to_flag(user.get("loccountrycode"))
-
         real_state = ["offline", "online", "занят", "отошел", "спит", "торгует", "ищет игру", "играет в {game}"]
         online_state = ["offline", "online", "busy", "away", "away", "online", "online", "busy"]
         user["onlineState"] = online_state[user["personastate"]].replace(" ", "")
@@ -107,6 +118,8 @@ async def get_user_data():
                 user["lastlog"] = humanize_timestamp(user["lastlogoff"], tz_offset=0)
             else:
                 user["lastlog"] = real_state[user["personastate"]]
+        
+        user["timecreated_word"] = humanize_timestamp(user["timecreated"])
 
         badges["player_level_word"] = f"{badges['player_level']} уровень"
         badges["percent"] = round(100 / (badges['player_xp']+badges['player_xp_needed_to_level_up']) * badges['player_xp'], 1)

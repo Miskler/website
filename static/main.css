@@ -7,8 +7,11 @@
 }
 
 .frame {
+    --normal-ar: 3 / 1.5;
+    --mini-ar: 3 / 2.5;
+
     position: relative;
-    aspect-ratio: 3 / 1.5;
+    aspect-ratio: var(--normal-ar);
     border-radius: 15px;
     overflow: hidden;
     background: var(--color-bg-secondary);
@@ -61,8 +64,38 @@
     .main-grid {
         grid-template-columns: repeat(2, 1fr);
     }
+}@media (max-width: 1630px) {
+    .frame {
+        aspect-ratio: var(--mini-ar);
+    }
 }@media (max-width: 1440px) {
     .main-grid {
         grid-template-columns: repeat(1, 1fr);
+    }
+    .frame {
+        aspect-ratio: var(--normal-ar);
+    }
+}@media (max-width: 999px) {
+    .frame {
+        aspect-ratio: var(--mini-ar);
+    }
+}@media (max-width: 919px) {
+    .frame {
+        aspect-ratio: var(--normal-ar);
+    }
+}@media (max-width: 780px) {
+    .frame {
+        aspect-ratio: var(--mini-ar);
+    }
+}@media (max-width: 699px) {
+    .frame {
+        aspect-ratio: var(--normal-ar);
+    }
+}@media (max-width: 450px) {
+    .main-grid {
+        padding: 20px;
+    }
+    .frame {
+        aspect-ratio: var(--mini-ar);
     }
 }
