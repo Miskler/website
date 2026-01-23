@@ -7,9 +7,14 @@ from steam import get_user_data
 from datetime import datetime
 from pswp import render_pswp_description,  wrap_images
 from tools import render_md
+from github import fetch_github_data
+from pprint import pprint
 
 
 app = Flask(__name__)
+
+with open("configs/secrets.json", encoding="utf-8") as f:
+    SECRETS = json.load(f)
 
 
 @app.context_processor
@@ -60,6 +65,19 @@ async def steam():
         steam_games=steam_data["games"]
     )
 
+@app.route("/cards/github")
+async def github():
+    result = await fetch_github_data(SECRETS["github"], SECRETS["github_id"])
+    pprint(result)
+
+    return render_template(
+        "cards/github.html",
+        contributions=result["monthly_contributions"],
+        organizations=result["organizations"],
+        profile=result["profile"],
+        repositories=result["repositories"]
+    )
+
 @app.route("/")
 async def home():
     return render_template("index.html")
@@ -71,9 +89,6 @@ async def get_cv():
 @app.route("/get/cv/ok")
 async def get_cv_ok():
     password = request.args.get("psw")
-    
-    with open("configs/secrets.json", encoding="utf-8") as f:
-        SECRETS = json.load(f)
 
     print(password)
     print(str(SECRETS["password_cv"]))

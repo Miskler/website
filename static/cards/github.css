@@ -1,0 +1,58 @@
+
+body {
+    background: var(--color-bg-secondary);
+
+    --top-height: 36vh;
+    --bottom-padding: 2vh;
+    --pad: 5vh;
+    
+    padding: var(--pad);
+    margin: 0;
+    height: calc(100% - var(--pad) * 2);
+    overflow-y: hidden;
+}
+
+.top {
+    height: var(--top-height);
+}
+
+.bottom {
+    height: calc(100vh - var(--top-height) - var(--pad) * 2 - var(--bottom-padding));
+    margin-top: var(--bottom-padding);
+    overflow-x: scroll;
+}
+.bottom > div {
+    display: flex;
+    height: 100%;
+    gap: 1vh;
+}
+
+.profileSpace {
+    --nickname-size: 8vh;
+
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    height: 100%;
+    font-size: var(--nickname-size);
+    text-align: center;
+    color: var(--color-text-primary);
+    font-weight: bold;
+}
+.profileSpace > img {
+    height: calc(var(--top-height) - var(--nickname-size));
+    border-radius: 12%;
+    width: fit-content;
+}
+
+.repo {
+    height: 100%;
+    aspect-ratio: 1 / 1.2;
+    background: var(--color-bg-primary);
+    border-radius: 3vh;
+}
+.repo .fork {
+    width: 10px;
+    height: 10px;
+    background-color: red;
+}

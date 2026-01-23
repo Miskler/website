@@ -1,0 +1,24 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="{{ url_for('static', filename='variables.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='cards/github.css') }}">
+    </head>
+    <body>
+        <script src="{{ url_for('static', filename='theme_toggle_iframe.js') }}"></script>
+        <div class="top">
+            <div class="profileSpace">
+                <img src="{{ profile.avatar_url }}" alt="github user avatar">
+                <div class="nameSpace">{{ profile.login }}</div>
+            </div>
+        </div>
+        <div class="bottom">
+            <div>
+                {% for repo in repositories %}
+                <a class="repo" href="https://github.com/{{ repo.full_name }}">
+                    <div class="title">{{ repo.name }} {% if repo.is_fork %}<div class="fork"></div>{% endif %}</div>
+                </a>
+                {% endfor %}
+            </div>
+        </div>
+    </body>
+</html>
