@@ -79,7 +79,7 @@
 }
 
 .timeline-range, .timeline-point {
-  background: color-mix(in srgb, var(--contrast-color) 30%, var(--clr, #fff) 70%);
+  background: color-mix(in srgb, rgb(21, 21, 21) 30%, var(--clr, #fff) 70%);
 }
 
 /* Текст */
