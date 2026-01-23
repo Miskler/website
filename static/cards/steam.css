@@ -86,7 +86,7 @@ body {
     background: var(--color-accent-dark);
 }
 .lastOnline.offline > .icon {
-    background-color: var(--color-border);
+    background-color: var(--gray);
 }
 .lastOnline.offline > .icon > div {
     width: 40%;
