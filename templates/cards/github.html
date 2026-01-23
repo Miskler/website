@@ -2,23 +2,169 @@
     <head>
         <link rel="stylesheet" href="{{ url_for('static', filename='variables.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='cards/github.css') }}">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist/dist/chartist.min.css">
     </head>
     <body>
         <script src="{{ url_for('static', filename='theme_toggle_iframe.js') }}"></script>
+        
         <div class="top">
-            <div class="profileSpace">
-                <img src="{{ profile.avatar_url }}" alt="github user avatar">
-                <div class="nameSpace">{{ profile.login }}</div>
+            <div class="profileSection">
+                <img src="{{ profile.avatar_url }}" alt="github user avatar" class="avatar">
+                <div class="profileInfo">
+                    <h1 class="username">{{ profile.login }}</h1>
+                    <div class="stats">
+                        <div class="stat">
+                            <span class="stat-label">Репозитории</span>
+                            <span class="stat-value">{{ profile.public_repos }}</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Фолловеры</span>
+                            <span class="stat-value">{{ profile.followers }}</span>
+                        </div>
+                        <div class="stat">
+                            <span class="stat-label">Подписки</span>
+                            <span class="stat-value">{{ profile.following }}</span>
+                        </div>
+                    </div>
+                </div>
             </div>
+
+            {% if organizations %}
+            <div class="organizations">
+                <h3>Организации</h3>
+                <div class="orgList">
+                    {% for org in organizations %}
+                    <div class="org">
+                        <img src="{{ org.avatar_url }}" alt="{{ org.login }}" class="orgAvatar">
+                        <span class="orgName">{{ org.login }}</span>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            {% if contributions %}
+            <div class="contributions">
+                <h3>Вклад за месяц</h3>
+                <div class="contribGrid">
+                    {% for week in contributions %}
+                    <div class="contribWeek">
+                        {% for day in week %}
+                        <div class="contribDay" 
+                             style="--contrib-level: {{ day.level }};"
+                             title="{{ day.date }}: {{ day.count }} контрибуций">
+                        </div>
+                        {% endfor %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
         </div>
+
         <div class="bottom">
-            <div>
+            <h2 class="sectionTitle">Репозитории</h2>
+            <div class="reposGrid">
                 {% for repo in repositories %}
-                <a class="repo" href="https://github.com/{{ repo.full_name }}">
-                    <div class="title">{{ repo.name }} {% if repo.is_fork %}<div class="fork"></div>{% endif %}</div>
+                <a class="repoCard" href="https://github.com/{{ repo.full_name }}" target="_blank">
+                    <div class="repoHeader">
+                        <h3 class="repoName">
+                            {{ repo.name }}
+                            {% if repo.is_fork %}
+                            <span class="forkBadge">Fork</span>
+                            {% endif %}
+                        </h3>
+                        <span class="repoStars">⭐ {{ repo.stargazers_count }}</span>
+                    </div>
+                    
+                    {% if repo.description %}
+                    <p class="repoDescription">{{ repo.description }}</p>
+                    {% endif %}
+                    
+                    <div class="repoMeta">
+                        {% if repo.language %}
+                        <span class="repoLang">● {{ repo.language }}</span>
+                        {% endif %}
+                    </div>
+                    
+                    {% if repo.languages_percent %}
+                    <div class="languagesChart" 
+                         data-languages='{{ repo.languages_percent|tojson }}'
+                         data-repo-id="{{ repo.id }}">
+                        <!-- Диаграмма будет создана JavaScript -->
+                    </div>
+                    {% endif %}
                 </a>
                 {% endfor %}
             </div>
         </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/chartist/dist/chartist.min.js"></script>
+        <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Обработка круговых диаграмм языков
+            document.querySelectorAll('.languagesChart').forEach(chartContainer => {
+                const languages = JSON.parse(chartContainer.dataset.languages);
+                const repoId = chartContainer.dataset.repoId;
+                
+                // Преобразуем данные для Chartist
+                const series = [];
+                const labels = [];
+                
+                Object.entries(languages).forEach(([lang, percent]) => {
+                    if (percent > 0) {
+                        series.push(percent);
+                        labels.push(lang);
+                    }
+                });
+                
+                // Создаём диаграмму только если есть данные
+                if (series.length > 0) {
+                    const chartData = {
+                        series: series,
+                        labels: labels
+                    };
+                    
+                    const options = {
+                        donut: true,
+                        donutWidth: 30,
+                        showLabel: false,
+                        width: '80px',
+                        height: '80px'
+                    };
+                    
+                    // Создаём контейнер для диаграммы
+                    const chartEl = document.createElement('div');
+                    chartEl.className = 'ct-chart ct-perfect-fourth';
+                    chartContainer.appendChild(chartEl);
+                    
+                    new Chartist.Pie(chartEl, chartData, options);
+                    
+                    // Добавляем легенду с иконками
+                    const legend = document.createElement('div');
+                    legend.className = 'chartLegend';
+                    
+                    Object.entries(languages).forEach(([lang, percent]) => {
+                        if (percent > 5) { // Показываем только языки > 5%
+                            const langLower = lang.toLowerCase();
+                            const legendItem = document.createElement('div');
+                            legendItem.className = 'legendItem';
+                            legendItem.innerHTML = `
+                                <img src="/static/cards/icons/languages/${langLower}.svg" 
+                                     alt="${lang}" 
+                                     class="langIcon" 
+                                     onerror="this.style.display='none'">
+                                <span class="langName">${lang}</span>
+                                <span class="langPercent">${percent.toFixed(1)}%</span>
+                            `;
+                            legend.appendChild(legendItem);
+                        }
+                    });
+                    
+                    chartContainer.appendChild(legend);
+                }
+            });
+        });
+        </script>
     </body>
 </html>
