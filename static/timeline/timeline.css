@@ -79,7 +79,7 @@
 }
 
 .timeline-range, .timeline-point {
-  background: color-mix(in srgb, rgb(21, 21, 21) 30%, var(--clr, #fff) 70%);
+  background: color-mix(in srgb, var(--contrast-color) 30%, var(--clr, #fff) 70%);
 }
 
 /* Текст */
@@ -89,7 +89,7 @@
   transform: translateY(-50%);
   max-width: 320px;
   padding: 6px 10px;
-  background: color-mix(in srgb, rgb(21, 21, 21) 90%, var(--clr) 10%);;
+  background: color-mix(in srgb, var(--color-bg-primary) 80%, var(--clr, #fff) 20%);
   border-radius: 6px;
   text-wrap: balance;
 
@@ -169,7 +169,7 @@
   position: absolute;
   width: 50%;
   height: 2.5px;
-  background-color: white;
+  background-color: var(--contrast-color);
 }
 
 .timeline-dates .major-line-text {
@@ -189,5 +189,5 @@
   position: absolute;
   width: 10%;
   height: 2px;
-  background-color: white;
+  background-color: var(--contrast-color);
 }

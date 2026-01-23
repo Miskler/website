@@ -12,6 +12,7 @@
     --gray: #4b4b4b;
 
     /* Основные цвета */
+    --contrast-color: white;
     --color-bg-primary: #121212;
     --color-bg-secondary: var(--dark-sec);
     --color-text-primary: #E0E0E0;
@@ -25,6 +26,7 @@
 }
 
 :root.light {
+    --contrast-color: black;
     --color-bg-primary: #FFFFFF;
     --color-bg-secondary: var(--light-sec);
     --color-text-primary: #212121;
