@@ -114,3 +114,9 @@
 .navigation-menu-toggle.active {
     right: var(--navigation-width);
 }
+
+.switch-cont {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+}

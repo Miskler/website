@@ -200,7 +200,7 @@ body {
     position: absolute;
     right: 1vh;
     bottom: 1vh;
-    background: #000000d6;
+    background: rgba(from var(--color-bg-secondary) r g b / 0.8);
     color: var(--color-text-primary);
     padding: 0.5vh;
     border-radius: 2vh;

@@ -28,11 +28,11 @@
     --color-bg-primary: #FFFFFF;
     --color-bg-secondary: var(--light-sec);
     --color-text-primary: #212121;
-    --color-text-secondary: #757575;
+    --color-text-secondary: #515151;
     
-    --color-accent: #4CAF50;
-    --color-accent-hover: #66BB6A;
-    --color-accent-dark: #2E7D32;
+    --color-accent: #46984A;
+    --color-accent-hover: #579A5B;
+    --color-accent-dark: #255E28;
     --color-accent-disabled: #C8E6C9;
 }
 
