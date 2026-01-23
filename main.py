@@ -5,8 +5,9 @@ from pathlib import Path
 import json
 from steam import get_user_data
 from datetime import datetime
-from pswp import render_pswp_description, render_md, wrap_images
-from pprint import pprint
+from pswp import render_pswp_description,  wrap_images
+from tools import render_md
+
 
 app = Flask(__name__)
 

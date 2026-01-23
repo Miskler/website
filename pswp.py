@@ -2,7 +2,6 @@ from PIL import Image
 from pathlib import Path
 from flask import url_for
 from markupsafe import Markup, escape
-import markdown
 import os
 from bs4 import BeautifulSoup
 from urllib.parse import urlparse
@@ -56,17 +55,6 @@ def wrap_images(html: str, static_root: str = '') -> str:
 
     return str(soup)
 
-
-def render_md(text):
-    html = markdown.markdown(
-        text,
-        extensions=[
-            "extra",
-            "sane_lists",
-            "nl2br"
-        ]
-    )
-    return Markup(html)
 
 def render_pswp_description(desc):
     parts = []
