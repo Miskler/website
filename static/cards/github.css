@@ -34,6 +34,13 @@ body {
     width: max-content;
     gap: 3vh;
     height: var(--profile-section);
+    color: var(--color-text-primary);
+    text-decoration: none;
+    transition: filter 0.2s;
+}
+
+.profileSection:hover {
+    filter: brightness(0.8);
 }
 
 .avatar {
@@ -178,6 +185,10 @@ body {
     background: var(--color-accent);
     border-radius: var(--br);
     width: 100%;
+    transition: background 0.2s;
+}
+.contribMonth:hover > div {
+    background: var(--color-accent-hover);
 }
 
 /* Репозитории */
@@ -206,6 +217,8 @@ body {
     display: block;
     transition: box-shadow 0.2s, border-color 0.2s;
     border: 1px solid transparent;
+    position: relative;
+    overflow: hidden;
 }
 
 .repoCard:hover {
@@ -264,96 +277,52 @@ body {
     overflow: hidden;
 }
 
-.repoMeta {
+.cardLanguages {
     display: flex;
-    gap: 2vh;
-    font-size: 1.6vh;
-    color: var(--color-text-secondary);
-    margin-bottom: 2vh;
-}
-
-.languagesChart {
-    margin-top: 2vh;
-    display: flex;
-    align-items: center;
-    gap: 2vh;
-}
-
-.ct-chart {
-    flex-shrink: 0;
-}
-
-.ct-series-a .ct-slice-donut {
-    stroke: var(--color-accent) !important;
-}
-
-.ct-series-b .ct-slice-donut {
-    stroke: #4CAF50 !important;
-}
-
-.ct-series-c .ct-slice-donut {
-    stroke: #2196F3 !important;
-}
-
-.ct-series-d .ct-slice-donut {
-    stroke: #FF9800 !important;
-}
-
-.ct-series-e .ct-slice-donut {
-    stroke: #9C27B0 !important;
-}
-
-.chartLegend {
-    display: flex;
-    flex-direction: column;
-    gap: 0.8vh;
-    flex: 1;
-}
-
-.legendItem {
-    display: flex;
-    align-items: center;
-    gap: 1vh;
-    font-size: 1.6vh;
-}
-
-.langIcon {
-    width: 2vh;
     height: 2vh;
-    border-radius: 0.5vh;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
 }
 
-.langName {
-    flex: 1;
-    color: var(--color-text-secondary);
+.Python {
+    background-color: #20517A;
 }
 
-.langPercent {
-    color: var(--color-text-primary);
-    font-weight: bold;
+.GDScript {
+    background-color: #567c99;
 }
 
-/* Стили для Chartist */
-.ct-label {
-    fill: var(--color-text-primary) !important;
-    font-size: 1.5vh !important;
+.Go {
+    background-color: #00ADD8;
 }
 
-/* Кастомный скроллбар */
-.reposGrid::-webkit-scrollbar {
-    width: 8px;
+.HTML {
+    background-color: #E34C26;
 }
 
-.reposGrid::-webkit-scrollbar-track {
-    background: var(--color-bg-primary);
-    border-radius: 4px;
+.CSS {
+    background-color: #1572B6;
 }
 
-.reposGrid::-webkit-scrollbar-thumb {
-    background: var(--color-accent);
-    border-radius: 4px;
+.JavaScript {
+    background-color: #F7DF1E;
 }
 
-.reposGrid::-webkit-scrollbar-thumb:hover {
-    background: var(--color-accent-hover);
+.gles {
+    background-color: #4B8B3B;
+}
+
+.Makefile {
+    background-color: #666666;
+}
+
+.Shell {
+    background-color: #0A7E0A;
+}
+
+.cardLanguages > div {
+    width: var(--p);
+    height: 100%;
 }
