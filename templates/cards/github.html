@@ -59,7 +59,7 @@
         <div class="bottom">
             <div class="reposGrid">
                 {% for repo in repositories %}
-                <a class="repoCard" href="https://github.com/{{ repo.full_name }}" target="_blank">
+                <a class="repoCard" href="https://github.com/{{ repo.full_name }}" owner="{{ repo.owner }}" target="_blank">
                     <div class="repoHeader">
                         <h3 class="repoName" title="{{ repo.full_name }}">
                             {{ repo.name }}
@@ -83,5 +83,97 @@
                 {% endfor %}
             </div>
         </div>
+        <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Текущая активная организация
+    let activeOrg = null;
+    
+    // Получаем все элементы организаций
+    const orgElements = document.querySelectorAll('.org');
+    
+    // Функция для скрытия/показа репозиториев
+    function filterReposByOwner(owner) {
+        // Получаем все карточки репозиториев
+        const repoCards = document.querySelectorAll('.repoCard');
+        
+        repoCards.forEach(card => {
+            // Получаем владельца репозитория из атрибута owner
+            const repoOwner = card.getAttribute('owner');
+            
+            // Если передан владелец (для фильтрации)
+            if (owner) {
+                // Показываем только репозитории выбранной организации
+                if (repoOwner === owner) {
+                    card.classList.remove('hidden');
+                } else {
+                    card.classList.add('hidden');
+                }
+            } else {
+                // Если owner = null, показываем все репозитории
+                card.classList.remove('hidden');
+            }
+        });
+    }
+    
+    // Функция для активации организации
+    function activateOrg(orgElement, orgName) {
+        // Снимаем active со всех организаций
+        orgElements.forEach(org => {
+            org.classList.remove('active');
+        });
+        
+        // Если кликнули на уже активную организацию - снимаем фильтр
+        if (activeOrg === orgName) {
+            activeOrg = null;
+            filterReposByOwner(null);
+        } else {
+            // Активируем новую организацию
+            activeOrg = orgName;
+            orgElement.classList.add('active');
+            filterReposByOwner(orgName);
+        }
+    }
+    
+    // Добавляем обработчики кликов на все организации
+    orgElements.forEach(orgElement => {
+        orgElement.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            
+            // Получаем имя организации из элемента с классом orgName
+            const orgNameElement = this.querySelector('.orgName');
+            if (orgNameElement) {
+                const orgName = orgNameElement.textContent.trim();
+                activateOrg(this, orgName);
+            }
+        });
+        
+        // Добавляем стили для курсора, чтобы показать, что элемент кликабельный
+        orgElement.style.cursor = 'pointer';
+        orgElement.style.userSelect = 'none';
+    });
+    
+    // Добавляем обработчик для сброса фильтра при клике вне организаций
+    document.addEventListener('click', function(e) {
+        // Проверяем, был ли клик на элементе организации или внутри него
+        const clickedOnOrg = e.target.closest('.org');
+        
+        // Если клик был не по организации и есть активная организация
+        if (!clickedOnOrg && activeOrg) {
+            // Находим активную организацию по имени
+            const activeOrgElement = Array.from(orgElements).find(org => {
+                const orgNameElement = org.querySelector('.orgName');
+                return orgNameElement && orgNameElement.textContent.trim() === activeOrg;
+            });
+            
+            if (activeOrgElement) {
+                activeOrgElement.classList.remove('active');
+            }
+            activeOrg = null;
+            filterReposByOwner(null);
+        }
+    });
+});
+</script>
     </body>
 </html>

@@ -24,7 +24,9 @@ body {
 }
 
 .leftTopSection {
-    width: 55%;
+    width: auto;
+    min-width: 45%;
+    max-width: 61%;
 }
 
 .profileSection {
@@ -94,7 +96,7 @@ body {
     width: max-content;
     background: var(--color-bg-primary);
     border-radius: 1vh;
-    transition: border-color 0.2s;
+    transition: border-color 0.2s, background 0.2s;
     border: 1px solid transparent;
     cursor: pointer;
 }
@@ -102,6 +104,13 @@ body {
 .org:hover {
     box-shadow: 0 8px 25px rgba(0,0,0,0.2);
     border-color: var(--color-accent);
+}
+
+.org.active {
+    background: var(--color-accent);
+}
+.org.active > .orgName {
+    color: white;
 }
 
 .orgAvatar {
@@ -202,6 +211,10 @@ body {
 .repoCard:hover {
     box-shadow: 0 8px 25px rgba(0,0,0,0.2);
     border-color: var(--color-accent);
+}
+
+.repoCard.hidden {
+    display: none;
 }
 
 .repoHeader {

@@ -210,6 +210,14 @@ async def fetch_github_data(token: str, username: str) -> dict:
     }
     profile["followers_word"] = plural_ru(profile['followers'], "фолловер", "фолловера", "фолловеров")
 
+    if len(organizations) > 0:
+        organizations.append({
+            "login": profile['login'],
+            "name": profile['login'],
+            "description": profile['bio'],
+            "avatar_url": profile['avatar_url']
+        })
+
     # Контрибьюции по месяцам
     monthly_contributions = defaultdict(int)
     weeks = user['contributionsCollection']['contributionCalendar']['weeks']
