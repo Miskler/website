@@ -2,6 +2,8 @@ import json
 import aiohttp
 import asyncio
 from tools import humanize_timestamp, plural_ru
+from async_lru import alru_cache
+
 
 with open("configs/secrets.json", encoding="utf-8") as f:
     SECRETS = json.load(f)
@@ -35,6 +37,7 @@ def humanize_playtime(ts: int) -> str:
         value /= limit
 
 
+@alru_cache(ttl=240)
 async def get_user_data():
     async with aiohttp.ClientSession() as session:
         # Получаем пользователя, бейджи и игры
@@ -79,8 +82,3 @@ async def get_user_data():
             "games": top_games
         }
 
-
-# Пример запуска
-if __name__ == "__main__":
-    data = asyncio.run(get_user_data())
-    print(json.dumps(data, ensure_ascii=False, indent=2))

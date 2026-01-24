@@ -1,9 +1,9 @@
 import aiohttp
 import asyncio
-import json
 from datetime import datetime
 from collections import defaultdict
-import sys
+from async_lru import alru_cache
+
 
 async def github_graphql_query(session, token, query):
     url = "https://api.github.com/graphql"
@@ -22,6 +22,7 @@ async def github_graphql_query(session, token, query):
             raise Exception(f"GraphQL errors: {error_msgs}")
         return data
 
+@alru_cache(ttl=240)
 async def fetch_github_data(token: str, username: str) -> dict:
     """
     Единая асинхронная функция, которая собирает все требуемые данные о GitHub-профиле
