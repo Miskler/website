@@ -1,7 +1,7 @@
 body {
-    --pad: 5vh;
-    --top-height: 40vh;
-    --profile-section: calc(var(--top-height) / 1.32);
+    --pad: 4vh;
+    --top-height: 60vh;
+    --profile-section: calc(var(--top-height) / 2);
 
     background: var(--color-bg-secondary);
     color: var(--color-text-primary);
@@ -17,9 +17,14 @@ body {
     justify-content: space-between;
     font-size: 10vh;
 }
+.bottom {
+    overflow-x: scroll;
+    overflow-y: hidden;
+    height: calc(100vh - var(--top-height));
+}
 
 .leftTopSection {
-    margin-right: 1vh;
+    width: 55%;
 }
 
 .profileSection {
@@ -72,9 +77,13 @@ body {
 }
 
 .orgList {
+    overflow-x: scroll;
+}
+.orgList > div {
     display: flex;
     gap: 2vh;
-    flex-wrap: wrap;
+    flex-wrap: nowrap;
+    width: fit-content;
 }
 
 .org {
@@ -82,6 +91,7 @@ body {
     align-items: center;
     gap: 1vh;
     padding: 1vh;
+    width: max-content;
     background: var(--color-bg-primary);
     border-radius: 1vh;
     transition: transform 0.2s;
@@ -164,15 +174,17 @@ body {
     display: flex;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2vh;
-    max-height: 60vh;
-    overflow-y: auto;
+    width: max-content;
+    overflow-y: hidden;
     padding-right: 1vh;
+    height: 100%;
 }
 
 .repoCard {
     background: var(--color-bg-primary);
     border-radius: 2vh;
     padding: 2vh;
+    width: 40vh;
     text-decoration: none;
     color: inherit;
     display: block;
@@ -188,6 +200,7 @@ body {
 
 .repoHeader {
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     align-items: start;
     margin-bottom: 1.5vh;
@@ -195,11 +208,14 @@ body {
 
 .repoName {
     margin: 0;
-    font-size: 2.2vh;
+    font-size: 4.5vh;
     color: var(--color-accent);
-    display: flex;
+    display: -webkit-box;
     align-items: center;
     gap: 1vh;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }
 
 .forkBadge {
@@ -211,14 +227,14 @@ body {
     font-weight: normal;
 }
 
-.repoStars {
-    font-size: 2vh;
+.repoStats {
+    font-size: 3.5vh;
     color: var(--color-text-secondary);
 }
 
 .repoDescription {
     margin: 0 0 1.5vh 0;
-    font-size: 1.8vh;
+    font-size: 3.8vh;
     color: var(--color-text-secondary);
     line-height: 1.4;
     display: -webkit-box;

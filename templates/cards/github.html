@@ -24,18 +24,19 @@
                 <div class="organizations">
                     <h3>Организации</h3>
                     <div class="orgList">
-                        {% for org in organizations %}
-                        <div class="org">
-                            <img src="{{ org.avatar_url }}" alt="{{ org.login }}" class="orgAvatar">
-                            <span class="orgName">{{ org.login }}</span>
+                        <div>
+                            {% for org in organizations %}
+                            <div class="org">
+                                <img src="{{ org.avatar_url }}" alt="{{ org.login }}" class="orgAvatar">
+                                <span class="orgName">{{ org.login }}</span>
+                            </div>
+                            {% endfor %}
                         </div>
-                        {% endfor %}
                     </div>
                 </div>
                 {% endif %}
             </div>
 
-            {% if contributions %}
             <div class="contributions">
                 <div>
                     <h3>Вклад по месяцам {% include 'info_panel/icons/github.svg' %}</h3>
@@ -53,7 +54,6 @@
                 </div>
                 <span class="profileCreateAt">{{ profile.created_at_word }}</span>
             </div>
-            {% endif %}
         </div>
 
         <div class="bottom">
@@ -61,103 +61,27 @@
                 {% for repo in repositories %}
                 <a class="repoCard" href="https://github.com/{{ repo.full_name }}" target="_blank">
                     <div class="repoHeader">
-                        <h3 class="repoName">
+                        <h3 class="repoName" title="{{ repo.full_name }}">
                             {{ repo.name }}
                             {% if repo.is_fork %}
                             <span class="forkBadge">Fork</span>
                             {% endif %}
                         </h3>
-                        <span class="repoStars">⭐ {{ repo.stargazers_count }}</span>
+                        <div>
+                            <span class="repoStats">⭐ {{ repo.stars }}</span>
+                            <span class="repoStats">🐛 {{ repo.open_issues }}</span>
+                            <span class="repoStats">📦 {{ repo.open_pull_requests }}</span>
+                        </div>
                     </div>
                     
                     {% if repo.description %}
                     <p class="repoDescription">{{ repo.description }}</p>
                     {% endif %}
-                    
-                    <div class="repoMeta">
-                        {% if repo.language %}
-                        <span class="repoLang">● {{ repo.language }}</span>
-                        {% endif %}
-                    </div>
-                    
-                    {% if repo.languages_percent %}
-                    <div class="languagesChart" 
-                         data-languages='{{ repo.languages_percent|tojson }}'
-                         data-repo-id="{{ repo.id }}">
-                        <!-- Диаграмма будет создана JavaScript -->
-                    </div>
-                    {% endif %}
+
+                    <div></div>
                 </a>
                 {% endfor %}
             </div>
         </div>
-
-        <script src="https://cdn.jsdelivr.net/npm/chartist/dist/chartist.min.js"></script>
-        <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Обработка круговых диаграмм языков
-            document.querySelectorAll('.languagesChart').forEach(chartContainer => {
-                const languages = JSON.parse(chartContainer.dataset.languages);
-                const repoId = chartContainer.dataset.repoId;
-                
-                // Преобразуем данные для Chartist
-                const series = [];
-                const labels = [];
-                
-                Object.entries(languages).forEach(([lang, percent]) => {
-                    if (percent > 0) {
-                        series.push(percent);
-                        labels.push(lang);
-                    }
-                });
-                
-                // Создаём диаграмму только если есть данные
-                if (series.length > 0) {
-                    const chartData = {
-                        series: series,
-                        labels: labels
-                    };
-                    
-                    const options = {
-                        donut: true,
-                        donutWidth: 30,
-                        showLabel: false,
-                        width: '80px',
-                        height: '80px'
-                    };
-                    
-                    // Создаём контейнер для диаграммы
-                    const chartEl = document.createElement('div');
-                    chartEl.className = 'ct-chart ct-perfect-fourth';
-                    chartContainer.appendChild(chartEl);
-                    
-                    new Chartist.Pie(chartEl, chartData, options);
-                    
-                    // Добавляем легенду с иконками
-                    const legend = document.createElement('div');
-                    legend.className = 'chartLegend';
-                    
-                    Object.entries(languages).forEach(([lang, percent]) => {
-                        if (percent > 5) { // Показываем только языки > 5%
-                            const langLower = lang.toLowerCase();
-                            const legendItem = document.createElement('div');
-                            legendItem.className = 'legendItem';
-                            legendItem.innerHTML = `
-                                <img src="/static/cards/icons/languages/${langLower}.svg" 
-                                     alt="${lang}" 
-                                     class="langIcon" 
-                                     onerror="this.style.display='none'">
-                                <span class="langName">${lang}</span>
-                                <span class="langPercent">${percent.toFixed(1)}%</span>
-                            `;
-                            legend.appendChild(legendItem);
-                        }
-                    });
-                    
-                    chartContainer.appendChild(legend);
-                }
-            });
-        });
-        </script>
     </body>
 </html>
