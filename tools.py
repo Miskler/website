@@ -1,6 +1,8 @@
 import time
 from markupsafe import Markup
 import markdown
+from datetime import datetime
+
 
 def render_md(text):
     html = markdown.markdown(
@@ -29,7 +31,15 @@ def plural_ru(value: int, form1: str, form2: str, form5: str) -> str:
     return f"{value} {form}"
 
 
-def humanize_timestamp(ts: int, tz_offset: int = 0, now: int | None = None) -> str:
+def humanize_timestamp(ts: int | str, tz_offset: int = 0, now: int | None = None) -> str:
+    # если ts — строка ISO 8601, преобразуем в timestamp
+    if isinstance(ts, str):
+        try:
+            dt = datetime.fromisoformat(ts.replace("Z", "+00:00"))
+            ts = int(dt.timestamp())
+        except ValueError:
+            return "неверный формат даты"
+
     offset = tz_offset * 3600
     if now is None:
         now = int(time.time())
@@ -57,7 +67,6 @@ def humanize_timestamp(ts: int, tz_offset: int = 0, now: int | None = None) -> s
     for limit, f1, f2, f5 in units:
         if value < limit:
             main = int(value)
-
             result = plural_ru(main, f1, f2, f5)
 
             # добавляем предыдущий разряд, если он есть и ненулевой

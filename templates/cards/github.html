@@ -8,62 +8,55 @@
         <script src="{{ url_for('static', filename='theme_toggle_iframe.js') }}"></script>
         
         <div class="top">
-            <div class="profileSection">
-                <img src="{{ profile.avatar_url }}" alt="github user avatar" class="avatar">
-                <div class="profileInfo">
-                    <h1 class="username">{{ profile.login }}</h1>
-                    <div class="stats">
-                        <div class="stat">
-                            <span class="stat-label">Репозитории</span>
-                            <span class="stat-value">{{ profile.public_repos }}</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-label">Фолловеры</span>
-                            <span class="stat-value">{{ profile.followers }}</span>
-                        </div>
-                        <div class="stat">
-                            <span class="stat-label">Подписки</span>
-                            <span class="stat-value">{{ profile.following }}</span>
+            <div class="leftTopSection">
+                <div class="profileSection">
+                    <img src="{{ profile.avatar_url }}" alt="github user avatar" class="avatar">
+                    <div class="profileInfo">
+                        <h1 class="username">{{ profile.login }}</h1>
+                        <div class="followers">
+                            {% include 'cards/icons/person.svg' %}
+                            <span>{{ profile.followers_word }}</span>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            {% if organizations %}
-            <div class="organizations">
-                <h3>Организации</h3>
-                <div class="orgList">
-                    {% for org in organizations %}
-                    <div class="org">
-                        <img src="{{ org.avatar_url }}" alt="{{ org.login }}" class="orgAvatar">
-                        <span class="orgName">{{ org.login }}</span>
-                    </div>
-                    {% endfor %}
-                </div>
-            </div>
-            {% endif %}
-
-            {% if contributions %}
-            <div class="contributions">
-                <h3>Вклад за месяц</h3>
-                <div class="contribGrid">
-                    {% for week in contributions %}
-                    <div class="contribWeek">
-                        {% for day in week %}
-                        <div class="contribDay" 
-                             style="--contrib-level: {{ day.level }};"
-                             title="{{ day.date }}: {{ day.count }} контрибуций">
+                {% if organizations %}
+                <div class="organizations">
+                    <h3>Организации</h3>
+                    <div class="orgList">
+                        {% for org in organizations %}
+                        <div class="org">
+                            <img src="{{ org.avatar_url }}" alt="{{ org.login }}" class="orgAvatar">
+                            <span class="orgName">{{ org.login }}</span>
                         </div>
                         {% endfor %}
                     </div>
-                    {% endfor %}
                 </div>
+                {% endif %}
+            </div>
+
+            {% if contributions %}
+            <div class="contributions">
+                <div>
+                    <h3>Вклад по месяцам {% include 'info_panel/icons/github.svg' %}</h3>
+                    <div class="contribGrid">
+                        {% for month, count in contributions.monthly.items() %}
+                        <div class="contribMonth" title="{{ month }} - {{ count[0] }} commits" style="--p: {{ count[1] }}%;">
+                            <div></div>
+                        </div>
+                        {% endfor %}
+                    </div>
+                    <div class="contribText">
+                        <span>{{ contributions.first_month }}</span>
+                        <span>{{ contributions.last_month }}</span>
+                    </div>
+                </div>
+                <span class="profileCreateAt">{{ profile.created_at_word }}</span>
             </div>
             {% endif %}
         </div>
 
         <div class="bottom">
-            <h2 class="sectionTitle">Репозитории</h2>
             <div class="reposGrid">
                 {% for repo in repositories %}
                 <a class="repoCard" href="https://github.com/{{ repo.full_name }}" target="_blank">

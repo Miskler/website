@@ -1,29 +1,37 @@
 body {
+    --pad: 5vh;
+    --top-height: 40vh;
+    --profile-section: calc(var(--top-height) / 1.32);
+
     background: var(--color-bg-secondary);
     color: var(--color-text-primary);
     font-family: sans-serif;
     margin: 0;
-    padding: 2vh;
-    height: 96vh;
+    padding: var(--pad);
+    height: var(--top-height);
     overflow-y: auto;
 }
 
 .top {
-    margin-bottom: 3vh;
+    display: flex;
+    justify-content: space-between;
+    font-size: 10vh;
+}
+
+.leftTopSection {
+    margin-right: 1vh;
 }
 
 .profileSection {
     display: flex;
-    align-items: center;
+    width: max-content;
     gap: 3vh;
-    margin-bottom: 3vh;
+    height: var(--profile-section);
 }
 
 .avatar {
-    width: 15vh;
-    height: 15vh;
-    border-radius: 50%;
-    border: 3px solid var(--color-accent);
+    height: 100%;
+    border-radius: 12%;
 }
 
 .profileInfo {
@@ -32,31 +40,25 @@ body {
 
 .username {
     margin: 0 0 1vh 0;
-    font-size: 4vh;
+    font-size: 10vh;
     color: var(--color-text-primary);
 }
 
-.stats {
-    display: flex;
-    gap: 4vh;
+.profileCreateAt {
+    font-size: 6vh;
 }
 
-.stat {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-}
+.followers {
+    --height: 7vh;
+    height: var(--height);
+    font-size: var(--height);
 
-.stat-label {
-    font-size: 1.8vh;
-    color: var(--color-text-secondary);
-    margin-bottom: 0.5vh;
 }
-
-.stat-value {
-    font-size: 3vh;
-    font-weight: bold;
-    color: var(--color-accent);
+.followers > svg {
+    --anti-scl: 1.2;
+    --wh-scl: calc(var(--height) / var(--anti-scl));
+    width: var(--wh-scl);
+    height: var(--wh-scl);
 }
 
 /* Организации */
@@ -65,8 +67,8 @@ body {
 }
 
 .organizations h3 {
-    margin: 0 0 1.5vh 0;
-    font-size: 2.5vh;
+    margin: 1.5vh 0 1.5vh 0;
+    font-size: 5vh;
 }
 
 .orgList {
@@ -85,25 +87,34 @@ body {
     transition: transform 0.2s;
 }
 
-.org:hover {
-    transform: translateY(-2px);
-}
-
 .orgAvatar {
-    width: 4vh;
-    height: 4vh;
+    height: 8vh;
     border-radius: 50%;
 }
 
 .orgName {
-    font-size: 1.8vh;
+    font-size: 4vh;
     color: var(--color-text-secondary);
 }
 
 /* Контрибуции */
+.contributions {
+    --title-size: 5.5vh;
+}
+
+.contributions svg {
+    --scaled: calc(var(--title-size) * 1.5);
+    height: var(--scaled);
+    width: var(--scaled);
+    color: black;
+    margin-left: 2vh;
+}
+
 .contributions h3 {
     margin: 0 0 1.5vh 0;
-    font-size: 2.5vh;
+    font-size: var(--title-size);
+    align-content: center;
+    display: flex;
 }
 
 .contribGrid {
@@ -113,25 +124,34 @@ body {
     background: var(--color-bg-primary);
     border-radius: 2vh;
     overflow-x: auto;
-}
-
-.contribWeek {
+    height: 35%;
     display: flex;
-    flex-direction: column;
-    gap: 0.5vh;
+    align-items: end;
+    overflow: visible;
 }
 
-.contribDay {
-    width: 2vh;
-    height: 2vh;
-    border-radius: 0.5vh;
-    background-color: hsl(120, 60%, calc(20% + var(--contrib-level) * 20%));
-    cursor: pointer;
-    transition: transform 0.2s;
+.contribText {
+    font-size: 5vh;
+    display: flex;
+    justify-content: space-between;
 }
 
-.contribDay:hover {
-    transform: scale(1.2);
+.contribMonth {
+    --br: 1vh;
+    position: sticky;
+    width: 3.75vh;
+    height: 100%;
+    background-color: var(--color-bg-secondary);
+    overflow: hidden;
+    border-radius: var(--br);
+    display: flex;
+    align-items: end;
+}
+.contribMonth > div {
+    height: var(--p);
+    background: var(--color-accent);
+    border-radius: var(--br);
+    width: 100%;
 }
 
 /* Репозитории */
@@ -141,7 +161,7 @@ body {
 }
 
 .reposGrid {
-    display: grid;
+    display: flex;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 2vh;
     max-height: 60vh;

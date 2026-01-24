@@ -77,11 +77,12 @@ body {
 }
 .lastOnline {
     display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .lastOnline > .icon {
     position: relative;
     margin-right: 2vh;
-    margin-top: calc(var(--size) / 4);
     height: var(--size);
     aspect-ratio: 1;
     border-radius: 100%;

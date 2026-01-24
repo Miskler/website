@@ -3,6 +3,7 @@ import asyncio
 from datetime import datetime
 from collections import defaultdict
 from async_lru import alru_cache
+from tools import plural_ru, humanize_timestamp
 
 
 async def github_graphql_query(session, token, query):
@@ -105,6 +106,9 @@ async def fetch_github_data(token: str, username: str) -> dict:
             avatarUrl
             bio
             createdAt
+            followers {{
+              totalCount
+            }}
             contributionsCollection {{
               contributionCalendar {{
                 totalContributions
@@ -198,29 +202,40 @@ async def fetch_github_data(token: str, username: str) -> dict:
         "login": user['login'],
         "avatar_url": user['avatarUrl'],
         "bio": user['bio'] or None,
+        "followers": user['followers']['totalCount'] or 0,
         "created_at": user['createdAt'],
+        "created_at_word": humanize_timestamp(user['createdAt']),
         "total_contributions_last_year": user['contributionsCollection']['contributionCalendar']['totalContributions']
     }
+    profile["followers_word"] = plural_ru(profile['followers'], "фолловер", "фолловера", "фолловеров")
 
     # Контрибьюции по месяцам
     monthly_contributions = defaultdict(int)
     weeks = user['contributionsCollection']['contributionCalendar']['weeks']
     for week in weeks:
-        for day in week['contributionDays']:
-            date_str = day['date']
-            count = day['contributionCount']
-            month_key = datetime.strptime(date_str, "%Y-%m-%d").strftime("%B %Y")
-            monthly_contributions[month_key] += count
+      for day in week['contributionDays']:
+        date_str = day['date']
+        count = day['contributionCount']
+        month_key = datetime.strptime(date_str, "%Y-%m-%d").strftime("%B %Y")
+        monthly_contributions[month_key] += count
+    percent_step = 100 / max(monthly_contributions.values())
+    for key, month in monthly_contributions.items():
+        monthly_contributions[key] = [month, percent_step * month]
 
     # Сортируем по дате
     sorted_monthly = dict(sorted(monthly_contributions.items(), key=lambda x: datetime.strptime(x[0], "%B %Y")))
+    keys_sm = list(sorted_monthly.keys())
 
     # Итоговый результат
     return {
         "organizations": organizations,
         "repositories": repositories,
         "profile": profile,
-        "monthly_contributions": sorted_monthly
+        "monthly_contributions": {
+            "monthly": sorted_monthly,
+            "first_month": keys_sm[0],
+            "last_month": keys_sm[-1]
+        }
     }
 
 def _process_repo_node(node: dict, default_permission: str = None) -> dict:
