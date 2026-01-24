@@ -193,8 +193,9 @@ async def fetch_github_data(token: str, username: str) -> dict:
         edges = result['data']['organization']['repositories']['edges']
         for repo in edges:
             node = repo['node']
-            if node['viewerPermission'] in ['ADMIN', 'MAINTAIN', 'WRITE']:
+            if node['viewerPermission'] in ['ADMIN', 'MAINTAIN', 'WRITE'] and not node['name'].startswith('.'):
                 repositories.append(_process_repo_node(node))
+    repositories = sorted(repositories, key=lambda x: x['stars'], reverse=True)
 
     # Профиль
     user = profile_data['data']['user']

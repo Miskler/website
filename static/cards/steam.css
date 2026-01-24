@@ -191,13 +191,16 @@ body {
     border-radius: 3vh;
     overflow: hidden;
     position: relative;
-    transition: filter 0.1s;
+    transition: filter 0.2s, border-color 0.2s;
+    border: 1vh solid transparent;
 }
 .games > div > a:hover {
     filter: brightness(0.8);
+    border-color: var(--color-accent);
 }
 .games > div > a:active {
     filter: brightness(0.6);
+    border-color: var(--color-accent-dark);
 }
 .games > div > a > img {
     height: 100%;

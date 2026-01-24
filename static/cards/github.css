@@ -94,7 +94,14 @@ body {
     width: max-content;
     background: var(--color-bg-primary);
     border-radius: 1vh;
-    transition: transform 0.2s;
+    transition: border-color 0.2s;
+    border: 1px solid transparent;
+    cursor: pointer;
+}
+
+.org:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    border-color: var(--color-accent);
 }
 
 .orgAvatar {
@@ -188,12 +195,11 @@ body {
     text-decoration: none;
     color: inherit;
     display: block;
-    transition: transform 0.2s, box-shadow 0.2s;
+    transition: box-shadow 0.2s, border-color 0.2s;
     border: 1px solid transparent;
 }
 
 .repoCard:hover {
-    transform: translateY(-4px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.2);
     border-color: var(--color-accent);
 }
@@ -216,6 +222,8 @@ body {
     -webkit-line-clamp: 1;
     -webkit-box-orient: vertical;
     overflow: hidden;
+    width: 100%;
+    word-break: break-all;
 }
 
 .forkBadge {

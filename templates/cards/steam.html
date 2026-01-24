@@ -36,7 +36,7 @@
         <div class="games">
             <div>
                 {% for game in steam_games %}
-                <a href="{{ game.gamelink }}">
+                <a href="{{ game.gamelink }}" target="_top">
                     <img src="{{ game.vlogo }}" alt="logo {{ game.name }}" onerror="this.onerror=null; this.src='{{ url_for("static", filename="img/no_image.webp") }}';">
                     <div class="gamePlayTime">{{ game.playtime_word }}</div>
                 </a>
