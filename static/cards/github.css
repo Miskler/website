@@ -278,12 +278,25 @@ body {
 }
 
 .cardLanguages {
+    width: 100%;
+    left: 0;
+    bottom: 0;
+    position: absolute;
+}
+
+.cardLanguages > .line {
     display: flex;
     height: 2vh;
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
+}
+
+.cardLanguages > .labels {
+    height: 7vh;
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1vh;
+}
+.cardLanguages > .labels > img {
+    height: 100%;
 }
 
 .Python {
@@ -294,7 +307,7 @@ body {
     background-color: #567c99;
 }
 
-.Go {
+.GLSL {
     background-color: #00ADD8;
 }
 
@@ -318,11 +331,15 @@ body {
     background-color: #666666;
 }
 
+.Batchfile {
+    background-color: #424141;
+}
+
 .Shell {
     background-color: #0A7E0A;
 }
 
-.cardLanguages > div {
+.cardLanguages > .line > div {
     width: var(--p);
     height: 100%;
 }

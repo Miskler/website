@@ -2,7 +2,6 @@
     <head>
         <link rel="stylesheet" href="{{ url_for('static', filename='variables.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='cards/github.css') }}">
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chartist/dist/chartist.min.css">
     </head>
     <body>
         <script src="{{ url_for('static', filename='theme_toggle_iframe.js') }}"></script>
@@ -79,9 +78,16 @@
                     {% endif %}
 
                     <div class="cardLanguages">
-                        {% for language, percent in repo.languages_percent.items() %}
-                        <div style="--p: {{ percent }}%" class="{{ language }}"></div>
-                        {% endfor %}
+                        <div class="labels">
+                            {% for language, percent in repo.languages_percent.items() %}
+                            <img src="{{ url_for('static', filename='cards/icons/languages/' + (language | lower) + '.svg') }}" title="{{ language }} {{ percent }}%">
+                            {% endfor %}
+                        </div>
+                        <div class="line">
+                            {% for language, percent in repo.languages_percent.items() %}
+                            <div style="--p: {{ percent }}%" class="{{ language }}" title="{{ language }} {{ percent }}%"></div>
+                            {% endfor %}
+                        </div>
                     </div>
                 </a>
                 {% endfor %}

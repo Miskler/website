@@ -56,6 +56,11 @@ body {
     height: 100%;
     color: black;
 }
+.nameSpace > span {
+    display: flex;
+    height: fit-content;
+    align-self: center;
+}
 
 .nameSpaceSecond {
     --size: 6vh;
