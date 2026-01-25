@@ -1,0 +1,21 @@
+{% macro nav_item(item) %}
+    {% if item.link %}
+        <a href="{{ item.link }}" class="nav-link">
+    {% else %}
+        <div class="nav-link">
+    {% endif %}
+            <div class="nav-main">
+                {% if item.icon %}
+                    {% include item.icon %}
+                {% endif %}
+                <span class="title">{{ item.title }}</span>
+            </div>
+            {% if item.description %}
+                <span class="description">{{ item.description }}</span>
+            {% endif %}
+    {% if item.link %}
+        </a>
+    {% else %}
+        </div>
+    {% endif %}
+{% endmacro %}

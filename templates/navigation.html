@@ -1,30 +1,15 @@
 <aside class="navigation" id="navigation">
     <ul class="nav-list" id="navigation-list">
+        {% from "macros/navigation.html" import nav_item %}
         {% for item in navigation %}
             <li class="nav-item">
-                <a href="{{ item.link }}" class="nav-link">
-                    <div>
-                        {% if item.icon %}
-                        {% include item.icon %}
-                        {% endif %}
-                        <span class="title">{{ item.title }}</span>
-                    </div>
-                    <span class="description">{{ item.description }}</span>
-                </a>
+                {{ nav_item(item) }}
                 {% if item.children %}
                     <ul class="sub-nav">
                         {% for child in item.children %}
-                            <li class="nav-item">
-                                <a href="{{ child.link }}" class="nav-link">
-                                    <div>
-                                        {% if child.icon %}
-                                        {% include child.icon %}
-                                        {% endif %}
-                                        <span class="title">{{ child.title }}</span>
-                                    </div>
-                                    <span class="description">{{ child.description }}</span>
-                                </a>
-                            </li>
+                        <li class="nav-item">
+                            {{ nav_item(child) }}
+                        </li>
                         {% endfor %}
                     </ul>
                 {% endif %}
@@ -60,6 +45,9 @@ const nav = document.getElementById('navigation-list');
 const hoverBar = document.getElementById('hover-bar');
 
 document.querySelectorAll('.nav-link').forEach(item => {
+    // проверяем, что элемент <a>
+    if (item.tagName.toLowerCase() !== 'a') return;
+
     item.addEventListener('mouseenter', () => {
         const itemRect = item.getBoundingClientRect();
         const navRect = nav.getBoundingClientRect();
@@ -73,5 +61,4 @@ document.querySelectorAll('.nav-link').forEach(item => {
 nav.addEventListener('mouseleave', () => {
     hoverBar.style.opacity = 0;
 });
-
 </script>

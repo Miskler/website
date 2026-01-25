@@ -18,7 +18,6 @@
     },
     {
         "title": "Статьи",
-        "link": "/papers",
         "icon": "/navigation/icons/microscope.svg",
         "children": [
             {

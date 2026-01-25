@@ -6,6 +6,7 @@ from pprint import pprint
 from typing import Any, Dict, List, Tuple, Union
 
 from flask import Flask, Response, abort, render_template, request
+from flask_minify import Minify
 from PIL import Image
 
 from github import fetch_github_data
@@ -14,6 +15,18 @@ from steam import get_user_data
 from tools import render_md
 
 app = Flask(__name__)
+
+# Или с дополнительными настройками:
+Minify(
+    app=app,
+    html=True,        # минификация HTML
+    js=True,          # минификация inline JS
+    cssless=True,     # минификация inline CSS
+    caching_limit=200,
+    static=True,      # минификация статических файлов (ограниченно)
+    bypass=[],        # список endpoint’ов, которые не минифицировать
+)
+
 
 with open("configs/secrets.json", encoding="utf-8") as f:
     SECRETS: Dict[str, Any] = json.load(f)
@@ -118,7 +131,6 @@ async def experience() -> str:
             e["timeline"]["now"] = True
 
     return render_template("experience.html", experience=exp, experience_per_day="0.65")
-
 
 @app.route("/papers/<path:slug>")
 async def papers(slug: str) -> str:
