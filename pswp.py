@@ -1,16 +1,16 @@
-from PIL import Image
-from pathlib import Path
-from flask import url_for
-from markupsafe import Markup, escape
 import os
-from bs4 import BeautifulSoup
+from pathlib import Path
 from urllib.parse import urlparse
 
+from bs4 import BeautifulSoup
+from flask import url_for
+from markupsafe import Markup, escape
+from PIL import Image
 
 STATIC_ROOT = Path("static/timeline/res")
 
 
-def wrap_images(html: str, static_root: str = '') -> str:
+def wrap_images(html: str, static_root: str = "") -> str:
     soup = BeautifulSoup(html, "html.parser")
 
     for p in soup.find_all("p"):
@@ -43,7 +43,7 @@ def wrap_images(html: str, static_root: str = '') -> str:
                 **{
                     "data-pswp-width": str(w),
                     "data-pswp-height": str(h),
-                }
+                },
             )
 
             img.wrap(a)
@@ -80,8 +80,7 @@ def render_pswp_description(desc):
         url = url_for("static", filename=f"timeline/res/{rel_path}")
 
         parts.append(
-            f"<a href='{url}' data-pswp-width='{w}' data-pswp-height='{h}'>"
-            f"{escape(text)}</a>"
+            f"<a href='{url}' data-pswp-width='{w}' data-pswp-height='{h}'>" f"{escape(text)}</a>"
         )
         has_gallery = True
 

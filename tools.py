@@ -1,18 +1,12 @@
 import time
-from markupsafe import Markup
-import markdown
 from datetime import datetime
+
+import markdown
+from markupsafe import Markup
 
 
 def render_md(text):
-    html = markdown.markdown(
-        text,
-        extensions=[
-            "extra",
-            "sane_lists",
-            "nl2br"
-        ]
-    )
+    html = markdown.markdown(text, extensions=["extra", "sane_lists", "nl2br"])
     return Markup(html)
 
 
