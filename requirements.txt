@@ -1,0 +1,8 @@
+flask[async]
+flask_minify
+pillow
+aiohttp
+async_lru
+markdown
+beautifulsoup4
+gunicorn

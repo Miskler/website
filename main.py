@@ -2,7 +2,6 @@ import json
 import os
 from datetime import datetime
 from pathlib import Path
-from pprint import pprint
 from typing import Any, Dict, List, Tuple, Union
 
 from flask import Flask, Response, abort, render_template, request
@@ -82,7 +81,6 @@ async def steam() -> str:
 @app.route("/cards/github")
 async def github() -> str:
     result = await fetch_github_data(SECRETS["github"], SECRETS["github_id"])
-    pprint(result["repositories"])
 
     return render_template(
         "cards/github.html",
@@ -107,8 +105,6 @@ async def get_cv() -> str:
 async def get_cv_ok() -> Union[str, Tuple[Response, int]]:
     password = request.args.get("psw")
 
-    print(password)
-    print(str(SECRETS["password_cv"]))
     if str(password) == str(SECRETS["password_cv"]):
         return render_template("cv.txt")
     else:
