@@ -37,7 +37,6 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 15px;
     margin-top: 10px;
 }
 
@@ -102,7 +101,7 @@
 
 .sidebar-scroll {
     overflow-y: auto;        /* скролл на wrapper */
-    padding-right: 12px;     /* сдвигаем скролл вправо */
+    padding-right: 10px;     /* сдвигаем скролл вправо */
     box-sizing: content-box; /* чтобы padding не уменьшал ширину контента */
     /* Маска применяется только к контенту */
     -webkit-mask-image: linear-gradient(

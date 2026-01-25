@@ -9,7 +9,7 @@ body {
     margin: 0;
     padding: var(--pad);
     height: var(--top-height);
-    overflow-y: auto;
+    overflow-y: hidden;
 }
 
 .top {

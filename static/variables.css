@@ -44,3 +44,48 @@
     animation: none;
     mix-blend-mode: normal;
 }
+
+
+
+html, body {
+  /* Firefox: Fixed thin width, transparent by default */
+  scrollbar-width: thin;
+  scrollbar-color: transparent transparent;
+}
+
+/* WebKit: Fixed thin width, transparent by default (Chrome, Safari, Edge) */
+html::-webkit-scrollbar,
+body::-webkit-scrollbar {
+  width: 6px; /* Consistent thin size */
+  height: 6px; /* For horizontal */
+  background: transparent;
+}
+
+html::-webkit-scrollbar-track,
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+html::-webkit-scrollbar-thumb,
+body::-webkit-scrollbar-thumb {
+  background: transparent;
+  border-radius: 10px;
+}
+
+/* Reveal on hover (Firefox) */
+html:hover,
+body:hover {
+  scrollbar-color: var(--contrast-color) transparent; /* Subtle thumb */
+}
+
+/* Reveal on hover (WebKit) */
+html:hover::-webkit-scrollbar-thumb,
+body:hover::-webkit-scrollbar-thumb {
+  background: var(--contrast-color);
+  transition: background 0.3s ease;
+}
+
+html:hover::-webkit-scrollbar-thumb:hover,
+body:hover::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.4); /* Darken for emphasis */
+}
