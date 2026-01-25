@@ -3,8 +3,9 @@ import os
 from datetime import datetime
 from pathlib import Path
 from pprint import pprint
+from typing import Any, Dict, List, Tuple, Union
 
-from flask import Flask, abort, render_template, request
+from flask import Flask, Response, abort, render_template, request
 from PIL import Image
 
 from github import fetch_github_data
@@ -15,17 +16,17 @@ from tools import render_md
 app = Flask(__name__)
 
 with open("configs/secrets.json", encoding="utf-8") as f:
-    SECRETS = json.load(f)
+    SECRETS: Dict[str, Any] = json.load(f)
 
 
 @app.context_processor
-def inject_config():
+def inject_config() -> Dict[str, Any]:
     with open("configs/info_panel.json", encoding="utf-8") as f:
-        info_bar = json.load(f)
+        info_bar: Dict[str, Any] = json.load(f)
     with open("configs/navigation.json", encoding="utf-8") as f:
-        navigation = json.load(f)
+        navigation: Dict[str, Any] = json.load(f)
 
-    def get_size(path, static_root: Path = Path("static")) -> list[int, int]:
+    def get_size(path: str, static_root: Path = Path("static")) -> List[int]:
         path = os.path.join(static_root, path)
         if not os.path.isfile(path):
             return [200, 200]
@@ -54,7 +55,7 @@ def inject_config():
 
 
 @app.route("/cards/steam")
-async def steam():
+async def steam() -> str:
     steam_data = await get_user_data()
 
     return render_template(
@@ -66,7 +67,7 @@ async def steam():
 
 
 @app.route("/cards/github")
-async def github():
+async def github() -> str:
     result = await fetch_github_data(SECRETS["github"], SECRETS["github_id"])
     pprint(result["repositories"])
 
@@ -80,17 +81,17 @@ async def github():
 
 
 @app.route("/")
-async def home():
+async def home() -> str:
     return render_template("index.html")
 
 
 @app.route("/get/cv")
-async def get_cv():
+async def get_cv() -> str:
     return render_template("get_cv.html")
 
 
 @app.route("/get/cv/ok")
-async def get_cv_ok():
+async def get_cv_ok() -> Union[str, Tuple[Response, int]]:
     password = request.args.get("psw")
 
     print(password)
@@ -102,9 +103,9 @@ async def get_cv_ok():
 
 
 @app.route("/experience")
-async def experience():
+async def experience() -> str:
     with open("configs/timeline.json", encoding="utf-8") as f:
-        exp = json.load(f)
+        exp: List[Dict[str, Any]] = json.load(f)
 
     today = datetime.today().strftime("%d.%m.%Y")
 
@@ -120,7 +121,7 @@ async def experience():
 
 
 @app.route("/papers/<path:slug>")
-async def papers(slug):
+async def papers(slug: str) -> str:
     base_dir = os.path.join(app.root_path, "static", "papers")
     md_path = os.path.join(base_dir, slug, "paper.md")
 
@@ -144,7 +145,7 @@ async def papers(slug):
 
 
 @app.errorhandler(404)
-async def error_404(e):
+async def error_404(e: Any) -> Tuple[str, int]:
     return (
         render_template(
             "error.html",
@@ -158,7 +159,7 @@ async def error_404(e):
 
 
 @app.errorhandler(403)
-async def error_403(e):
+async def error_403(e: Any) -> Tuple[str, int]:
     return (
         render_template(
             "error.html",
@@ -171,7 +172,7 @@ async def error_403(e):
 
 
 @app.errorhandler(500)
-async def error_500(e):
+async def error_500(e: Any) -> Tuple[str, int]:
     return (
         render_template(
             "error.html",

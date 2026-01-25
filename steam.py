@@ -1,5 +1,6 @@
 import asyncio
 import json
+from typing import Any, Dict
 
 import aiohttp
 from async_lru import alru_cache
@@ -14,33 +15,39 @@ STEAM_ID = SECRETS["steam_id"]
 STEAM_API = "https://api.steampowered.com"
 
 
-async def steam_get(session, interface, method, version="v1", **params):
+async def steam_get(
+    session: aiohttp.ClientSession, interface: str, method: str, version: str = "v1", **params: Any
+) -> Dict[str, Any]:
     url = f"{STEAM_API}/{interface}/{method}/{version}"
     params["key"] = STEAM_KEY
     async with session.get(url, params=params) as resp:
         resp.raise_for_status()
-        return await resp.json()
+        return dict(await resp.json())
 
 
 def humanize_playtime(ts: int) -> str:
-    value = ts * 60
+    value: float = float(ts * 60)
     if value < 0:
         return "не играл"
     if value < 5:
         return "пару минут"
+
     units = (
-        (60, "секунду", "секунды", "секунд"),
-        (60, "минуту", "минуты", "минут"),
+        (60.0, "секунду", "секунды", "секунд"),
+        (60.0, "минуту", "минуты", "минут"),
         (float("inf"), "час", "часа", "часов"),
     )
+
     for limit, f1, f2, f5 in units:
         if value < limit:
             return plural_ru(int(value), f1, f2, f5)
         value /= limit
 
+    return "UNKNOWN ERROR HP"
+
 
 @alru_cache(ttl=240)
-async def get_user_data():
+async def get_user_data() -> dict[str, dict]:
     async with aiohttp.ClientSession() as session:
         # Получаем пользователя, бейджи и игры
         user, badges, games = await asyncio.gather(

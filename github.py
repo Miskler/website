@@ -1,6 +1,7 @@
 import asyncio
 from collections import defaultdict
 from datetime import datetime
+from typing import Any, Dict, Optional
 
 import aiohttp
 from async_lru import alru_cache
@@ -8,7 +9,9 @@ from async_lru import alru_cache
 from tools import humanize_timestamp, plural_ru
 
 
-async def github_graphql_query(session, token, query):
+async def github_graphql_query(
+    session: aiohttp.ClientSession, token: str, query: str
+) -> Dict[str, Any]:
     url = "https://api.github.com/graphql"
     headers = {"Authorization": f"Bearer {token}", "Content-Type": "application/json"}
     payload = {"query": query}
@@ -16,7 +19,7 @@ async def github_graphql_query(session, token, query):
         if response.status != 200:
             text = await response.text()
             raise Exception(f"HTTP {response.status}: {text}")
-        data = await response.json()
+        data: Dict[str, Any] = await response.json()
         if "errors" in data:
             error_msgs = "; ".join([err["message"] for err in data["errors"]])
             raise Exception(f"GraphQL errors: {error_msgs}")
@@ -26,7 +29,8 @@ async def github_graphql_query(session, token, query):
 @alru_cache(ttl=240)
 async def fetch_github_data(token: str, username: str) -> dict:
     """
-    Единая асинхронная функция, которая собирает все требуемые данные о GitHub-профиле
+    Единая асинхронная функция,
+    которая собирает все требуемые данные о GitHub-профиле
     и возвращает их в виде словаря (готового к сериализации в JSON).
     """
     async with aiohttp.ClientSession() as session:
@@ -214,7 +218,7 @@ async def fetch_github_data(token: str, username: str) -> dict:
 
     # Из организаций
     for result in org_repos_results:
-        if isinstance(result, Exception):
+        if isinstance(result, BaseException):
             continue
         edges = result["data"]["organization"]["repositories"]["edges"]
         for repo in edges:
@@ -253,17 +257,26 @@ async def fetch_github_data(token: str, username: str) -> dict:
         )
 
     # Контрибьюции по месяцам
-    monthly_contributions = defaultdict(int)
+    # Используем два отдельных словаря для сбора данных
+    monthly_totals: Dict[str, int] = defaultdict(int)
     weeks = user["contributionsCollection"]["contributionCalendar"]["weeks"]
+
     for week in weeks:
         for day in week["contributionDays"]:
             date_str = day["date"]
             count = day["contributionCount"]
             month_key = datetime.strptime(date_str, "%Y-%m-%d").strftime("%B %Y")
-            monthly_contributions[month_key] += count
-    percent_step = 100 / max(monthly_contributions.values())
-    for key, month in monthly_contributions.items():
-        monthly_contributions[key] = [month, percent_step * month]
+            monthly_totals[month_key] += count
+
+    # Создаем финальный словарь с кортежами (total, percentage)
+    monthly_contributions: Dict[str, tuple[int, float]] = {}
+
+    if monthly_totals:
+        max_total = max(monthly_totals.values())
+        percent_step = 100 / max_total
+
+        for month_key, total in monthly_totals.items():
+            monthly_contributions[month_key] = (total, percent_step * total)
 
     # Сортируем по дате
     sorted_monthly = dict(
@@ -278,13 +291,13 @@ async def fetch_github_data(token: str, username: str) -> dict:
         "profile": profile,
         "monthly_contributions": {
             "monthly": sorted_monthly,
-            "first_month": keys_sm[0],
-            "last_month": keys_sm[-1],
+            "first_month": keys_sm[0] if keys_sm else "",
+            "last_month": keys_sm[-1] if keys_sm else "",
         },
     }
 
 
-def _process_repo_node(node: dict, default_permission: str = None) -> dict:
+def _process_repo_node(node: dict, default_permission: Optional[str] = None) -> dict:
     """Вспомогательная функция для обработки узла репозитория."""
     languages = node["languages"]
     total_size = languages["totalSize"]
