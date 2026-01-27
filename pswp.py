@@ -93,7 +93,7 @@ def render_pswp_description(desc: List[Union[str, List[str]]]) -> Markup:
         url = url_for("static", filename=f"timeline/res/{rel_path}")
 
         parts.append(
-            f"<a href='{url}' data-pswp-width='{w}' data-pshp-height='{h}'>" f"{escape(text)}</a>"
+            f"<a href='{url}' data-pswp-width='{w}' data-pswp-height='{h}'>" f"{escape(text)}</a>"
         )
         has_gallery = True
 
