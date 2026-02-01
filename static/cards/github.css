@@ -164,7 +164,7 @@ body {
 }
 
 .contribText {
-    font-size: 5vh;
+    font-size: 4.5vh;
     display: flex;
     justify-content: space-between;
 }
@@ -238,6 +238,11 @@ body {
     margin-bottom: 1.5vh;
 }
 
+.repoHeader > div {
+    gap: 2vh;
+    display: flex;
+}
+
 .repoName {
     margin: 0;
     font-size: 4.5vh;
@@ -309,6 +314,18 @@ body {
 
 .GLSL {
     background-color: #00ADD8;
+}
+
+.Dockerfile {
+    background-color: #2396ED;
+}
+
+.Go {
+    background-color: #CE3262;
+}
+
+.Starlark {
+    background-color: #7CFF8A;
 }
 
 .HTML {

@@ -20,7 +20,7 @@
     "nickname": "Miskler",
     "description": "Михаил Есько",
     "country": "Россия",
-    "age": 17,
+    "age": "2008-03-14",
     "pie_skills": [
         {"name": "Russian", "percent": 100, "description": "Native"},
         {"name": "English", "percent": 60, "description": "B1"}

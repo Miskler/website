@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 28" aria-hidden="true">
+
+  <!-- верхний левый -->
+  <g transform="translate(0 4)">
+    <!-- top -->
+    <polygon points="8 0 16 4 8 8 0 4" fill="#7CFF8A"/>
+    <!-- left -->
+    <polygon points="0 4 8 8 8 14 0 10" fill="#4FCB6A"/>
+    <!-- right -->
+    <polygon points="16 4 8 8 8 14 16 10" fill="#2E9E4F"/>
+  </g>
+
+  <!-- верхний правый -->
+  <g transform="translate(16 4)">
+    <polygon points="8 0 16 4 8 8 0 4" fill="#7CFF8A"/>
+    <polygon points="0 4 8 8 8 14 0 10" fill="#4FCB6AincAG"/>
+    <polygon points="16 4 8 8 8 14 16 10" fill="#2E9E4F"/>
+  </g>
+
+  <!-- нижний (тёмный) -->
+  <g transform="translate(8 8)">
+    <polygon points="8 0 16 4 8 8 0 4" fill="#3FAE5A"/>
+    <polygon points="0 4 8 8 8 14 0 10" fill="#2E8E4A"/>
+    <polygon points="16 4 8 8 8 14 16 10" fill="#1F6F36"/>
+  </g>
+
+</svg>

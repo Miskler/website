@@ -3,7 +3,19 @@
     <head>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Miskler.dev</title>
+
+        <title>{{ title | default("Miskler.dev") }}</title>
+
+        <meta name="description" content="{{ description | default("Сайт-портфолио miskler'а") }}">
+
+        <meta name="keywords" content="Miskler, веб-разработчик, Godot, Python, JavaScript, Playwright, FastAPI, UI/UX, проекты, портфолио">
+
+        {% if canonical %}
+        <link rel="canonical" href="{{ canonical }}">
+        {% else %}
+        <link rel="canonical" href="{{ request.base_url }}">
+        {% endif %}
+
         <link rel="icon" href="{{ url_for('static', filename='favicon.ico') }}" type="image/x-icon">
 
         <link rel="stylesheet" href="{{ url_for('static', filename='chartist/chartist.min.css') }}">

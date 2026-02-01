@@ -1,6 +1,6 @@
 import json
 import os
-from datetime import datetime
+from datetime import datetime, date
 from pathlib import Path
 from typing import Any, Dict, List, Tuple, Union
 
@@ -11,7 +11,7 @@ from PIL import Image
 from github import fetch_github_data
 from pswp import render_pswp_description, wrap_images
 from steam import get_user_data
-from tools import render_md
+from tools import render_md, plural_ru
 
 app = Flask(__name__)
 
@@ -53,6 +53,13 @@ def inject_config() -> Dict[str, Any]:
             h = int(round(h * scale))
 
         return [w, h]
+
+
+    birth = datetime.strptime(info_bar["age"], "%Y-%m-%d").date()
+    today = date.today()
+    age = today.year - birth.year - ((today.month, today.day) < (birth.month, birth.day))
+
+    info_bar["age"] = plural_ru(age, "год", "года", "лет")
 
     info_bar["avatar"]["size"] = get_size(info_bar["avatar"]["url"])
     for i in info_bar["avatar"]["extra"]:
