@@ -4,7 +4,7 @@ from datetime import datetime, date
 from pathlib import Path
 from typing import Any, Dict, List, Tuple, Union
 
-from flask import Flask, Response, abort, render_template, request
+from flask import Flask, Response, abort, render_template, request, send_from_directory
 from flask_minify import Minify
 from PIL import Image
 
@@ -153,6 +153,10 @@ async def papers(slug: str) -> str:
 
     return render_template("paper.html", pape=html, page_type="paper", paper_slug=slug)
 
+
+@app.route("/robots.txt")
+def robots():
+    return send_from_directory(app.static_folder, "robots.txt")
 
 # ------------------------
 # Errors

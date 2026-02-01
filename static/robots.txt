@@ -1,0 +1,7 @@
+User-agent: *
+Disallow: /get/cv
+
+# Sitemap отсутствует пока
+# Sitemap: https://example.com/sitemap.xml
+
+# Остальные страницы разрешены
