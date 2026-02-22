@@ -1,5 +1,6 @@
 import json
 import os
+import asyncio
 from datetime import datetime, date
 from pathlib import Path
 from typing import Any, Dict, List, Tuple, Union
@@ -9,6 +10,7 @@ from flask_minify import Minify
 from PIL import Image
 
 from github import fetch_github_data
+from openworkshop import fetch_openworkshop_mods, fetch_openworkshop_stats
 from pswp import render_pswp_description, wrap_images
 from steam import get_user_data
 from tools import render_md, plural_ru
@@ -99,8 +101,12 @@ async def github() -> str:
 
 @app.route("/cards/openworkshop")
 async def openworkshop() -> str:
+    ow_stats, ow_mods = await asyncio.gather(fetch_openworkshop_stats(), fetch_openworkshop_mods())
+
     return render_template(
         "cards/openworkshop.html",
+        ow=ow_stats,
+        ow_mods=ow_mods,
     )
 
 

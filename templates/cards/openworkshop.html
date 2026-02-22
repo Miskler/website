@@ -1,10 +1,87 @@
 <html>
     <head>
         <title>OpenWorkshop info-card</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='variables.css') }}">
-        <link rel="stylesheet" href="{{ url_for('static', filename='cards/openworkshop.css') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='variables.css', v='ow-20260222-7') }}">
+        <link rel="stylesheet" href="{{ url_for('static', filename='cards/openworkshop.css', v='ow-20260222-7') }}">
     </head>
     <body>
-        ...
+        <script src="{{ url_for('static', filename='theme_toggle_iframe.js', v='ow-20260222-7') }}"></script>
+
+        <a class="top" href="https://openworkshop.miskler.ru" target="_top" rel="noopener noreferrer">
+            <span class="brandBadge">OW</span>
+            <div class="brandInfo">
+                <div class="brandTop">
+                    <h1>OpenWorkshop</h1>
+                    <div class="brandIcon">
+                        {% include 'cards/icons/internet.svg' %}
+                    </div>
+                </div>
+                <div class="brandStatus">
+                    <span class="dot"></span>
+                    <span>online</span>
+                </div>
+            </div>
+        </a>
+
+        <div class="stats">
+            <article class="statCard">
+                <span class="statValue">{{ ow.mods_count_word }}</span>
+                <span class="statLabel">в каталоге</span>
+            </article>
+
+            <article class="statCard">
+                <span class="statValue">{{ ow.users_count_word }}</span>
+                <span class="statLabel">пользователей</span>
+            </article>
+
+            <article class="statCard">
+                <span class="statValue">{{ ow.resources_size_word }}</span>
+                <span class="statLabel">вес ресурсов</span>
+            </article>
+
+            <article class="statCard">
+                <span class="statValue">{{ ow.total_storage_word }}</span>
+                <span class="statLabel">вес общей базы</span>
+            </article>
+        </div>
+
+        <section class="modsSection">
+            <div class="modsTop">
+                <h2>Топ модов по загрузкам</h2>
+                <span>{{ ow_mods.mods_total_word }}</span>
+            </div>
+
+            <div class="modsList">
+                {% for mod in ow_mods.mods %}
+                <a class="modCard" href="https://openworkshop.miskler.ru/mod/{{ mod.id }}" target="_top" rel="noopener noreferrer">
+                    <div class="modHead">
+                        <h3 title="{{ mod.name }}">{{ mod.name }}</h3>
+                        <span>#{{ mod.id }}</span>
+                    </div>
+                    <p class="modDescription">{{ mod.short_description }}</p>
+                    <div class="modMeta">
+                        <span>{{ mod.source_label }}</span>
+                        <span>{{ mod.size_word }}</span>
+                        <span>{{ mod.downloads_word }}</span>
+                    </div>
+                    <div class="modDates">
+                        <span>Создан {{ mod.date_creation_word }}</span>
+                        <span>Обновлен {{ mod.date_update_word }}</span>
+                    </div>
+                </a>
+                {% endfor %}
+            </div>
+
+            {% if ow_mods.api_error %}
+            <div class="apiError" title="{{ ow_mods.api_error }}">
+                API модов временно недоступно, список может быть пустым.
+            </div>
+            {% endif %}
+            {% if ow.api_error %}
+            <div class="apiError" title="{{ ow.api_error }}">
+                API статистики временно недоступно.
+            </div>
+            {% endif %}
+        </section>
     </body>
 </html>

@@ -1,0 +1,328 @@
+body {
+    --pad: 3.2vh;
+    --gap: 1.1vh;
+    --radius: 2vh;
+
+    margin: 0;
+    padding: var(--pad);
+    height: 100vh;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    background: var(--color-bg-secondary);
+    color: var(--color-text-primary);
+
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap);
+}
+
+.top {
+    height: 28vh;
+    color: var(--color-text-primary);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 2vh;
+    transition: filter 0.12s;
+}
+
+.top:hover {
+    filter: brightness(0.84);
+}
+
+.top:active {
+    filter: brightness(0.68);
+}
+
+.brandBadge {
+    height: 100%;
+    aspect-ratio: 1;
+    border-radius: 12%;
+    background: #d0d0d0;
+    color: #2d2d2d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10vh;
+    font-weight: 800;
+    flex-shrink: 0;
+}
+
+.brandInfo {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-width: 0;
+}
+
+.brandTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 1.3vh;
+}
+
+.brandTop > h1 {
+    margin: 0;
+    font-size: 10vh;
+    line-height: 0.9;
+    letter-spacing: -0.18vh;
+    white-space: nowrap;
+}
+
+.brandIcon {
+    width: 7.2vh;
+    height: 7.2vh;
+    flex-shrink: 0;
+}
+
+.brandIcon > svg {
+    width: 100%;
+    height: 100%;
+}
+
+.brandStatus {
+    margin-top: 3vh;
+    display: flex;
+    align-items: center;
+    gap: 1.2vh;
+    font-size: 5.4vh;
+    color: var(--color-text-secondary);
+    line-height: 1;
+}
+
+.brandStatus > .dot {
+    width: 4.4vh;
+    height: 4.4vh;
+    border-radius: 100%;
+    background: var(--color-accent-dark);
+    flex-shrink: 0;
+}
+
+.stats {
+    height: 18vh;
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: var(--gap);
+}
+
+.statCard {
+    background: var(--color-bg-primary);
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    padding: 1.4vh 1.7vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.8vh;
+    transition: border-color 0.2s, box-shadow 0.2s;
+    min-width: 0;
+}
+
+.statCard:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 0.8vh 2.2vh rgba(0, 0, 0, 0.2);
+}
+
+.statValue {
+    font-size: 5.5vh;
+    font-weight: 700;
+    letter-spacing: -0.1vh;
+    line-height: 1;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
+.statLabel {
+    font-size: 2.5vh;
+    color: var(--color-text-secondary);
+    line-height: 1;
+}
+
+.modsSection {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+}
+
+.modsTop {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 1.2vh;
+}
+
+.modsTop > h2 {
+    margin: 0;
+    font-size: 4.8vh;
+    line-height: 1;
+}
+
+.modsTop > span {
+    font-size: 3.4vh;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+}
+
+.modsList {
+    flex: 1;
+    min-height: 0;
+    display: flex;
+    gap: 1vh;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.modCard {
+    width: 42vh;
+    min-width: 42vh;
+    min-height: 100%;
+    background: var(--color-bg-primary);
+    border-radius: var(--radius);
+    border: 1px solid transparent;
+    color: inherit;
+    text-decoration: none;
+    padding: 1.6vh;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    gap: 1vh;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.modCard:hover {
+    border-color: var(--color-accent);
+    box-shadow: 0 0.8vh 2.2vh rgba(0, 0, 0, 0.2);
+}
+
+.modHead {
+    display: flex;
+    justify-content: space-between;
+    gap: 1vh;
+    align-items: start;
+}
+
+.modHead > h3 {
+    margin: 0;
+    font-size: 3.5vh;
+    line-height: 1;
+    color: var(--color-accent);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+}
+
+.modHead > span {
+    font-size: 2.5vh;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+}
+
+.modDescription {
+    margin: 0;
+    font-size: 2.5vh;
+    color: var(--color-text-secondary);
+    line-height: 1.2;
+    display: -webkit-box;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    min-height: 12vh;
+}
+
+.modMeta {
+    display: flex;
+    gap: 0.6vh;
+    flex-wrap: wrap;
+}
+
+.modMeta > span {
+    background: var(--color-bg-secondary);
+    border-radius: 0.9vh;
+    padding: 0.6vh 0.8vh;
+    font-size: 2.2vh;
+    line-height: 1;
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+}
+
+.modDates {
+    margin-top: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5vh;
+}
+
+.modDates > span {
+    font-size: 2.1vh;
+    color: var(--color-text-secondary);
+    line-height: 1;
+}
+
+.apiError {
+    border-radius: 1.2vh;
+    padding: 0.95vh 1.2vh;
+    font-size: 2.4vh;
+    color: #ffd58a;
+    background: rgba(255, 192, 90, 0.13);
+    border: 1px solid rgba(255, 192, 90, 0.45);
+}
+
+@media (max-width: 900px) {
+    body {
+        --pad: 2.3vh;
+    }
+
+    .top {
+        height: 26vh;
+    }
+
+    .brandBadge {
+        font-size: 8vh;
+    }
+
+    .brandTop > h1 {
+        font-size: 8.8vh;
+    }
+
+    .brandIcon {
+        width: 6.2vh;
+        height: 6.2vh;
+    }
+
+    .brandStatus {
+        font-size: 6vh;
+    }
+
+    .stats {
+        height: 17vh;
+    }
+
+    .statValue {
+        font-size: 6vh;
+    }
+
+    .statLabel {
+        font-size: 4vh;
+    }
+
+    .modsTop > h2 {
+        margin: 1.5vh 0 1.5vh 0;
+        font-size: 5vh;
+    }
+
+    .modsTop > span {
+        font-size: 5vh;
+    }
+
+    .modCard {
+        width: 38vh;
+        min-width: 38vh;
+    }
+}
