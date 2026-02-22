@@ -97,6 +97,12 @@ async def github() -> str:
         repositories=result["repositories"],
     )
 
+@app.route("/cards/openworkshop")
+async def openworkshop() -> str:
+    return render_template(
+        "cards/openworkshop.html",
+    )
+
 
 @app.route("/")
 async def home() -> str:
