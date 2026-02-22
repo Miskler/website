@@ -12,9 +12,6 @@
             <div class="brandInfo">
                 <div class="brandTop">
                     <h1>OpenWorkshop</h1>
-                    <div class="brandIcon">
-                        {% include 'cards/icons/internet.svg' %}
-                    </div>
                 </div>
                 <div class="brandStatus">
                     <span class="dot"></span>
@@ -56,17 +53,14 @@
                 <a class="modCard" href="https://openworkshop.miskler.ru/mod/{{ mod.id }}" target="_top" rel="noopener noreferrer">
                     <div class="modHead">
                         <h3 title="{{ mod.name }}">{{ mod.name }}</h3>
-                        <span>#{{ mod.id }}</span>
                     </div>
                     <p class="modDescription">{{ mod.short_description }}</p>
                     <div class="modMeta">
-                        <span>{{ mod.source_label }}</span>
                         <span>{{ mod.size_word }}</span>
                         <span>{{ mod.downloads_word }}</span>
                     </div>
                     <div class="modDates">
                         <span>Создан {{ mod.date_creation_word }}</span>
-                        <span>Обновлен {{ mod.date_update_word }}</span>
                     </div>
                 </a>
                 {% endfor %}
