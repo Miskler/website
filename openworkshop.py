@@ -1,4 +1,3 @@
-from datetime import datetime
 from typing import Any, Dict
 
 import aiohttp
@@ -11,12 +10,9 @@ OPENWORKSHOP_MODS_API = "https://api.openworkshop.miskler.ru/mods"
 OPENWORKSHOP_MODS_PARAMS: Dict[str, Any] = {
     "page_size": 10,
     "page": 0,
-    "sort": "DOWNLOADS",
+    "sort": "-downloads",
     "show_not_public": "false",
-    "short_description": "true",
-    "description": "false",
-    "dates": "true",
-    "general": "true",
+    "include": "short_description",
 }
 
 
@@ -69,18 +65,6 @@ def _safe_text(value: Any, fallback: str = "—") -> str:
     return value_str if value_str else fallback
 
 
-def _format_date(value: Any) -> str:
-    if not isinstance(value, str):
-        return "—"
-
-    try:
-        dt = datetime.fromisoformat(value.replace("Z", "+00:00"))
-    except ValueError:
-        return "—"
-
-    return dt.strftime("%d.%m.%Y")
-
-
 def _format_source(source: Any) -> str:
     if not isinstance(source, str):
         return "UNKNOWN"
@@ -94,21 +78,40 @@ def _format_source(source: Any) -> str:
     return labels.get(source.lower(), source.upper())
 
 
+def _format_condition(condition: Any) -> str:
+    if not isinstance(condition, str):
+        return "Неизвестно"
+
+    labels = {
+        "published": "Опубликован",
+        "draft": "Черновик",
+        "hidden": "Скрыт",
+        "removed": "Удалён",
+        "archived": "В архиве",
+    }
+    normalized = condition.strip().lower()
+    return labels.get(normalized, normalized.capitalize())
+
+
 def _build_mod_item(payload: Dict[str, Any]) -> Dict[str, Any]:
     mod_id = _safe_int(payload.get("id"))
     downloads = _safe_int(payload.get("downloads"))
+    game_id = _safe_int(payload.get("game_id"))
+    visibility = "Публичный" if bool(payload.get("public")) else "Скрытый"
+    adult = "18+" if bool(payload.get("adult")) else "Без 18+"
 
     return {
         "id": mod_id,
         "name": _safe_text(payload.get("name"), fallback=f"Mod #{mod_id}" if mod_id else "Unknown mod"),
         "short_description": _safe_text(payload.get("short_description"), fallback="Описание отсутствует"),
         "source_label": _format_source(payload.get("source")),
+        "source_id": _safe_text(payload.get("source_id"), fallback="—"),
+        "game_id_word": f"Игра #{game_id}" if game_id else "Игра —",
+        "visibility_label": visibility,
+        "condition_label": _format_condition(payload.get("condition")),
+        "adult_label": adult,
         "size_word": _format_bytes(_safe_int(payload.get("size"))),
         "downloads_word": _format_count(downloads, "загрузка", "загрузки", "загрузок"),
-        "date_creation_word": _format_date(payload.get("date_creation")),
-        "date_edit_word": _format_date(payload.get("date_edit")),
-        "date_update_word": _format_date(payload.get("date_update_file")),
-        "source_id": _safe_text(payload.get("source_id"), fallback="—"),
     }
 
 
@@ -201,16 +204,31 @@ async def fetch_openworkshop_mods() -> Dict[str, Any]:
             "api_error": "Invalid API response shape",
         }
 
-    raw_results = payload.get("results")
+    raw_results = payload.get("items")
     if not isinstance(raw_results, list):
-        raw_results = []
+        return {
+            "mods": [],
+            "mods_total_word": _format_count(0, "мод", "мода", "модов"),
+            "offset": 0,
+            "api_error": "Invalid API response shape",
+        }
 
     mods = [_build_mod_item(mod) for mod in raw_results if isinstance(mod, dict)]
-    mods_total = _safe_int(payload.get("database_size"))
+    pagination = payload.get("pagination")
+    if not isinstance(pagination, dict):
+        return {
+            "mods": [],
+            "mods_total_word": _format_count(0, "мод", "мода", "модов"),
+            "offset": 0,
+            "api_error": "Invalid API response shape",
+        }
+
+    mods_total = _safe_int(pagination.get("total"))
+    offset = _safe_int(pagination.get("offset"))
 
     return {
         "mods": mods,
         "mods_total_word": _format_count(mods_total, "мод", "мода", "модов"),
-        "offset": _safe_int(payload.get("offset")),
+        "offset": offset,
         "api_error": None,
     }

@@ -58,9 +58,12 @@
                     <div class="modMeta">
                         <span>{{ mod.size_word }}</span>
                         <span>{{ mod.downloads_word }}</span>
+                        <span>{{ mod.visibility_label }}</span>
                     </div>
                     <div class="modDates">
-                        <span>Создан {{ mod.date_creation_word }}</span>
+                        <span>{{ mod.game_id_word }}</span>
+                        <span>{{ mod.condition_label }}</span>
+                        <span>{{ mod.adult_label }}</span>
                     </div>
                 </a>
                 {% endfor %}
