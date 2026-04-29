@@ -89,7 +89,7 @@
   transform: translateY(-50%);
   max-width: 320px;
   padding: 6px 10px;
-  background: color-mix(in srgb, var(--color-bg-primary) 80%, var(--clr, #fff) 20%);
+  background: color-mix(in srgb, var(--color-bg-primary-surface) 80%, var(--clr, #fff) 20%);
   border-radius: 6px;
   text-wrap: balance;
 
@@ -140,7 +140,7 @@
 .bounds-timeline {
   z-index: -1;
   border-radius: 10px;
-  background-color: rgba(0, 0, 0, 0.2);
+  background-color: rgba(from var(--color-bg-primary) r g b / 0.2);
 }
 
 /* Боковые панели дат */

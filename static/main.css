@@ -14,15 +14,15 @@
     aspect-ratio: var(--normal-ar);
     border-radius: 15px;
     overflow: hidden;
-    background: var(--color-bg-secondary);
+    background: var(--color-bg-secondary-surface);
 }
 
 /* нижняя анимация */
 .shimmer {
     position: absolute;
     inset: 0;
-    --ctrs: color-mix(in srgb, var(--color-bg-secondary) 80%, var(--contrast-color, #fff) 20%);
-    background: linear-gradient( 90deg, var(--color-bg-secondary) 0%, var(--ctrs) 50%, var(--color-bg-secondary) 100% );
+    --ctrs: color-mix(in srgb, var(--color-bg-secondary-surface) 80%, var(--contrast-color, #fff) 20%);
+    background: linear-gradient( 90deg, var(--color-bg-secondary-surface) 0%, var(--ctrs) 50%, var(--color-bg-secondary-surface) 100% );
     background-size: 200% 100%;
     animation: shimmer 3s linear infinite;
 }

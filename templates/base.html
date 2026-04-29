@@ -30,6 +30,7 @@
         <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='photoswipe/photoswipe.css') }}">
         <link rel="stylesheet" href="{{ url_for('static', filename='photoswipe/photoswipe-dynamic-caption-plugin.css') }}">
+        <script src="{{ url_for('static', filename='dynamic_background.js') }}" defer></script>
 
         <!-- Yandex.Metrika counter -->
         <script type="text/javascript">
@@ -46,6 +47,10 @@
         <!-- /Yandex.Metrika counter -->
     </head>
     <body>
+        <div class="site-background" aria-hidden="true">
+            <pre id="site-background-surface" class="site-background__surface" aria-hidden="true"></pre>
+        </div>
+
         <script src="{{ url_for('static', filename='theme_toggle.js') }}"></script>
         <button id="info-panel-buttom-state" class="info-panel-toggle burger-toggle" onclick="toggleSidebar()">
             <span></span>

@@ -75,6 +75,11 @@ def inject_config() -> Dict[str, Any]:
 # ------------------------
 
 
+@app.route("/healthz")
+def healthz() -> Response:
+    return Response("ok\n", mimetype="text/plain")
+
+
 @app.route("/cards/steam")
 async def steam() -> str:
     steam_data = await get_user_data()

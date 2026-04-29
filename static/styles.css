@@ -14,6 +14,69 @@ body {
     font-family: sans-serif;
     background: var(--color-bg-primary);
     color: var(--color-text-primary);
+    position: relative;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+    background: var(--color-bg-primary-overlay);
+    pointer-events: none;
+}
+
+.site-background {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+    background: var(--color-bg-primary);
+}
+
+.site-background__surface {
+    position: absolute;
+    inset: 0;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    white-space: pre;
+    user-select: none;
+    pointer-events: none;
+    font-family: "JetBrains Mono", "Fira Code", "Cascadia Mono", "Consolas", monospace;
+    font-size: 13px;
+    line-height: 1;
+    letter-spacing: 0;
+    color: #ffffff;
+    text-shadow: none;
+}
+
+:root.light .site-background__surface {
+    color: rgba(26, 26, 26, 0.34);
+}
+
+.site-background[data-background="life"] .site-background__surface {
+    opacity: 0.26;
+    font-size: 12px;
+    line-height: 12px;
+}
+
+.site-background[data-background="perlin"] .site-background__surface {
+    opacity: 0.35;
+}
+
+:root.light .site-background[data-background="life"] .site-background__surface {
+    opacity: 0.28;
+}
+
+:root.light .site-background[data-background="perlin"] .site-background__surface {
+    opacity: 0.32;
+}
+
+:root.light body::before {
+    background: rgba(245, 245, 245, 0.34);
 }
 
 a {
@@ -42,12 +105,14 @@ a:hover {
 .layout {
     display: flex;
     height: 100vh;
+    position: relative;
+    z-index: 2;
 }
 
 /* левая панель */
 .sidebar {
     width: var(--sidebar-width);
-    background: var(--color-bg-secondary);
+    background: var(--color-bg-secondary-surface);
     padding: 20px;
     position: fixed;
     top: 0;
@@ -59,7 +124,7 @@ a:hover {
 
 .navigation {
     width: var(--navigation-width);
-    background: var(--color-bg-secondary);
+    background: var(--color-bg-secondary-surface);
     position: fixed;
     top: 0;
     right: 0;

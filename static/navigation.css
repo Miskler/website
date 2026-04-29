@@ -113,7 +113,7 @@ div.nav-item .title {
     right: 0;
     border: none;
     border-bottom-left-radius: 10px;
-    background: var(--color-bg-secondary);
+    background: var(--color-bg-secondary-surface);
     cursor: pointer;
     transition: all 0.3s ease;
     padding: 15px;

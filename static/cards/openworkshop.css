@@ -9,7 +9,7 @@ body {
     box-sizing: border-box;
     overflow: hidden;
 
-    background: var(--color-bg-secondary);
+    background: var(--color-bg-secondary-surface);
     color: var(--color-text-primary);
 
     display: flex;
@@ -109,7 +109,7 @@ body {
 }
 
 .statCard {
-    background: var(--color-bg-primary);
+    background: var(--color-bg-primary-surface);
     border-radius: var(--radius);
     border: 1px solid transparent;
     padding: 1.4vh 1.7vh;
@@ -177,7 +177,7 @@ body {
     width: 42vh;
     min-width: 42vh;
     min-height: 100%;
-    background: var(--color-bg-primary);
+    background: var(--color-bg-primary-surface);
     border-radius: var(--radius);
     border: 1px solid transparent;
     color: inherit;
@@ -239,7 +239,7 @@ body {
 }
 
 .modMeta > span {
-    background: var(--color-bg-secondary);
+    background: var(--color-bg-secondary-surface);
     border-radius: 0.9vh;
     padding: 0.6vh 0.8vh;
     font-size: 3.5vh;

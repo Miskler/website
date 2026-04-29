@@ -8,12 +8,12 @@
     --navigation-submenu-line-width: 1px;
 
     --dark-sec: #1E1E1E;
-    --light-sec: #F5F5F5;
+    --light-sec: #FFFFFF;
     --gray: #4b4b4b;
 
     /* Основные цвета */
     --contrast-color: white;
-    --color-bg-primary: #121212;
+    --color-bg-primary: #292929;
     --color-bg-secondary: var(--dark-sec);
     --color-text-primary: #E0E0E0;
     --color-text-secondary: #B0B0B0;
@@ -23,11 +23,15 @@
     --color-accent-hover: #38a13d;
     --color-accent-dark: #388E3C;
     --color-accent-disabled: #303A30;
+
+    --color-bg-primary-overlay: rgba(41, 41, 41, 0.5);
+    --color-bg-primary-surface: rgba(41, 41, 41, 0.82);
+    --color-bg-secondary-surface: rgba(30, 30, 30, 0.88);
 }
 
 :root.light {
     --contrast-color: black;
-    --color-bg-primary: #FFFFFF;
+    --color-bg-primary: #F5F5F5;
     --color-bg-secondary: var(--light-sec);
     --color-text-primary: #212121;
     --color-text-secondary: #515151;
@@ -36,6 +40,10 @@
     --color-accent-hover: #579A5B;
     --color-accent-dark: #255E28;
     --color-accent-disabled: #C8E6C9;
+
+    --color-bg-primary-overlay: rgba(245, 245, 245, 0.5);
+    --color-bg-primary-surface: rgba(255, 255, 255, 0.84);
+    --color-bg-secondary-surface: rgba(255, 255, 255, 0.88);
 }
 
 /* Prevent default View Transition animations for a clean reveal */

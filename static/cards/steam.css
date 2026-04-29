@@ -1,6 +1,6 @@
 
 body {
-    background: var(--color-bg-secondary);
+    background: var(--color-bg-secondary-surface);
     
     --pad: 5vh;
     padding: var(--pad);
@@ -101,7 +101,7 @@ body {
 .lastOnline.offline > .icon > div {
     width: 40%;
     height: 40%;
-    background: var(--color-bg-secondary);
+    background: var(--color-bg-secondary-surface);
     border-radius: 100%;
     right: 50%;
     top: 50%;
@@ -116,7 +116,7 @@ body {
     height: 30%;
     position: absolute;
     z-index: 10;
-    background: var(--color-bg-secondary);
+    background: var(--color-bg-secondary-surface);
     border-radius: 30%;
     top: 50%;
     left: 50%;
@@ -128,7 +128,7 @@ body {
 .lastOnline.away > .icon > div {
     height: 65%;
     width: 60%;
-    background: var(--color-bg-secondary);
+    background: var(--color-bg-secondary-surface);
     top: 5%;
     position: absolute;
     border-radius: 100%;
@@ -214,7 +214,7 @@ body {
     position: absolute;
     right: 1vh;
     bottom: 1vh;
-    background: rgba(from var(--color-bg-secondary) r g b / 0.8);
+    background: rgba(from var(--color-bg-secondary-surface) r g b / 0.8);
     color: var(--color-text-primary);
     padding: 0.5vh;
     border-radius: 2vh;

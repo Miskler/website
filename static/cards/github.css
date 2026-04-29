@@ -3,7 +3,7 @@ body {
     --top-height: 60vh;
     --profile-section: calc(var(--top-height) / 2);
 
-    background: var(--color-bg-secondary);
+    background: var(--color-bg-secondary-surface);
     color: var(--color-text-primary);
     font-family: sans-serif;
     margin: 0;
@@ -101,7 +101,7 @@ body {
     gap: 1vh;
     padding: 1vh;
     width: max-content;
-    background: var(--color-bg-primary);
+    background: var(--color-bg-primary-surface);
     border-radius: 1vh;
     transition: border-color 0.2s, background 0.2s;
     border: 1px solid transparent;
@@ -154,7 +154,7 @@ body {
     display: flex;
     gap: 1vh;
     padding: 2vh;
-    background: var(--color-bg-primary);
+    background: var(--color-bg-primary-surface);
     border-radius: 2vh;
     overflow-x: auto;
     height: 35%;
@@ -174,7 +174,7 @@ body {
     position: sticky;
     width: 3.75vh;
     height: 100%;
-    background-color: var(--color-bg-secondary);
+    background-color: var(--color-bg-secondary-surface);
     overflow: hidden;
     border-radius: var(--br);
     display: flex;
@@ -208,7 +208,7 @@ body {
 }
 
 .repoCard {
-    background: var(--color-bg-primary);
+    background: var(--color-bg-primary-surface);
     border-radius: 2vh;
     padding: 2vh;
     width: 40vh;
