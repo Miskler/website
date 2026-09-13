@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 from typing import List, Union
-from urllib.parse import urlparse
+from urllib.parse import unquote, urlparse
 
 from bs4 import BeautifulSoup
 from flask import url_for
@@ -9,6 +9,82 @@ from markupsafe import Markup, escape
 from PIL import Image
 
 STATIC_ROOT = Path("static/timeline/res")
+AUDIO_MIME_TYPES = {
+    ".aac": "audio/aac",
+    ".flac": "audio/flac",
+    ".m4a": "audio/mp4",
+    ".mp3": "audio/mpeg",
+    ".ogg": "audio/ogg",
+    ".wav": "audio/wav",
+    ".webm": "audio/webm",
+}
+
+
+def _audio_label(href: str) -> str:
+    path = unquote(urlparse(href).path)
+    stem = Path(path).stem.replace("_", " ").replace("-", " ")
+    return " ".join(stem.split()).strip() or "Аудиозапись"
+
+
+def _audio_player(soup: BeautifulSoup, href: str, label: str):
+    parsed = urlparse(href)
+    mime_type = AUDIO_MIME_TYPES.get(Path(parsed.path).suffix.lower(), "audio/*")
+
+    wrapper = soup.new_tag("span", attrs={"class": "audio-player", "role": "group"})
+    caption = soup.new_tag("span", attrs={"class": "audio-player__label"})
+    caption.string = label
+    wrapper.append(caption)
+
+    audio = soup.new_tag("audio", attrs={"controls": "", "preload": "none", "aria-label": label})
+    source = soup.new_tag("source", attrs={"src": href, "type": mime_type})
+    audio.append(source)
+    wrapper.append(audio)
+    return wrapper
+
+
+def wrap_audio(html: str) -> str:
+    soup = BeautifulSoup(html, "html.parser")
+
+    # Keep support for hand-written audio tags, while adding a visible caption.
+    for audio in soup.find_all("audio"):
+        if audio.find_parent(class_="audio-player"):
+            continue
+
+        source = audio.find("source", src=True)
+        if source is None and audio.get("src"):
+            source = soup.new_tag("source", attrs={"src": str(audio["src"])})
+            audio.append(source)
+        if source is None:
+            continue
+
+        label = str(audio.get("data-label") or audio.get("aria-label") or "").strip()
+        if not label:
+            label = _audio_label(str(source["src"]))
+
+        for child in list(audio.contents):
+            if child is not source and getattr(child, "name", None) != "source":
+                child.extract()
+
+        caption = soup.new_tag("span", attrs={"class": "audio-player__label"})
+        caption.string = label
+        audio.wrap(soup.new_tag("span", attrs={"class": "audio-player", "role": "group"}))
+        audio.parent.insert(0, caption)
+        audio["aria-label"] = label
+
+    # Turn Markdown links to audio files into the same player component.
+    for link in list(soup.find_all("a", href=True)):
+        href = str(link["href"])
+        if link.find_parent("audio"):
+            continue
+
+        suffix = Path(urlparse(href).path).suffix.lower()
+        if suffix not in AUDIO_MIME_TYPES:
+            continue
+
+        label = " ".join(link.stripped_strings).strip() or _audio_label(href)
+        link.replace_with(_audio_player(soup, href, label))
+
+    return str(soup)
 
 
 def wrap_images(html: str, static_root: str = "") -> str:

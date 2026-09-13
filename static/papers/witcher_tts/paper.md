@@ -190,10 +190,6 @@ Aligned-модель смогла сформировать для них реч�
 - [Aligned 122k: Geralt, «Грека/рак»](/static/papers/witcher_tts/static/witcher_tts/samples/nonstandard_compare_aligned_54k_vs_raw_128k/aligned_122k_geralt_greka.wav)
 - [Aligned 122k: Yennefer, «Саша шла по шоссе»](/static/papers/witcher_tts/static/witcher_tts/samples/nonstandard_compare_aligned_54k_vs_raw_128k/aligned_122k_yennefer_sasha.wav)
 
-<audio controls preload="none"><source src="/static/papers/witcher_tts/static/witcher_tts/samples/nonstandard_compare_aligned_54k_vs_raw_128k/aligned_122k_geralt_sasha.wav" type="audio/wav">[Скачать WAV](/static/papers/witcher_tts/static/witcher_tts/samples/nonstandard_compare_aligned_54k_vs_raw_128k/aligned_122k_geralt_sasha.wav)</audio>
-
-<audio controls preload="none"><source src="/static/papers/witcher_tts/static/witcher_tts/samples/nonstandard_compare_aligned_54k_vs_raw_128k/ordinary_128k_geralt_sasha.wav" type="audio/wav">[Скачать WAV](/static/papers/witcher_tts/static/witcher_tts/samples/nonstandard_compare_aligned_54k_vs_raw_128k/ordinary_128k_geralt_sasha.wav)</audio>
-
 Именно эту ветку мы зафиксировали как базу для следующего вопроса: можно ли к уже работающему text-to-speech добавить просодию.
 
 ## 9. Text-conditioning ablation: текст не игнорируется полностью
@@ -221,11 +217,9 @@ C: пустой текст/PAD
 
 Важная деталь: в этом тесте всем трём вариантам намеренно задавали одинаковые 531 mel-кадр, поэтому все выходы длились около 5,66 секунды. Это не означало, что модель выучила одинаковую длительность всех фраз; это было условие эксперимента.
 
-<audio controls preload="none"><source src="/static/papers/witcher_tts/static/witcher_tts/samples/text_conditioning_ablation_123k/geralt_correct.wav" type="audio/wav">[Скачать WAV](/static/papers/witcher_tts/static/witcher_tts/samples/text_conditioning_ablation_123k/geralt_correct.wav)</audio>
-
-<audio controls preload="none"><source src="/static/papers/witcher_tts/static/witcher_tts/samples/text_conditioning_ablation_123k/geralt_shuffled.wav" type="audio/wav">[Скачать WAV](/static/papers/witcher_tts/static/witcher_tts/samples/text_conditioning_ablation_123k/geralt_shuffled.wav)</audio>
-
-<audio controls preload="none"><source src="/static/papers/witcher_tts/static/witcher_tts/samples/text_conditioning_ablation_123k/geralt_blank.wav" type="audio/wav">[Скачать WAV](/static/papers/witcher_tts/static/witcher_tts/samples/text_conditioning_ablation_123k/geralt_blank.wav)</audio>
+- [correct: правильный русский текст](/static/papers/witcher_tts/static/witcher_tts/samples/text_conditioning_ablation_123k/geralt_correct.wav)
+- [shuffled: текст другой реплики](/static/papers/witcher_tts/static/witcher_tts/samples/text_conditioning_ablation_123k/geralt_shuffled.wav)
+- [blank: без текстового условия](/static/papers/witcher_tts/static/witcher_tts/samples/text_conditioning_ablation_123k/geralt_blank.wav)
 
 ### Почему auxiliary `D_text` не решил проблему
 
@@ -324,9 +318,9 @@ Frozen ablation показал:
 
 Короткая контрольная тройка:
 
-- [correct](/static/papers/witcher_tts/static/witcher_tts/samples/local_prosody_9000_grid_geralt_contrast/geralt_correct.wav)
-- [shuffled](/static/papers/witcher_tts/static/witcher_tts/samples/local_prosody_9000_grid_geralt_contrast/geralt_shuffled.wav)
-- [blank](/static/papers/witcher_tts/static/witcher_tts/samples/local_prosody_9000_grid_geralt_contrast/geralt_blank.wav)
+- [correct: исходная просодия](/static/papers/witcher_tts/static/witcher_tts/samples/local_prosody_9000_grid_geralt_contrast/geralt_correct.wav)
+- [shuffled: чужая просодия](/static/papers/witcher_tts/static/witcher_tts/samples/local_prosody_9000_grid_geralt_contrast/geralt_shuffled.wav)
+- [blank: без просодийного условия](/static/papers/witcher_tts/static/witcher_tts/samples/local_prosody_9000_grid_geralt_contrast/geralt_blank.wav)
 
 ## 13. Frankenstein-просодия: MFA, F0, energy, pause
 
@@ -350,10 +344,6 @@ Frozen ablation показал:
 - [растяжение + тихий хвост](/static/papers/witcher_tts/static/witcher_tts/samples/mfa_duration_rankloss_34500_focus_prosody_control_v3_ves/geralt_source_prosody_focus_emphasis_0_5s_whisper_tail.wav)
 
 Пользователь подтвердил: `ё` действительно растягивается. Это был реальный и локальный эффект. Но усиление акцента через F0/energy было слабым, а quiet-tail распространялся шире заданного участка и в основном проявлялся как падение громкости.
-
-<audio controls preload="none"><source src="/static/papers/witcher_tts/static/witcher_tts/samples/mfa_duration_rankloss_34500_focus_prosody_control_v3_ves/geralt_source_prosody_mfa_duration.wav" type="audio/wav">[Скачать WAV](/static/papers/witcher_tts/static/witcher_tts/samples/mfa_duration_rankloss_34500_focus_prosody_control_v3_ves/geralt_source_prosody_mfa_duration.wav)</audio>
-
-<audio controls preload="none"><source src="/static/papers/witcher_tts/static/witcher_tts/samples/mfa_duration_rankloss_34500_focus_prosody_control_v3_ves/geralt_source_prosody_focus_emphasis_0_5s.wav" type="audio/wav">[Скачать WAV](/static/papers/witcher_tts/static/witcher_tts/samples/mfa_duration_rankloss_34500_focus_prosody_control_v3_ves/geralt_source_prosody_focus_emphasis_0_5s.wav)</audio>
 
 ### Почему F0 не стал магической метрикой
 
@@ -442,9 +432,8 @@ CTC        1.7017
 
 В targeted A/B проверили `predicted`, MFA и CTC-oracle alignment с одинаковым noise seed. Для Geralt MFA и CTC-oracle звучали почти одинаково; predicted иногда неверно распределял локальное время. Для Yennefer три режима были почти неразличимы. Значит, одной заменой duration path проблему не решить.
 
-<audio controls preload="none"><source src="/static/papers/witcher_tts/static/witcher_tts/samples/speech_only_150m_rescue2_29k_known_text_grid/geralt_1_geralt.wav" type="audio/wav">[Скачать WAV](/static/papers/witcher_tts/static/witcher_tts/samples/speech_only_150m_rescue2_29k_known_text_grid/geralt_1_geralt.wav)</audio>
-
-<audio controls preload="none"><source src="/static/papers/witcher_tts/static/witcher_tts/samples/current_150m_listen/geralt_neutral.wav" type="audio/wav">[Скачать WAV](/static/papers/witcher_tts/static/witcher_tts/samples/current_150m_listen/geralt_neutral.wav)</audio>
+- [150M speech-only rescue2: Geralt, matching](/static/papers/witcher_tts/static/witcher_tts/samples/speech_only_150m_rescue2_29k_known_text_grid/geralt_1_geralt.wav)
+- [150M joint на 18k: Geralt, neutral](/static/papers/witcher_tts/static/witcher_tts/samples/current_150m_listen/geralt_neutral.wav)
 
 После этого подготовили отдельный fine-tune с тремя добавками: MFA duration override, усиленный speaker classification и masked transition/delta loss. Но это уже был ремонт симптомов поверх сложной системы, а не доказанный новый baseline. До полноценной стабилизации этой ветки проект перешёл к проверке готовых моделей.
 
@@ -552,7 +541,7 @@ Seamless M4T v2 Large установили как готовый baseline для
 
 1. [Aligned unseen «Саша»](/static/papers/witcher_tts/static/witcher_tts/samples/nonstandard_compare_aligned_54k_vs_raw_128k/aligned_122k_geralt_sasha.wav) — первый пример обобщения текста.
 2. [Ordinary Transformer на той же «Саше»](/static/papers/witcher_tts/static/witcher_tts/samples/nonstandard_compare_aligned_54k_vs_raw_128k/ordinary_128k_geralt_sasha.wav) — контроль, почему aligned был важен.
-3. [Text ablation correct](/static/papers/witcher_tts/static/witcher_tts/samples/text_conditioning_ablation_123k/geralt_correct.wav), [shuffled](/static/papers/witcher_tts/static/witcher_tts/samples/text_conditioning_ablation_123k/geralt_shuffled.wav), [blank](/static/papers/witcher_tts/static/witcher_tts/samples/text_conditioning_ablation_123k/geralt_blank.wav) — что именно означал слабый text signal.
+3. [Text ablation: correct — правильный текст](/static/papers/witcher_tts/static/witcher_tts/samples/text_conditioning_ablation_123k/geralt_correct.wav), [Text ablation: shuffled — другой текст](/static/papers/witcher_tts/static/witcher_tts/samples/text_conditioning_ablation_123k/geralt_shuffled.wav), [Text ablation: blank — пустое условие](/static/papers/witcher_tts/static/witcher_tts/samples/text_conditioning_ablation_123k/geralt_blank.wav) — что именно означал слабый text signal.
 4. [Prosody neutral](/static/papers/witcher_tts/static/witcher_tts/samples/local_prosody_5k_cartoon_prosody/geralt_neutral.wav), [bounce](/static/papers/witcher_tts/static/witcher_tts/samples/local_prosody_5k_cartoon_prosody/geralt_cartoon_bounce.wav), [question](/static/papers/witcher_tts/static/witcher_tts/samples/local_prosody_5k_cartoon_prosody/geralt_cartoon_question.wav) — доказательство, что просодийный вход способен менять манеру.
 5. [Растяжение «ё» в «всё»](/static/papers/witcher_tts/static/witcher_tts/samples/mfa_duration_rankloss_34500_focus_prosody_control_v3_ves/geralt_source_prosody_focus_emphasis_0_5s.wav) — наиболее чистый локальный контроль.
 6. [150M speech-only после rescue](/static/papers/witcher_tts/static/witcher_tts/samples/speech_only_150m_rescue2_29k_known_text_grid/geralt_1_geralt.wav) — почему улучшение loss ещё не стало естественной речью.

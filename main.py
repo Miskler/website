@@ -11,7 +11,7 @@ from PIL import Image
 
 from github import fetch_github_data
 from openworkshop import fetch_openworkshop_mods, fetch_openworkshop_stats
-from pswp import render_pswp_description, wrap_images
+from pswp import render_pswp_description, wrap_audio, wrap_images
 from steam import get_user_data
 from tools import render_md, plural_ru
 
@@ -166,7 +166,7 @@ async def papers(slug: str) -> str:
     with open(md_path, encoding="utf-8") as f:
         md = f.read()
 
-    html = wrap_images(render_md(md))
+    html = wrap_audio(wrap_images(render_md(md)))
 
     return render_template("paper.html", pape=html, page_type="paper", paper_slug=slug)
 
