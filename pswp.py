@@ -18,12 +18,26 @@ AUDIO_MIME_TYPES = {
     ".wav": "audio/wav",
     ".webm": "audio/webm",
 }
+VIDEO_MIME_TYPES = {
+    ".m4v": "video/mp4",
+    ".mov": "video/quicktime",
+    ".mp4": "video/mp4",
+    ".webm": "video/webm",
+}
+
+
+def _media_label(href: str, fallback: str) -> str:
+    path = unquote(urlparse(href).path)
+    stem = Path(path).stem.replace("_", " ").replace("-", " ")
+    return " ".join(stem.split()).strip() or fallback
 
 
 def _audio_label(href: str) -> str:
-    path = unquote(urlparse(href).path)
-    stem = Path(path).stem.replace("_", " ").replace("-", " ")
-    return " ".join(stem.split()).strip() or "Аудиозапись"
+    return _media_label(href, "Аудиозапись")
+
+
+def _video_label(href: str) -> str:
+    return _media_label(href, "Видеозапись")
 
 
 def _audio_player(soup: BeautifulSoup, href: str, label: str):
@@ -83,6 +97,79 @@ def wrap_audio(html: str) -> str:
 
         label = " ".join(link.stripped_strings).strip() or _audio_label(href)
         link.replace_with(_audio_player(soup, href, label))
+
+    return str(soup)
+
+
+def _video_player(soup: BeautifulSoup, href: str, label: str):
+    parsed = urlparse(href)
+    mime_type = VIDEO_MIME_TYPES.get(Path(parsed.path).suffix.lower(), "video/*")
+
+    wrapper = soup.new_tag("figure", attrs={"class": "video-player", "role": "group"})
+    video = soup.new_tag(
+        "video",
+        attrs={
+            "controls": "",
+            "preload": "metadata",
+            "playsinline": "",
+            "aria-label": label,
+        },
+    )
+    source = soup.new_tag("source", attrs={"src": href, "type": mime_type})
+    video.append(source)
+    wrapper.append(video)
+
+    caption = soup.new_tag("figcaption", attrs={"class": "video-player__label"})
+    caption.string = label
+    wrapper.append(caption)
+    return wrapper
+
+
+def wrap_video(html: str) -> str:
+    soup = BeautifulSoup(html, "html.parser")
+
+    # Keep support for hand-written video tags, while adding a visible caption.
+    for video in soup.find_all("video"):
+        if video.find_parent(class_="video-player"):
+            continue
+
+        source = video.find("source", src=True)
+        if source is None and video.get("src"):
+            source = soup.new_tag("source", attrs={"src": str(video["src"])})
+            video.append(source)
+        if source is None:
+            continue
+
+        label = str(video.get("data-label") or video.get("aria-label") or "").strip()
+        if not label:
+            label = _video_label(str(source["src"]))
+
+        for child in list(video.contents):
+            if child is not source and getattr(child, "name", None) != "source":
+                child.extract()
+
+        video["controls"] = ""
+        video["preload"] = video.get("preload") or "metadata"
+        video["playsinline"] = ""
+        video["aria-label"] = label
+        wrapper = soup.new_tag("figure", attrs={"class": "video-player", "role": "group"})
+        video.wrap(wrapper)
+        caption = soup.new_tag("figcaption", attrs={"class": "video-player__label"})
+        caption.string = label
+        video.parent.append(caption)
+
+    # Turn Markdown links to video files into an inline preview player.
+    for link in list(soup.find_all("a", href=True)):
+        href = str(link["href"])
+        if link.find_parent("video"):
+            continue
+
+        suffix = Path(urlparse(href).path).suffix.lower()
+        if suffix not in VIDEO_MIME_TYPES:
+            continue
+
+        label = " ".join(link.stripped_strings).strip() or _video_label(href)
+        link.replace_with(_video_player(soup, href, label))
 
     return str(soup)
 
