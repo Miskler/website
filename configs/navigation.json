@@ -24,6 +24,11 @@
                 "title": "Токсичность на Пикабу",
                 "description": "научный подход",
                 "link": "/papers/pikabu"
+            },
+            {
+                "title": "Witcher TTS: история эксперимента",
+                "description": "русская озвучка и просодия",
+                "link": "/papers/witcher_tts"
             }
         ]
     }
