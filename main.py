@@ -67,7 +67,11 @@ def inject_config() -> Dict[str, Any]:
     for i in info_bar["avatar"]["extra"]:
         i["size"] = get_size(i["url"])
 
-    return {"info_panel": info_bar, "navigation": navigation}
+    return {
+        "info_panel": info_bar,
+        "navigation": navigation,
+        "rybbit_site_id": os.environ.get("RYBBIT_SITE_ID", ""),
+    }
 
 
 # ------------------------
