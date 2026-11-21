@@ -14,8 +14,10 @@ from openworkshop import fetch_openworkshop_mods, fetch_openworkshop_stats
 from pswp import render_pswp_description, wrap_audio, wrap_images, wrap_video
 from steam import get_user_data
 from tools import render_md, plural_ru
+from telemetry import setup_telemetry
 
 app = Flask(__name__)
+setup_telemetry(app)
 
 # Или с дополнительными настройками:
 Minify(

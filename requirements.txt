@@ -6,3 +6,7 @@ async_lru
 markdown
 beautifulsoup4
 gunicorn
+opentelemetry-sdk>=1.41,<2
+opentelemetry-exporter-otlp-proto-grpc>=1.41,<2
+opentelemetry-instrumentation-flask>=0.62b1,<1
+opentelemetry-instrumentation-aiohttp-client>=0.62b1,<1
